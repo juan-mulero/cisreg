@@ -1,0 +1,140 @@
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2004/02/skos/core#prefLabel> "has definition" .
+<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> "has name" .
+<http://www.w3.org/2004/02/skos/core#altLabel> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#altLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> "has synonym" .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#prefLabel> "is instance of" .
+<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#prefLabel> "is subclass of" .
+<http://schema.org/evidenceOrigin> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://schema.org/evidenceOrigin> <http://www.w3.org/2004/02/skos/core#prefLabel> "has evidence origin" .
+<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2004/02/skos/core#prefLabel> "has evidence" .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2004/02/skos/core#prefLabel> "is defined by" .
+<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2004/02/skos/core#prefLabel> "has source" .
+<http://purl.obolibrary.org/obo/RO_0002428> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0002428> <http://www.w3.org/2004/02/skos/core#prefLabel> "involved in regulation of" .
+<http://purl.obolibrary.org/obo/RO_0002436> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0002436> <http://www.w3.org/2004/02/skos/core#prefLabel> "molecularly interacts with" .
+<http://purl.obolibrary.org/obo/RO_0002331> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0002331> <http://www.w3.org/2004/02/skos/core#prefLabel> "involved in" .
+<http://purl.obolibrary.org/obo/RO_0000052> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0000052> <http://www.w3.org/2004/02/skos/core#prefLabel> "characteristic of" .
+<http://purl.obolibrary.org/obo/RO_0001025> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0001025> <http://www.w3.org/2004/02/skos/core#prefLabel> "located in" .
+<http://purl.org/dc/terms/hasVersion> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.org/dc/terms/hasVersion> <http://www.w3.org/2004/02/skos/core#prefLabel> "has version" .
+<http://purl.obolibrary.org/obo/CLO_0037210> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/CLO_0037210> <http://www.w3.org/2004/02/skos/core#prefLabel> "derived from cell line" .
+<http://purl.obolibrary.org/obo/CLO_0037209> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/CLO_0037209> <http://www.w3.org/2004/02/skos/core#prefLabel> "derived from cell" .
+<http://purl.obolibrary.org/obo/CLO_0037208> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/CLO_0037208> <http://www.w3.org/2004/02/skos/core#prefLabel> "derived from anatomic part" .
+<http://purl.obolibrary.org/obo/SO_0000727> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/SO_0000727> <http://www.w3.org/2004/02/skos/core#prefLabel> "CRM" .
+<http://purl.obolibrary.org/obo/OGI_1000004> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://purl.obolibrary.org/obo/OGI_1000004> <http://www.w3.org/2004/02/skos/core#prefLabel> "start point of interval" .
+<http://purl.obolibrary.org/obo/OGI_1000003> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://purl.obolibrary.org/obo/OGI_1000003> <http://www.w3.org/2004/02/skos/core#prefLabel> "end point of interval" .
+<http://purl.obolibrary.org/obo/SO_0000727> <http://www.w3.org/2004/02/skos/core#altLabel> "cis-regulatory module" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000001.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-1" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000010.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-10" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000011.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-11" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000012.12> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-12" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000013.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-13" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000014.9> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-14" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000015.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-15" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000016.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-16" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000017.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-17" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000018.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-18" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000019.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-19" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000002.12> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-2" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000020.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-20" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000021.9> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-21" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000022.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-22" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000003.12> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-3" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000004.12> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-4" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000005.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-5" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000006.12> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-6" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000007.14> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-7" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000008.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-8" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-9" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000023.11> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-X" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_000024.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-Y" .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.25> <http://www.w3.org/2004/02/skos/core#prefLabel> "GRCh37.p13" .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> <http://www.w3.org/2004/02/skos/core#prefLabel> "GRCh38.p13" .
+<http://www.licpathway.net/ENdb/> <http://www.w3.org/2004/02/skos/core#prefLabel> "ENdb" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000727> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2004/02/skos/core#definition> "Cis-regulatory module located in Homo sapiens chr1 between 100936807 and 100947168" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2004/02/skos/core#prefLabel> "crm/CRMHS00000000001" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000115> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0004307> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0002331> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000001.11> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_070> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/RO_0002331> <http://purl.obolibrary.org/obo/DOID_1936> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/OGI_1000003> 100947168 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000226> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0004176> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/MI_0402> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0001954> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.bioassayontology.org/bao#BAO_0002661> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0001805> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/MI_1205> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/21464207> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> <http://purl.obolibrary.org/obo/OGI_1000004> 100936807 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/crm/9606/CRMHS00000000001> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2004/02/skos/core#prefLabel> "crm#CRMHS00000000001#endb" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000115> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0004307> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0002331> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000001.11> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_070> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/RO_0002331> <http://purl.obolibrary.org/obo/DOID_1936> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/OGI_1000003> 100947168 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000226> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0004176> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/MI_0402> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0001954> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.bioassayontology.org/bao#BAO_0002661> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0001805> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/MI_1205> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/21464207> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000001#endb> <http://purl.obolibrary.org/obo/OGI_1000004> 100936807 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000727> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://www.w3.org/2004/02/skos/core#definition> "Cis-regulatory module located in Homo sapiens chr1 between 1148520 and 1150520" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://www.w3.org/2004/02/skos/core#prefLabel> "crm/CRMHS00000000002" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0002327> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0000310> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000001.11> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_138> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.obolibrary.org/obo/OGI_1000003> 1150520 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/24086551> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> <http://purl.obolibrary.org/obo/OGI_1000004> 1148520 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/crm/9606/CRMHS00000000002> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://www.w3.org/2004/02/skos/core#prefLabel> "crm#CRMHS00000000002#endb" .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0002327> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0000310> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000001.11> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_138> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.obolibrary.org/obo/OGI_1000003> 1150520 .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/24086551> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000000002#endb> <http://purl.obolibrary.org/obo/OGI_1000004> 1148520 .

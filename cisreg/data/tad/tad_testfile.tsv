@@ -1,0 +1,2 @@
+TAD_ID	orig_chr	orig_start	orig_end	orig_assembly	current_chr	current_start	current_end	current_assembly	minimum_ratio	score	original_ID	crossref	TAD_PMID	biosample_name	TAD_method	resolution	type	source
+hg19_chr1_535000_1845000	chr1	535000	1845000	hg19	chr1	599620	1913561	hg38	0.95	1.00300839465008	-	http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=HUVEC&rg=hg19&chr=1&se=535000_1845000&id=1&res=10kb&caller=GMAP	30871473	HUVEC	HiC	10kb	TAD	TADKB
