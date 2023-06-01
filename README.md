@@ -9,4 +9,8 @@ With this contribution we also encourage the community to work on the developmen
 
 ## Structure and content
 
+The generated knowledge network is structured in graphs, being each graph a different information domain. We distinguish two types of graphs in the network: entity graphs and relation graphs. The first ones aim to model different biological entities, while the second ones model relations between different entities.
+
+[Graph](./images/graph_types.PNG)
+
 Semantic model for CRM, TAD and gene extension for hGBW knowledge graphs. This code requires functions of the project: https://github.com/vlmir/bgw3
