@@ -11,6 +11,24 @@ With this contribution we also encourage the community to work on the developmen
 
 The generated knowledge network is structured in graphs, being each graph a different information domain. We distinguish two types of graphs in the network: entity graphs and relation graphs. The first ones aim to model different biological entities, while the second ones model relations between different entities.
 
-![Graph](./images/graph_types.PNG)
+![Graph_types](./images/graph_types.PNG)
+
+The knowledge network has the following networks:
+- crm : Cis Regulatory Modules. Currently only enhancer sequences, that increase gene transcription levels.
+- tad : Topologically associating domain. Domains of genome structure and regulation.
+- gene : Genes.
+- prot  - Proteins.
+- omim - OMIM ontology (phenotypes, among others).
+- go - GO ontology (biological processes, molecular functions and cellular components).
+- mi - Molecular Interaction Ontology.
+- gene2phe – Relations Genes to phenotypes (omim) .
+tfac2gene – Relations Transcription factors (TF) and their target genes.
+prot2prot - Relations of protein-protein interactions.
+prot2cc - Protein - Celullar components relations.
+prot2bp - Protein - Biological processes relations
+prot2mf - Protein - Molecular functions relations
+
+![Graphs](./images/graphs.PNG)
+
 
 Semantic model for CRM, TAD and gene extension for hGBW knowledge graphs. This code requires functions of the project: https://github.com/vlmir/bgw3
