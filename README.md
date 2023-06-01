@@ -22,11 +22,11 @@ The knowledge network has the following networks:
 - go - GO ontology (biological processes, molecular functions and cellular components).
 - mi - Molecular Interaction Ontology.
 - gene2phe – Relations Genes to phenotypes (omim) .
-tfac2gene – Relations Transcription factors (TF) and their target genes.
-prot2prot - Relations of protein-protein interactions.
-prot2cc - Protein - Celullar components relations.
-prot2bp - Protein - Biological processes relations
-prot2mf - Protein - Molecular functions relations
+- tfac2gene – Relations Transcription factors (TF) and their target genes.
+- prot2prot - Relations of protein-protein interactions.
+- prot2cc - Protein - Celullar components relations.
+- prot2bp - Protein - Biological processes relations
+- prot2mf - Protein - Molecular functions relations
 
 ![Graphs](./images/graphs.PNG)
 
