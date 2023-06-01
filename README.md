@@ -13,7 +13,7 @@ The generated knowledge network is structured in graphs, being each graph a diff
 
 ![Graph_types](./images/graph_types.PNG)
 
-The knowledge network has the following networks:
+The knowledge network has the following graphs:
 - crm : Cis Regulatory Modules. Currently only enhancer sequences, that increase gene transcription levels.
 - tad : Topologically associating domain. Domains of genome structure and regulation.
 - gene : Genes.
@@ -30,5 +30,8 @@ The knowledge network has the following networks:
 
 ![Graphs](./images/graphs.PNG)
 
+hBGW is an integrative model in which classes represent entities and instances represent individuals of the classes. Classes collect information from the different databases used as sources of information, so they are useful nodes to extract integrated information. Instances collect the information from each original database, so they are useful nodes for representing the information from each source and its metadata.
+
+![Classes_and_intances](./images/classes_instances.PNG)
 
 Semantic model for CRM, TAD and gene extension for hGBW knowledge graphs. This code requires functions of the project: https://github.com/vlmir/bgw3
