@@ -43,6 +43,6 @@ The following steps were taken to generate the new hBGW domains:
 1. Compilation of the databases used as a source.
 2. Preprocessing of files [(Rcodes folder)](./Rcodes).
 3. Generation of RDF files [(cisreg folder)](./cisreg). This code requires functions of the project: https://github.com/vlmir/bgw3
-4. Loading and generation of graphs in Virtuoso.
+4. Loading and generation of graphs in [Virtuoso](https://github.com/openlink/virtuoso-opensource).
 
 ![workflow](./images/workflow.PNG)
