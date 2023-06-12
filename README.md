@@ -46,3 +46,11 @@ The following steps were taken to generate the new hBGW domains:
 4. Loading and generation of graphs in [Virtuoso](https://github.com/openlink/virtuoso-opensource).
 
 ![workflow](./images/workflow.PNG)
+
+## Use Cases
+
+We demonstrate the use of the knowledge network in a set of advanced queries (three use cases) that were not possible in an efficient way until now. Below we provide the files corresponding to the queries and the results obtained:
+
+- Use Case 1: Query - Results
+- Use Case 2: Query - Results
+- Use Case 3: Query - Results
