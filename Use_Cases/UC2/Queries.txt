@@ -1,0 +1,244 @@
+#We are interested in the study of the "breast cancer" phenotype, so we use the network to obtain information about the regulation around this phenotype.
+#1. Using OMIM as reference, which phenotypes are subject to study because they contain "breast cancer" in their preferred or alternative label?
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT DISTINCT  ?phen ?label
+WHERE {
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+}
+
+
+#2. What genes are involved with these phenotypes? What proteins are encoded by these genes and in what biological processes are these proteins involved?
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?phen ?gene_label ?prot_label ?bp_label
+WHERE {
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
+		?gene2phe rdf:object ?phen ;
+			rdf:subject ?gene .
+	}	
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		?gene skos:prefLabel ?gene_label ;
+			sio:SIO_010078 ?prot
+        }
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot> {
+               	?prot skos:prefLabel ?prot_label .
+        }
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot2bp> {
+		?prot2bp rdf:subject ?prot ;
+			rdf:object ?bp .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/go> {
+		?bp rdfs:label ?bp_label .
+	}
+}
+ORDER BY ?phen ?gene_label ?prot_label ?bp_label
+ 
+
+#3.1. What enhancers are involved in the regulation of these genes?
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?phen ?gene_label ?enh_label
+WHERE {
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
+		?gene2phe rdf:object ?phen ;
+			rdf:subject ?gene .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+			obo:RO_0002428 ?gene .
+	}	
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		?gene skos:prefLabel ?gene_label .
+        }
+}
+ORDER BY ?phen ?gene_label ?enh_label
+
+
+#Since we are discussing the "breast cancer" phenotype, have any of these enhancers been identified in any cell line, cell type or tissue related to breast? 
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?phen ?label ?gene_label ?enh_label ?database_label
+WHERE {
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
+		?gene2phe rdf:object ?phen ;
+			rdf:subject ?gene .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+                        obo:RO_0002428 ?gene ;
+			obo:CLO_0037208 obo:UBERON_0000310 ;
+			sio:SIO_000253 ?database .
+		?database skos:prefLabel ?database_label .
+	}
+	
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		?gene skos:prefLabel ?gene_label
+	}
+}
+
+
+#3.2. In what biological processes are the genes regulated by these enhancers involved?
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?phen ?label ?gene_label ?enh_label ?database_label ?prot_label ?bp_label
+WHERE {
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
+		?gene2phe rdf:object ?phen ;
+			rdf:subject ?gene .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+                        obo:RO_0002428 ?gene ;
+			obo:CLO_0037208 obo:UBERON_0000310 ;
+			sio:SIO_000253 ?database .
+		?database skos:prefLabel ?database_label .
+	}
+	
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		?gene skos:prefLabel ?gene_label ;
+			sio:SIO_010078 ?prot .
+        }
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot> {
+               	?prot skos:prefLabel ?prot_label .
+        }
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot2bp> {
+		?prot2bp rdf:subject ?prot ;
+			rdf:object ?bp .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/go> {
+		?bp rdfs:label ?bp_label .
+	}
+}
+ORDER BY ?phen ?prot_label ?bp_label
+
+
+#3.3. Are these genes associated with other diseases?
+
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT *
+WHERE{
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		hgene:CDH1 skos:prefLabel ?gene_label .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
+		?gene2phe rdf:subject hgene:CDH1 ;
+			rdf:object ?phen .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		?phen skos:prefLabel ?phen_label .
+	}
+}
+
+
+#4. What enhancers are linked in the network directly to breast cancer? What are the target genes and the TFs linked to enhancers?
+
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database_label ?enh_label ?tgene ?tf
+WHERE {
+	{
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+			obo:RO_0002331 ?phen ;
+			sio:SIO_000253 ?database .
+		OPTIONAL {?enhID obo:RO_0002428 ?tgene}
+		OPTIONAL {?enhID obo:RO_0002436 ?tf}
+		?database skos:prefLabel ?database_label .
+	}
+	} UNION {
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		VALUES ?phen {
+			<http://purl.obolibrary.org/obo/DOID_1612>
+			<https://id.nlm.nih.gov/mesh/D001943>
+		}
+		?enhID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+			obo:RO_0002331 ?phen ;
+			sio:SIO_000253 ?database .
+		OPTIONAL {?enhID obo:RO_0002428 ?tgene}
+		OPTIONAL {?enhID obo:RO_0002436 ?tf}
+		?database skos:prefLabel ?database_label .
+	}
+	}
+}
+ORDER BY ?enh_label

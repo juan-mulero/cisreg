@@ -1,0 +1,485 @@
+#We have one mutation of interest (rs4784227-> chr16:52565276) and we want to study its possible implications in the regulation of gene expression. 
+#1. Is the mutation located in any enhancer sequence of the network? 
+# What databases support the sequence? Is the enhancer related to any disease? 
+# Does the enhancer have any target genes according to the sources? 
+# Which proteins encode the gene?
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?name_database ?enh_label ?chr_label ?start ?end ?disease ?tgene_label ?prot ?prot_label
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+                ?enhID rdf:type owl:Class ;
+      			obo:OGI_1000004 ?start;
+                        obo:OGI_1000003 ?end ;
+                        obo:RO_0001025 ?chr ;
+                        skos:prefLabel ?enh_label ;
+                        sio:SIO_000253 ?database ;
+                        obo:RO_0002428 ?tgene .
+                OPTIONAL { ?enhID obo:RO_0002331 ?disease}
+    					
+                ?chr skos:prefLabel ?chr_label .
+    		?database skos:prefLabel ?name_database
+                FILTER (?chr_label = "chr-16" && ?start <= 52565276 && ?end >= 52565276)
+  	}
+
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+                ?tgene skos:prefLabel ?tgene_label ;
+                        sio:SIO_010078 ?prot .
+        }
+
+        GRAPH <http://rdf.biogateway.eu/graph/prot> {
+                ?prot skos:prefLabel ?prot_label .
+        }
+}
+
+#2. Are these proteins involved in any biological process associated with the disease linked to the enhancer?
+#inmmune response: GO_0006955; angiogenesis: GO_0001525; apoptosis process: GO_0006915; regulation of apoptosis process: GO_0042981; cell population proliferation: GO_0008283; ER-nucleus signaling pathway: GO_0006984
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?tgene_label ?prot_label ?bp ?bp_label
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+                ?enhID rdf:type owl:Class ;
+      			obo:OGI_1000004 ?start;
+                        obo:OGI_1000003 ?end ;
+                        obo:RO_0001025 ?chr ;
+                        skos:prefLabel ?enh_label ;
+                        sio:SIO_000253 ?database ;
+                        obo:RO_0002428 ?tgene .
+                OPTIONAL { ?enhID obo:RO_0002331 ?disease}
+    					
+                ?chr skos:prefLabel ?chr_label .
+    		?database skos:prefLabel ?name_database
+                FILTER (?chr_label = "chr-16" && ?start <= 52565276 && ?end >= 52565276)
+
+  	}
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+                ?tgene skos:prefLabel ?tgene_label ;
+                        sio:SIO_010078 ?prot .
+        }
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot> {
+		?prot skos:prefLabel ?prot_label .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot2bp> {
+                VALUES ?bp {
+                        obo:GO_0006955
+                        obo:GO_0001525
+                        obo:GO_0006915
+                        obo:GO_0042981
+			obo:GO_0008283
+			obo:GO_0006984
+                }
+		?prot obo:RO_0002331 ?bp
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/go> {
+        	?bp rdfs:label ?bp_label .
+	}
+}
+
+#3. Multiple enhancers can collaborate in the regulation of one gene. What other enhancers can regulate the target gene? We follow three different criteria:
+#3.1. Enhancers provided by databases:
+
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?enh_label ?chr_label ?enh_start ?enh_end ?enh_middle ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+                ?enhID obo:RO_0002428 hgene:TOX3 ;
+                	rdf:type owl:Class ;
+                        skos:prefLabel ?enh_label ;
+			obo:OGI_1000004 ?enh_start ;
+			obo:OGI_1000003 ?enh_end ;
+			obo:RO_0001025 ?chr .
+		?chr skos:prefLabel ?chr_label
+        }
+        
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+                hgene:TOX3 obo:OGI_1000003 ?TSS_gene .
+        }
+
+        BIND((?enh_end - ?enh_start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?enh_start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+}
+ORDER BY ?distance
+
+
+#3.2. Distance of 50 kb between the TSS of the gene and the center of the enhancer, because studies have reported that a large part of the typical enhancers are linked to genes within this distance 
+#(the gene is in the strand "-", so the TSS of the gene is the end position)
+
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?enh_label ?chr_label ?enh_start ?enh_end ?enh_middle ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		hgene:TOX3 obo:OGI_1000003 ?TSS_gene ;
+			obo:RO_0001025 ?chr .
+		?chr skos:prefLabel ?chr_label .
+        }
+
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enh_ID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+			obo:RO_0001025 ?chr ;
+			obo:OGI_1000004 ?enh_start ;
+			obo:OGI_1000003 ?enh_end .
+        }
+        BIND((?enh_end - ?enh_start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?enh_start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+        FILTER(?distance <= 50000)
+}
+ORDER BY ?distance
+
+
+#Filtering by breast
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT ?enh_label ?chr_label ?enh_start ?enh_end ?enh_middle ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		hgene:TOX3 obo:OGI_1000003 ?TSS_gene ;
+			obo:RO_0001025 ?chr .
+		?chr skos:prefLabel ?chr_label .
+        }
+
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enh_ID rdf:type owl:Class ;
+			skos:prefLabel ?enh_label ;
+			obo:RO_0001025 ?chr ;
+			obo:OGI_1000004 ?enh_start ;
+			obo:OGI_1000003 ?enh_end ;
+			obo:CLO_0037208 obo:UBERON_0000310 .
+        }
+        BIND((?enh_end - ?enh_start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?enh_start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+        FILTER(?distance <= 50000)
+}
+ORDER BY ?distance
+
+
+#3.3. Enhancers located in the same TAD as the gene, because these domains act as regulatory modules
+
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT DISTINCT ?enh_label ?chr_label ?enh_start ?enh_end ?enh_middle ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		hgene:TOX3 obo:OGI_1000003 ?TSS_gene ;
+ 			obo:RO_0001025 ?chr .
+		?chr skos:prefLabel ?chr_label .
+        }
+
+        GRAPH <http://rdf.biogateway.eu/graph/tad> {
+		?tad_ID rdf:type owl:Class ;
+			obo:RO_0001025 ?chr ;
+			obo:OGI_1000004 ?tad_start ;
+			obo:OGI_1000003 ?tad_end .
+        }
+        FILTER(?tad_start < ?TSS_gene && ?tad_end > ?TSS_gene)
+
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enh_ID rdf:type owl:Class ;
+                	skos:prefLabel ?enh_label ;
+                        obo:RO_0001025 ?chr ;
+                        obo:OGI_1000004 ?enh_start ;
+                        obo:OGI_1000003 ?enh_end .
+        }
+        FILTER (?enh_start > ?tad_start && ?enh_end < ?tad_end)
+
+        BIND((?enh_end - ?enh_start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?enh_start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+}
+ORDER BY ?distance
+
+#Filtering by breast tissue:
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT DISTINCT ?enh_label ?chr_label ?enh_start ?enh_end ?enh_middle ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		hgene:TOX3 obo:OGI_1000003 ?TSS_gene ;
+ 			obo:RO_0001025 ?chr .
+		?chr skos:prefLabel ?chr_label .
+        }
+
+        GRAPH <http://rdf.biogateway.eu/graph/tad> {
+		?tad_ID rdf:type owl:Class ;
+			obo:RO_0001025 ?chr ;
+			obo:OGI_1000004 ?tad_start ;
+			obo:OGI_1000003 ?tad_end .
+        }
+        FILTER(?tad_start < ?TSS_gene && ?tad_end > ?TSS_gene)
+
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enh_ID rdf:type owl:Class ;
+                	skos:prefLabel ?enh_label ;
+                        obo:RO_0001025 ?chr ;
+                        obo:OGI_1000004 ?enh_start ;
+                        obo:OGI_1000003 ?enh_end ;
+                        obo:CLO_0037208 obo:UBERON_0000310 .
+        }
+        FILTER (?enh_start > ?tad_start && ?enh_end < ?tad_end)
+
+        BIND((?enh_end - ?enh_start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?enh_start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+}
+ORDER BY ?distance
+
+
+#4. If the enhancer is affected, in addition to the target gene provided by the databases, what other genes could be targeted by the same enhancer? We follow two criteria:
+
+#4.1. Distance of 50 kb
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?name_database ?enh_label ?chr_label ?start ?end ?enh_middle ?gene_label ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+                ?enhID rdf:type owl:Class ;
+      			obo:OGI_1000004 ?start;
+                        obo:OGI_1000003 ?end ;
+                        obo:RO_0001025 ?chr ;
+                        skos:prefLabel ?enh_label ;
+                        sio:SIO_000253 ?database ;
+                        obo:RO_0002428 ?tgene .
+                OPTIONAL { ?enhID obo:RO_0002331 ?disease}
+    					
+                ?chr skos:prefLabel ?chr_label .
+    		?database skos:prefLabel ?name_database
+                FILTER (?chr_label = "chr-16" && ?start <= 52565276 && ?end >= 52565276)
+
+  	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		{
+		?gene rdf:type owl:Class ;
+			skos:prefLabel ?gene_label ;
+			obo:RO_0001025 ?chr ;
+			obo:GENO_0000906 "+" ;
+			obo:OGI_1000004 ?TSS_gene .
+		} UNION {
+		?gene rdf:type owl:Class ;
+			skos:prefLabel ?gene_label ;
+			obo:RO_0001025 ?chr ;
+			obo:GENO_0000906 "-" ;
+			obo:OGI_1000003 ?TSS_gene .
+		}
+  	}
+
+	BIND((?end - ?start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+	FILTER(?distance <= 50000)
+}
+ORDER BY ?distance
+
+#Are any of these genes involved in any biological process associated with the disease?
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?name_database ?enh_label ?chr_label ?start ?end ?enh_middle ?gene_label ?TSS_gene ?distance ?prot_label ?bp_label
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+                ?enhID rdf:type owl:Class ;
+      			obo:OGI_1000004 ?start;
+                        obo:OGI_1000003 ?end ;
+                        obo:RO_0001025 ?chr ;
+                        skos:prefLabel ?enh_label ;
+                        sio:SIO_000253 ?database ;
+                        obo:RO_0002428 ?tgene .
+                OPTIONAL { ?enhID obo:RO_0002331 ?disease}
+    					
+                ?chr skos:prefLabel ?chr_label .
+    		?database skos:prefLabel ?name_database
+                FILTER (?chr_label = "chr-16" && ?start <= 52565276 && ?end >= 52565276)
+
+  	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		{
+		?gene rdf:type owl:Class ;
+			skos:prefLabel ?gene_label ;
+			obo:RO_0001025 ?chr ;
+			obo:GENO_0000906 "+" ;
+			obo:OGI_1000004 ?TSS_gene ;
+			sio:SIO_010078 ?prot .
+		} UNION {
+		?gene rdf:type owl:Class ;
+			skos:prefLabel ?gene_label ;
+			obo:RO_0001025 ?chr ;
+			obo:GENO_0000906 "-" ;
+			obo:OGI_1000003 ?TSS_gene ;
+			sio:SIO_010078 ?prot .
+		}
+  	}
+
+	BIND((?end - ?start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+	FILTER(?distance <= 50000)
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot> {
+             	?prot skos:prefLabel ?prot_label .
+       	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot2bp> {
+		VALUES ?bp {
+                        obo:GO_0006955
+                        obo:GO_0001525
+                        obo:GO_0006915
+                        obo:GO_0042981
+			obo:GO_0008283
+			obo:GO_0006984
+                }
+		?prot obo:RO_0002331 ?bp .
+	}
+	
+	OPTIONAL {
+		GRAPH <http://rdf.biogateway.eu/graph/go> {
+			?bp rdfs:label ?bp_label .
+		}
+	}
+}
+ORDER BY ?distance
+
+
+#4.2. The same TAD
+
+PREFIX hcrm: <http://rdf.biogateway.eu/crm/9606/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?name_database ?enh_label ?chr_label ?start ?end ?enh_middle ?gene_label ?TSS_gene ?distance
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		VALUES ?enh {
+			hcrm:CRMHS00000005858
+			hcrm:CRMHS00000032653
+			hcrm:CRMHS00000032654
+		}
+                ?enh skos:prefLabel ?enh_label ;
+      			obo:OGI_1000004 ?start;
+                        obo:OGI_1000003 ?end ;
+                        obo:RO_0001025 ?chr ;
+                        skos:prefLabel ?enh_label ;
+			sio:SIO_000253 ?database .
+                ?chr skos:prefLabel ?chr_label .
+		?database skos:prefLabel ?name_database .
+  	}
+
+        GRAPH <http://rdf.biogateway.eu/graph/tad> {
+		?tad_ID rdf:type owl:Class ;
+			obo:RO_0001025 ?chr ;
+			obo:OGI_1000004 ?tad_start ;
+			obo:OGI_1000003 ?tad_end ;
+                        obo:CLO_0037208 obo:UBERON_0000310 .
+        }
+        FILTER(?tad_start < ?start && ?tad_end > ?end)
+
+        GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		{
+		?gene rdf:type owl:Class ;
+			skos:prefLabel ?gene_label ;
+			obo:RO_0001025 ?chr ;
+			obo:GENO_0000906 "+" ;
+			obo:OGI_1000004 ?TSS_gene .
+		} UNION {
+		?gene rdf:type owl:Class ;
+			skos:prefLabel ?gene_label ;
+			obo:RO_0001025 ?chr ;
+			obo:GENO_0000906 "-" ;
+			obo:OGI_1000003 ?TSS_gene .
+		}
+  	}
+	FILTER(?TSS_gene > ?tad_start && ?TSS_gene < ?tad_end)
+
+	BIND((?end - ?start) AS ?enh_range)
+        BIND((ROUND(?enh_range/2) + ?start) AS ?enh_middle)
+        BIND(ABS(?TSS_gene - ?enh_middle) AS ?distance)
+
+}
+ORDER BY ?enh_label ?distance
+
+
+#5. How many transcription factors are associated with the enhancer or the target gene, how many other genes could be target of these TFs and how many other proteins interact with these TFs?
+
+
+PREFIX hcrm: <http://rdf.biogateway.eu/crm/9606/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT COUNT(DISTINCT ?tf) COUNT(DISTINCT ?gene) COUNT(DISTINCT ?prot)
+WHERE {
+	{
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		VALUES ?enh {
+			hcrm:CRMHS00000005858
+			hcrm:CRMHS00000032653
+			hcrm:CRMHS00000032654
+		}
+		?enh skos:prefLabel ?enh_label ;
+			obo:RO_0002436 ?tf .
+	}} UNION {
+	GRAPH <http://rdf.biogateway.eu/graph/tfac2gene> {
+		?int rdf:object hgene:TOX3 ;
+			rdf:subject ?tf .
+	}}
+
+	GRAPH <http://rdf.biogateway.eu/graph/tfac2gene> {
+		?int_tf2gene rdf:subject ?tf ;
+			rdf:object ?gene .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot2prot> {
+		?tf obo:RO_0002436 ?prot .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/prot> {
+		?tf skos:prefLabel ?tf_label .
+		?prot skos:prefLabel ?prot_label .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		?gene skos:prefLabel ?gene_label .
+	}
+}
