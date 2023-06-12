@@ -53,4 +53,4 @@ We demonstrate the use of the knowledge network in a set of advanced queries (th
 
 - Use Case 1: [Queries](./Use_Cases/UC1/Queries.txt) - [Results](./Use_Cases/UC1/Results.xlsx).
 - Use Case 2: [Queries](./Use_Cases/UC2/Queries.txt) - [Results](./Use_Cases/UC2/Results.xlsx).
-- Use Case 3: [Queries](./Use_Cases/UC3/Queries.txt) - [Results](./Use_Cases/UC3/Results.xlsx).
+- Use Case 3: [Queries](./Use_Cases/UC3/Queries.txt) - [Results](./Use_Cases/UC3/Results.tsv).
