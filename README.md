@@ -42,7 +42,7 @@ The current version of hBGW integrates the BioGateway human classes and instance
 The following steps were taken to generate the new hBGW domains:
 1. Compilation of the [databases used as sources](./images/table_sources.PNG).
 2. Preprocessing of files [(Rcodes folder)](./Rcodes).
-3. Generation of RDF files [(cisreg folder)](./cisreg). This code requires functions of the project: https://github.com/vlmir/bgw3. An RDF file fragment corresponding to enhancers and TADs is included in the repository as an illustrative example of output.
+3. Generation of RDF files [(cisreg folder)](./cisreg). This code requires functions of the project: https://github.com/vlmir/bgw3. An RDF file fragment corresponding to [enhancers](./RDF_file_examples/CRM.nt) and [TADs](./RDF_file_examples/TAD.nt) is included in the repository as an illustrative example of output.
 4. Loading and generation of graphs in [Virtuoso](https://github.com/openlink/virtuoso-opensource).
 
 ![workflow](./images/workflow.PNG)
@@ -51,6 +51,6 @@ The following steps were taken to generate the new hBGW domains:
 
 We demonstrate the use of the knowledge network in a set of advanced queries (three use cases) that were not possible in an efficient way until now. Below we provide the files corresponding to the queries and the results obtained:
 
-- Use Case 1: Query - Results
-- Use Case 2: Query - Results
-- Use Case 3: Query - Results
+- Use Case 1: [Queries](./Use_Cases/UC1/Queries.txt) - [Results](./Use_Cases/UC1/Results.xlsx).
+- Use Case 2: [Queries](./Use_Cases/UC2/Queries.txt) - [Results](./Use_Cases/UC2/Results.xlsx).
+- Use Case 3: [Queries](./Use_Cases/UC3/Queries.txt) - [Results](./Use_Cases/UC3/Results.xlsx).
