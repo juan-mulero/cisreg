@@ -42,7 +42,7 @@ The current version of hBGW integrates the BioGateway human classes and instance
 The following steps were taken to generate the new hBGW domains:
 1. Compilation of the [databases used as sources](./images/table_sources.PNG).
 2. Preprocessing of files [(Rcodes folder)](./Rcodes).
-3. Generation of RDF files [(cisreg folder)](./cisreg). This code requires functions of the project: https://github.com/vlmir/bgw3
+3. Generation of RDF files [(cisreg folder)](./cisreg). This code requires functions of the project: https://github.com/vlmir/bgw3. An RDF file fragment corresponding to enhancers and TADs is included in the repository as an illustrative example of output.
 4. Loading and generation of graphs in [Virtuoso](https://github.com/openlink/virtuoso-opensource).
 
 ![workflow](./images/workflow.PNG)
