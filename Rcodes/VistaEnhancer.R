@@ -159,7 +159,6 @@ merge_VistaEnhancer[is.na(merge_VistaEnhancer)] = "-"
 
 filt_merge_VistaEnhancer = merge_VistaEnhancer[-c(19,23,28:30)] #external_gene_names and diseases
 filt_merge_VistaEnhancer = filt_merge_VistaEnhancer[!duplicated(filt_merge_VistaEnhancer),]
-filt_merge_VistaEnhancer = cbind(filt_merge_VistaEnhancer[1:24], disease = "-", filt_merge_VistaEnhancer[28:32])
 indexes = which(filt_merge_VistaEnhancer$hgnc_symbol_target_genes == "-")
 if (length(indexes) > 0){filt_merge_VistaEnhancer$enh2gene_PMID[indexes] = filt_merge_VistaEnhancer$enh2gene_method[indexes] = "-"}
 rm(indexes)

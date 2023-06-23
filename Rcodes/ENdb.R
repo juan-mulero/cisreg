@@ -1,5 +1,4 @@
 #1. Reading and preprocess:
-t = proc.time()
 orig_ENdb = read.delim("http://www.licpathway.net/ENdb/file/download/ENdb_enhancer.txt", 
                            header = T, sep = "\t", encoding = "UTF-8")
 orig_ENdb = data.frame(orig_ENdb)
@@ -137,8 +136,34 @@ indexes = which(enh2diseases$disease %in% c("National Institute of Allergy and I
 if (length(indexes > 0)) {enh2diseases = enh2diseases[-indexes,]}
 
 #We remove multiple records (with commas) because there is no direct association between names and identifiers,
+#but we also create a file with this data adapted.
+other_enh2diseases = enh2diseases
 indexes = grep(",", enh2diseases$disease)
-enh2diseases = enh2diseases[-indexes,]
+if (length(indexes) > 0) {
+  enh2diseases = enh2diseases[-indexes,]
+  
+  count = stringr::str_count(other_enh2diseases$disease[indexes], ",") + 1 
+  disease_name = paste(other_enh2diseases$disease[indexes], collapse = ",")
+  disease_name = unlist(strsplit(disease_name, ","))
+  data = data.frame(cbind(enh_ID = rep(other_enh2diseases$enh_ID[indexes], count), disease = disease_name, OMIM = "-",  
+               DO = c("-", "DOID:417", "-", "DOID:9256", "DOID:1612", "DOID:3393", "DOID:6364", "DOID:9348", "-", "DOID:10763"),
+               mesh = c("D006084", "D001327", "D000022", "D015179", "D001943", "D003324", "D008881", "-", "D005352", "D006973"), 
+               disease_PMID = rep(other_enh2diseases$disease_PMID[indexes], count), disease_method = ",", source = "ENdb"))
+  other_enh2diseases = other_enh2diseases[-indexes,]
+  other_enh2diseases = rbind(other_enh2diseases, data)
+}
+
+#Mapping with OMIM
+diseases = other_enh2diseases[2:5]
+diseases = diseases[!duplicated(diseases),]
+source("./scripts/DO2OMIM.R")
+diseases$OMIM = DO2OMIM(diseases$DO)
+diseases = SplitIntoAtomicValues(diseases, 2, ",")
+diseases[is.na(diseases)] = "-"
+diseases = diseases[!duplicated(diseases),]
+
+other_enh2diseases = merge(other_enh2diseases[-3], diseases[1:2], by = "disease", all = T)
+other_enh2diseases = other_enh2diseases[c(2,1,8,3:7)]
 
 
 #5. Transcription factors
@@ -149,7 +174,7 @@ TFs2enh$TF_name = trimws(TFs2enh$TF_name)
 TFs2enh = SplitIntoAtomicValues(TFs2enh, 2, ",") #Split TFs
 colnames(TFs2enh)[2:5] = c("external_gene_name", "TFs2enh_PMID", "TFs2enh_method", "biosample_name")
 
-#Gene symbol update:
+#Gene symbol update
 upd_TFs = UpdateGeneSymbol(TFs2enh$external_gene_name)
 TFs2enh = merge(TFs2enh, upd_TFs, by = "external_gene_name")
 TFs2enh = TFs2enh[c(2,1,7,3:6)]
@@ -165,7 +190,7 @@ TFs2enh_split = SplitIntoAtomicValues(TFs2enh_split, 6, ",") #Biosamples
 TFs2enh_split$biosample_name = trimws(TFs2enh_split$biosample_name)
 TFs2enh_split = TFs2enh_split[!duplicated(TFs2enh_split),]
 indexes = which(grepl("^[[:alnum:][:blank:][:punct:]]+$", TFs2enh_split$biosample_name) == F)
-if (length(indexes) > 0){TFs2enh_split$biosample_name[indexes] = "-"}
+if (length(indexes) > 0){TFs2enh_split$biosample_name[indexes] = "-"} 
 
 
 #6. Mutations
@@ -178,7 +203,6 @@ enh2mutations$SNP_id = trimws(enh2mutations$SNP_id)
 colnames(enh2mutations)[2:4] = c("refsnp_ID", "mutation_PMID", "mutation_method")
 enh2mutations = enh2mutations[!duplicated(enh2mutations),]
 
-#Set of metadata
 enh2mutations_split = enh2mutations
 enh2mutations_split = SplitIntoAtomicValues(enh2mutations_split, 4, ",") #Spit methods
 enh2mutations_split$mutation_method = trimws(enh2mutations_split$mutation_method)
@@ -206,7 +230,7 @@ biosample_names = data.frame(biosample_names) #table for mapping terms in ontolo
 
 #9. Merge data
 rm(count, crossref, disease_name, enh2gene_method, i, index, indexes, strong_exp, weak_exp)
-#At the moment we have different subsets of data according to different topics. Now we join all these subsets in an unified format.
+#At the moment we have different subsets of data according to different topics. Now we join all these subsets in an unified format
 merge_ENdb = merge(hg19tohg38_tables$enhancers, enh_metadata_split, by = "enh_ID", all = T)
 merge_ENdb = merge(merge_ENdb, enh2target_genes_split[1:5], by = "enh_ID", all = T)
 merge_ENdb = merge_ENdb[!duplicated(merge_ENdb),]
@@ -221,7 +245,7 @@ merge_ENdb = merge_ENdb[!duplicated(merge_ENdb),]
 merge_ENdb[is.na(merge_ENdb)] = "-"
 
 #We remove the labels that we are not going to use
-filt_merge_ENdb = merge_ENdb[-c(19,23,27)] #external_gene_name and disease labels
+filt_merge_ENdb = merge_ENdb[-c(19,23,27)] #external_gene_name and disease
 filt_merge_ENdb = filt_merge_ENdb[!duplicated(filt_merge_ENdb),]
 indexes = which(filt_merge_ENdb$hgnc_symbol_target_genes == "-")
 if (length(indexes) > 0) {filt_merge_ENdb$enh2gene_PMID[indexes] = filt_merge_ENdb$enh2gene_method[indexes] = "-"}
@@ -257,7 +281,6 @@ if (length(indexes) > 0) {filt_merge_ENdb$disease_PMID[indexes] = filt_merge_ENd
 #10. Save
 dir.create("./ENdb_results")
 rm(disease, DO, i, index, indexes, list, mesh, OMIM)
-t = proc.time() - t; t
 save.image("./ENdb_results/Data_ENdb.RData")
 write.table(filt_merge_ENdb, "./ENdb_results/ENdb.tsv", quote = F, sep = "\t", col.names = T, row.names = F, 
             fileEncoding = "utf8")

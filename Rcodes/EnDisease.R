@@ -8,8 +8,8 @@
 #download.file("http://health.tsinghua.edu.cn/jianglab/endisease/download_files/endisease.zip", 
 #              "./EnDisease.zip")
 #unzip("EnDisease.zip")
-t = proc.time()
 orig_EnDisease = read.delim("endisease_2.0.txt", header = F, sep = "\t", encoding = "UTF-8", stringsAsFactors = F)
+t = proc.time()
 EnDisease = orig_EnDisease
 colnames(EnDisease) = c("original_ID", "PMID", "disease", "OMIM", "species", "biosample_name", "chr",
                         "start", "end", "strand", "external_gene_name_target_genes", "assembly", "refsnp_ID")
@@ -33,15 +33,34 @@ enh38 = dplyr::mutate(enh38, enh_ID = paste0(assembly, "_", chr, "_", start, "_"
 enh38 = enh38[c(6,1:5)]
 enh38 = enh38[!duplicated(enh38),]
 
-#enhancers
+#enh19
+source("./scripts/hgtohg_onestep.R")
+hg38tohg19 = hgtohg_onestep(enh38[2:5], 38, 19, 0.05)
+enh19 = hg38tohg19$filtered$new_bedTable
+colnames(enh19)[4] = "coord"
+enh19 = cbind(enh19, assembly = "hg19")
+
+enh_coord = hg38tohg19$filtered$IDs
+colnames(enh_coord) = c("coord", "hg38")
+enh_coord = cbind(enh_coord, minimum_ratio = 0.95, score = hg38tohg19$size_comparison$score)
+
+enh19 = merge(enh19, enh_coord, by = "coord", all.x = T)
+enh19 = enh19[!duplicated(enh19),]
+colnames(enh19)[c(1,6)] = c("hg19", "coord")
+enh19 = merge(enh19, enh38[c(1,5)], by = "coord", all.x = T)
+enh19 = enh19[c(9,3:5,2,6:8)]
+colnames(enh19)[5] = "coord"
+colnames(enh_coord)[1] = "hg19"
+
+
+#Union of coordinates
 enhancers = enh38[-5]
 colnames(enhancers)[2:5] = c("orig_chr", "orig_start", "orig_end", "orig_assembly")
 enhancers = cbind(enhancers, current_chr = enh38$chr, current_start = enh38$start, current_end = enh38$end, 
                   current_assembly = enh38$assembly, minimum_ratio = "-", score = "-")
-
-#Include enh_ID in the original set
 EnDisease = merge(EnDisease, enh38[c(1,5)], by = "coord", all.x = T)
 EnDisease = EnDisease[c(13,2:9,1,10:12)]
+
 
 #Metadata
 EnDisease$biosample_name = gsub("\\s+", "", EnDisease$biosample_name)
@@ -51,7 +70,6 @@ EnDisease = EnDisease[!duplicated(EnDisease),]
 enh_metadata = cbind(EnDisease[1:2], crossref = "-", EnDisease[c(3,6)], enh_method = "-", type = "-",
                      source = "EnDisease")
 enh_metadata = enh_metadata[!duplicated(enh_metadata),]
-colnames(enh_metadata)[4] = "enh_PMID"
 
 enh_metadata_split = enh_metadata
 source("./scripts/SplitIntoAtomicValues.R")

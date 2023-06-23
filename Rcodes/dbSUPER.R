@@ -37,7 +37,7 @@ data$PMID[data$cell_name == "MM1S" & data$number >= 67138] = 23582323
 data$method[data$cell_name == "MM1S" & data$number >= 67138] = "MED1"
 data$PMID[data$cell_name == "Jurkat" & data$number >= 66235] = 25043025
 
-data = data[-4] #Because we  only need the number to construct the IDs
+data = data[-4] #Because we only need the number to construct the IDs
   
 
 #2. Enhancers:

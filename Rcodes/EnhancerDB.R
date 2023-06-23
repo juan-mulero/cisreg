@@ -1,3 +1,4 @@
+#1. Enhancers
 ##Reading files
 library(data.table)
 orig_EnhancerDB = data.frame(fread("http://lcbb.swjtu.edu.cn/EnhancerDB/_download/enhancer.gz"))
@@ -12,13 +13,13 @@ crossref = paste0("http://lcbb.swjtu.edu.cn/EnhancerDB/enhancer/details?eid=", e
 enh_EnhancerDB = cbind(enh_ID, enh_EnhancerDB[1:3], orig_assembly = "hg19", enh_EnhancerDB[4], crossref, enh_PMID = 30689845,
                        enh_EnhancerDB[5], enh_method = "H3K4me1", type = NA, source = "EnhancerDB")
 #EnhancerDB contains 65423 enhancers from FANTOM5, but these have been incorrectly annotated as VISTA enhancers. 
-ind = which(enh_EnhancerDB$original_ID == "vista1") #461689 527112
-enh_EnhancerDB$enh_PMID[ind[1]:(ind[2]-1)] = 24670763
-enh_EnhancerDB$enh_method[ind[1]:(ind[2]-1)] = "CAGE"
+which(enh_EnhancerDB$original_ID == "vista1") #461689 527112
+enh_EnhancerDB$enh_PMID[461689:527111] = 24670763
+enh_EnhancerDB$enh_method[461689:527111] = "CAGE"
 
-enh_EnhancerDB$enh_PMID[ind[2]:nrow(enh_EnhancerDB)] = 17130149
-enh_EnhancerDB$enh_method[ind[2]:nrow(enh_EnhancerDB)] = "sequence conservation"
-set = enh_EnhancerDB[ind[2]:nrow(enh_EnhancerDB),]
+enh_EnhancerDB$enh_PMID[527112:nrow(enh_EnhancerDB)] = 17130149
+enh_EnhancerDB$enh_method[527112:nrow(enh_EnhancerDB)] = "sequence conservation"
+set = enh_EnhancerDB[527112:nrow(enh_EnhancerDB),]
 set$enh_method = "reporter gene assay"
 enh_EnhancerDB = rbind(enh_EnhancerDB, set)
 
@@ -55,3 +56,33 @@ filt_EnhancerDB = enh_EnhancerDB[-indexes,]
 dir.create("./EnhancerDB_results")
 save.image("./EnhancerDB_results/Data_EnhancerDB.RData")
 write.table(filt_EnhancerDB, "./EnhancerDB_results/EnhancerDB.tsv", col.names = T, row.names = F, quote = F, sep = "\t")
+
+
+#2. Enhancer-miRNA
+miRNA = data.frame(fread("http://lcbb.swjtu.edu.cn/EnhancerDB/_download/enhancer-miRNA.gz"))
+colnames(miRNA) = c("orig_chr", "orig_start", "orig_end", "original_ID", "miRNA_name", "chr", "start", "end", "TSS", "strand", "qValue")
+#We will not use the original IDs because for FANTOM enhancers are incorrect.
+coord = bed2coord(miRNA[1:3])
+enh_ID = paste0("hg19_", gsub("[:-]", "_", coord))
+enh2miRNA = cbind(enh_ID, miRNA, enh2miRNA_PMID = 30689845, enh2miRNA_method = "distance 100kb")
+enh2miRNA = enh2miRNA[!duplicated(enh2miRNA),]
+
+miRNAs = unique(enh2miRNA$miRNA_name)
+source("./scripts/UpdateGeneSymbol.R")
+t = proc.time()
+upd_miRNAs = UpdateGeneSymbol(miRNAs)
+t = proc.time() - t
+colnames(upd_miRNAs)[1] = colnames(miRNA)[5] = "external_miRNA_name"
+colnames(upd_miRNAs)[2] = "hgnc_symbol_miRNA"
+miRNA = merge(miRNA, upd_miRNAs, by = "external_miRNA_name", all.x = T)
+miRNA = miRNA[!duplicated(miRNA),]
+miRNA = miRNA[,c(2:5,1,12,6:11)]
+
+colnames(enh2miRNA)[6] = "external_miRNA_name"
+enh2miRNA = merge(enh2miRNA, upd_miRNAs, by = "external_miRNA_name", all.x = T)
+enh2miRNA = enh2miRNA[!duplicated(enh2miRNA),]
+enh2miRNA = enh2miRNA[,c(2:6,1,15,13:14,7:12)]
+
+save.image("./EnhancerDB_results/Data_EnhancerDB.RData")
+write.table(filt_EnhancerDB, "./EnhancerDB_results/EnhancerDB.tsv", col.names = T, row.names = F, quote = F, sep = "\t")
+

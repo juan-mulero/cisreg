@@ -1,7 +1,7 @@
 #1. Reading files
 library(data.table)
 #Enhancers:
-orig_enh_FANTOM5 = fread("https://fantom.gsc.riken.jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_and_2.bed.gz")
+orig_enh_FANTOM5 = fread("https://FANTOM5.gsc.riken.jp/5/datafiles/latest/extra/Enhancers/human_permissive_enhancers_phase_1_and_2.bed.gz")
 orig_enh_FANTOM5 = data.frame(orig_enh_FANTOM5)
 enhancers = orig_enh_FANTOM5
 

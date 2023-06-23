@@ -1,4 +1,6 @@
 library(data.table)
+
+#hg38
 dir.create("./3DGB_hg38TAD")
 temp = tempfile()
 download.file("http://3dgenome.fsm.northwestern.edu/downloads/hg38.TAD.zip", temp)
