@@ -7,3 +7,4 @@ git clone https://github.com/juan-mulero/cisreg.git
 cd cisreg
 go run cisreg.go
 ```
+Execution requires to specify input and output paths for files. Therefore, check these paths.
