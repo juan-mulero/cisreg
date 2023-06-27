@@ -13,7 +13,7 @@ The generated knowledge network is structured in graphs, being each graph a diff
 
 ![Graph_types](./images/graph_types.PNG)
 
-The knowledge network has the following graphs:
+The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - crm : Cis Regulatory Modules. Currently only enhancer sequences, that increase gene transcription levels.
 - tad : Topologically associating domain. Domains of genome structure and regulation.
 - gene : Genes.
