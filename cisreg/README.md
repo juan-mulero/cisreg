@@ -1,4 +1,4 @@
-Running the go code requires the installation of [go](https://go.dev/) and functions from the https://github.com/vlmir/bgw3.git repository. 
+Running the go code requires the installation of [go](https://go.dev/) language and functions from the https://github.com/vlmir/bgw3.git repository. 
 
 To clone the repository and execute the code:
 
