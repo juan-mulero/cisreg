@@ -37,7 +37,7 @@ hBGW is an integrative model in which classes represent entities and instances r
 
 ## Workflow
 
-The current version of hBGW integrates the BioGateway human classes and instances and domains associated with gene regulation. It also extends the gene graph to include aspects of genome location and provides relations to the [Biolink model](https://biolink.github.io/biolink-model/), focused on the standardization of knowledge graphs.
+The current version of hBGW integrates the BioGateway human classes and instances, and domains associated with gene regulation (CRM and TADs). It also extends the gene graph to include aspects of genome location and provides relations to the [Biolink model](https://biolink.github.io/biolink-model/), focused on the standardization of knowledge graphs.
 
 The following steps were taken to generate the new hBGW domains:
 1. Compilation of the [databases used as sources](./images/databases.PNG).
