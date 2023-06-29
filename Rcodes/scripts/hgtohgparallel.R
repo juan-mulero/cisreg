@@ -1,3 +1,4 @@
+#Version of hgtohg.R with parallel computing
 #Function to map sequences from one reference genome to another.
 #Input: bed_table --> table in bed format (chr start end ID) with the original sequences to be remapped to another reference genome.
 #       inputHg --> original reference genome. Format: integer 19 or 38
