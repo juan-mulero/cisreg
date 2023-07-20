@@ -206,7 +206,6 @@ WHERE {
 		?enhID rdf:type owl:Class ;
 			skos:prefLabel ?enh_label ;
 			obo:RO_0002331 ?phen ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
 	}
@@ -238,7 +237,6 @@ WHERE {
 		?enhID rdf:type owl:Class ;
 			skos:prefLabel ?enh_label ;
 			obo:RO_0002331 ?phen ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
 	}
@@ -270,7 +268,6 @@ WHERE {
 		}
 		?enhID rdf:type owl:Class ;
 			obo:RO_0002331 ?phen ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
 			obo:RO_0002428 ?tgene .
 	}
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
@@ -302,7 +299,6 @@ WHERE {
 		}
 		?enhID rdf:type owl:Class ;
 			obo:RO_0002331 ?phen ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
 			obo:RO_0002428 ?tgene .
 	}
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
