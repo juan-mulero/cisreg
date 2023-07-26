@@ -1,0 +1,300 @@
+# Triples per graph:
+SELECT ?graph (COUNT (*) AS ?triples) 
+WHERE {
+	GRAPH ?graph {
+		?s ?p ?o
+	}
+} 
+ORDER BY ?graph
+
+# Count of unique enhancers (classes):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?enhID)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdfs:subClassOf obo:SO_0000727
+        }
+}
+
+#Count of unique enhancers per chromosome:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX resource: <http://semanticscience.org/resource/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?label_chr (count(distinct ?enhID) as ?count)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdfs:subClassOf obo:SO_0000727 ;
+                        obo:RO_0001025 ?chr .
+                ?chr skos:prefLabel ?label_chr
+        }
+}
+ORDER BY ?label_chr
+
+# Count of unique enhancers per database
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX resource: <http://semanticscience.org/resource/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?label_database (count(distinct ?enhID) as ?count)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdfs:subClassOf obo:SO_0000727 ;
+                        resource:SIO_000253 ?database .
+                ?database skos:prefLabel ?label_database
+        }
+}
+
+#Count of unique TADs (classes):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?tadID)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdfs:subClassOf obo:SO_0002304
+        }
+}
+
+#Count of unique human genes (classes):
+SELECT COUNT(DISTINCT ?s)
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/gene>{
+                ?s a <http://www.w3.org/2002/07/owl#Class> ;
+                        <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/SIO_010035>;
+                        <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606>
+        }
+}
+
+#Count of enhancer instances:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?enhID)
+WHERE {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727
+        }
+}
+
+#Count of TAD instances:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?tadID)
+WHERE {
+        GRAPH <tad> {
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304
+        }
+}
+
+#Count of human gene instances:
+SELECT COUNT(DISTINCT ?s)
+WHERE {
+        GRAPH <http://rdf.biogateway.eu/graph/gene>{
+                ?s a ?o .
+                ?o <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/SIO_010035>;
+                        <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606>
+        }
+}
+
+#Count of enhancer target genes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?tgene)
+WHERE {
+        GRAPH <crm> {
+                ?enhID obo:RO_0002428 ?tgene
+                FILTER (regex(?tgene, "http://rdf.biogateway.eu/gene/9606/"))
+        }
+}
+
+#Count of transcription factor that interact with the enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?tfactor)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:RO_0002436 ?tfactor
+        }
+}
+
+#Count of disease ontology terms linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?disease)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:RO_0002331 ?disease
+        }
+}
+
+#Count of OMIM ontology terms linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?disease)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:RO_0002331 ?disease
+                FILTER(REGEX(?disease, "http://purl.bioontology.org/ontology/OMIM/"))
+        }
+}
+
+#Count of DOID ontology terms linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?disease)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:RO_0002331 ?disease
+                FILTER(REGEX(?disease, "http://purl.obolibrary.org/obo/DOID_"))
+        }
+}
+
+#Count of MeSH ontology terms linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?disease)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:RO_0002331 ?disease
+                FILTER(REGEX(?disease, "https://id.nlm.nih.gov/mesh/"))
+        }
+}
+
+#Count of pubmed articles linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                    <http://semanticscience.org/resource/SIO_000772> ?pubmed
+        }
+}
+
+#Count of pubmed articles linked to TADs:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdf:type owl:Class ;
+                    <http://semanticscience.org/resource/SIO_000772> ?pubmed
+        }
+}
+
+#Count of cell types linked to enhancers (Cell Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?cell_type)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:CLO_0037209 ?cell_type
+                FILTER(REGEX(?cell_type, "http://purl.obolibrary.org/obo/CL_"))
+        }
+}
+
+
+#Count of cell types linked to TADs (Cell Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?cell_type)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdf:type owl:Class ;
+                        obo:CLO_0037209 ?cell_type
+                FILTER(REGEX(?cell_type, "http://purl.obolibrary.org/obo/CL_"))
+        }
+}
+
+
+#Count of cell lines linked to enhancers (Cell Line Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?cell_line)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:CLO_0037210 ?cell_line
+                FILTER(REGEX(?cell_line, "http://purl.obolibrary.org/obo/CLO_"))
+        }
+}
+
+#Count of cell lines linked to TADs (Cell Line Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?cell_line)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdf:type owl:Class ;
+                        obo:CLO_0037210 ?cell_line
+                FILTER(REGEX(?cell_line, "http://purl.obolibrary.org/obo/CLO_"))
+        }
+}
+
+#Count of anatomical structures linked to enhances (UBERON Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?anatomy)
+WHERE {
+        GRAPH <crm> {
+                ?enhID rdf:type owl:Class ;
+                        obo:CLO_0037208 ?anatomy
+                FILTER(REGEX(?anatomy, "http://purl.obolibrary.org/obo/UBERON_"))
+        }
+}
+
+#Count of anatomical structures linked to TADs (UBERON Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?anatomy)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdf:type owl:Class ;
+                        obo:CLO_0037208 ?anatomy
+                FILTER(REGEX(?anatomy, "http://purl.obolibrary.org/obo/UBERON_"))
+        }
+}
+
+
+
+
