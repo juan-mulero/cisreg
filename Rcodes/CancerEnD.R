@@ -117,6 +117,17 @@ library(dplyr)
 filt_CancerEnD = arrange(filt_CancerEnD, enh_ID)
 rm(indexes)
 
+#Diseases --> biosamples
+colnames(diseases) = c("disease_name", "disease")
+filt_CancerEnD = merge(filt_CancerEnD, diseases, by = "disease", all.x = T)
+filt_CancerEnD = filt_CancerEnD[,-1]
+colnames(filt_CancerEnD)[30] = "disease"
+filt_CancerEnD = filt_CancerEnD[,c(1:24,30,25:29)]
+filt_CancerEnD$biosample_name = filt_CancerEnD$disease
+filt_CancerEnD$disease = "-"
+filt_CancerEnD = filt_CancerEnD[!duplicated(filt_CancerEnD),]
+
+
 #6. Save files
 dir.create("./CancerEnD_results/")
 save.image("./CancerEnD_results/CancerEnD_data.RData")
