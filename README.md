@@ -11,7 +11,7 @@ With this contribution we also encourage the community to work on the developmen
 
 The generated knowledge network is structured in graphs, being each graph a different information domain. We distinguish two types of graphs in the network: entity graphs and relation graphs. The first ones aim to model different biological entities, while the second ones model relations between different entities.
 
-![Graph_types](./images/graph_types.PNG)
+![Graph_types](./images/graphs.png)
 
 The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - crm : Cis Regulatory Modules. Currently only enhancer sequences, that increase gene transcription levels.
@@ -27,8 +27,6 @@ The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - prot2cc - Protein - Celullar components relations.
 - prot2bp - Protein - Biological processes relations
 - prot2mf - Protein - Molecular functions relations
-
-![Graphs](./images/graphs.PNG)
 
 hBGW is an integrative model in which classes represent entities and instances represent individuals of the classes. Classes collect information from the different databases used as sources of information, so they are useful nodes to extract integrated information. Instances collect the information from each original database, so they are useful nodes for representing the information from each source and its metadata.
 
