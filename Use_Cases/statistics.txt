@@ -113,8 +113,11 @@ SELECT COUNT(DISTINCT ?tgene)
 WHERE {
         GRAPH <crm> {
                 ?enhID obo:RO_0002428 ?tgene
-                FILTER (regex(?tgene, "http://rdf.biogateway.eu/gene/9606/"))
         }
+	GRAPH <gene> {
+		?tgene <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/SIO_010035>;
+			<http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606>
+	}
 }
 
 #Count of transcription factor that interact with the enhancers:
