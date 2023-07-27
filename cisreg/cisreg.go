@@ -14,6 +14,7 @@ import(
 	//"encoding/json"
 	//"reflect"
 	"strconv"
+	"regexp"
 )
 
 //Map of human chromosomes --> format: chromosome: {URI_chr, label_chromosome, parental_class}
@@ -42,6 +43,7 @@ var chromosomes = util.SliceSet{
         "chr22":	{"<https://www.ncbi.nlm.nih.gov/nuccore/NC_000022.11>", "chr-22", "<http://purl.obolibrary.org/obo/SO_0000340>"},
         "chrX": {"<https://www.ncbi.nlm.nih.gov/nuccore/NC_000023.11>", "chr-X", "<http://purl.obolibrary.org/obo/SO_0000340>"},
         "chrY": {"<https://www.ncbi.nlm.nih.gov/nuccore/NC_000024.10>", "chr-Y", "<http://purl.obolibrary.org/obo/SO_0000340>"},
+	"chrMT": {"<https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1>", "chr-MT", "<http://purl.obolibrary.org/obo/SO_0000340>"},
 }
 
 //Name diseases to URI --> name of ontology to ontology prefix to construct the complete URIs for each entitity
@@ -53,6 +55,7 @@ var diseases2uri = map[string]string{
 
 //Map of sources to URI --> format: database_name : {URI_database, label_database, parental_class}
 var sources2uri = util.SliceSet{
+	//Enhancers
         "ENdb": {"<http://www.licpathway.net/ENdb/>", "ENdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
         "EnDisease":    {"<http://health.tsinghua.edu.cn/jianglab/endisease/>", "EnDisease", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
         "FANTOM5":      {"<https://fantom.gsc.riken.jp/5/>", "FANTOM5", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
@@ -62,8 +65,12 @@ var sources2uri = util.SliceSet{
 	"RefSeq":	{"<https://www.ncbi.nlm.nih.gov/refseq/>", "RefSeq", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"RAEdb":	{"<http://www.computationalbiology.cn/RAEdb/index.php>", "RAEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"EnhancerDB":	{"<http://lcbb.swjtu.edu.cn/EnhancerDB/>", "EnhancerDB", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
+
+	//TADs
 	"TADKB":	{"<http://dna.cs.miami.edu/TADKB/>", "TADKB", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"3DGB":	{"<http://3dgenome.fsm.northwestern.edu/index.html>", "3DGB", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
+
+	//Enhancers (ampliation)
 	"ChromHMM":     {"<https://genome.ucsc.edu/cgi-bin/hgTrackUi?g=wgEncodeBroadHmm&db=hg19>", "ChromHMM", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"CancerEnD":	{"<https://webs.iiitd.edu.in/raghava/cancerend/>", "CancerEnD", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"DiseaseEnhancer":	{"<http://biocc.hrbmu.edu.cn/DiseaseEnhancer/>", "DiseaseEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
@@ -76,86 +83,16 @@ var sources2uri = util.SliceSet{
 	"TiED":	{"<http://lcbb.swjtu.edu.cn/TiED/>", "TiED", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"EnhancerAtlas":	{"<http://www.enhanceratlas.org/indexv2.php>", "EnhancerAtlas", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"Roadmap":	{"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr1":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr2":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr3":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr4":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr5":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr6":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr7":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr8":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr9":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr10":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr11":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr12":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr13":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr14":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr15":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr16":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr17":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr18":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr19":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr20":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr21":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chr22":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "Roadmap_chrX":      {"<https://egg2.wustl.edu/roadmap/>", "Roadmap", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"JEME":	{"<http://yiplab.cse.cuhk.edu.hk/jeme/>", "JEME", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-	"SCREEN":	{"<https://screen.encodeproject.org/>", "JEME", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
+	"SCREEN":	{"<https://screen.encodeproject.org/>", "SCREEN", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"SEdb": {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr1":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr2":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr3":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr4":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr5":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr6":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr7":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr8":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr9":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr10":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr11":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr12":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr13":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr14":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr15":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr16":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr17":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr18":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr19":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr20":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr21":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chr22":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "SEdb_chrX":    {"<http://www.licpathway.net/sedb/>", "SEdb", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 	"scEnhancer":	{"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr1":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr2":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr3":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr4":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr5":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr6":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr7":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr8":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr9":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr10":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr11":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr12":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr13":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr14":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr15":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr16":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr17":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr18":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr19":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr20":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr21":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chr22":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chrX":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
-        "scEnhancer_chrY":      {"<http://enhanceratlas.net/scenhancer/>", "scEnhancer", "<http://purl.obolibrary.org/obo/NCIT_C15426>"},
 }
 
 //Map of assembly versions --> format: assembly_name: {URI_assembly, label_assembly, parental_class}
 var assembly2uri = util.SliceSet{
-        "hg38": {"<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39>", "GRCh38.p13", "<http://purl.obolibrary.org/obo/SO_0001248>"},
-	//"hg19": {"<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.25>", "GRCh37.p13", "<http://purl.obolibrary.org/obo/SO_0001248>"},
+        "hg38": {"<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39>", "GRCh38.p13", "<http://purl.obolibrary.org/obo/SO_0001505>"},
+	//"hg19": {"<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.25>", "GRCh37.p13", "<http://purl.obolibrary.org/obo/SO_0001505>"},
 }
 
 //Datatype properties, i.e., that have a literal as the object of the relation --> format: short_key_to_represent_property : {URI_property, label_property}
@@ -398,7 +335,7 @@ func TAD2map3D(pathfile string, p_old2new_IDs, p_new2old_IDs *util.Set3D) (tadma
                                 new2old_IDs.Add(primarykey, "old_ID", tad_id)
                         }
 
-                        //We create a label for the sequence
+			//We create a label for the sequence
                         label := strings.Join(fields[6:8], "-")
                         label = strings.Join([]string{`"`, fields[5], ":", label, `"`}, "")
                         tadmap.Add(primarykey, "label", label)
@@ -461,11 +398,12 @@ func Chr2map(pathfile string) (util.Set4D, error){
         return map4D, nil
 }
 
+
 //Func to convert one file with enrichment information to map 3D
-        //path : path of the file to convert (input)
-        //name_fields : name of the columns of the table that will be use like secondary keys (input)
-        //skip : slice with the number of the columns that we do not want to use (start in 0) (input)
-        //util.Set3d : map3D with the data obtained (output)
+	//path : path of the file to convert (input)
+	//name_fields : name of the columns of the table that will be use like secondary keys (input)
+	//skip : slice with the number of the columns that we do not want to use (start in 0) (input)
+	//util.Set3d : map3D with the data obtained (output)
 func EnrichFile2map3D(path string, name_fields []string, skip []int) (util.Set3D, error){
         file, err := os.Open(path)
         if err != nil{
@@ -545,6 +483,7 @@ func ExportEnh2rdf(path_source, path_rdf, source_name string, p_genes_xmap *bgw.
 		"seq2anato",
 		"biolinkcat",
 		"is_a",
+		"sth2clm",
 		"sth2exm",
         }
 
@@ -965,9 +904,9 @@ func ExportEnh2rdf(path_source, path_rdf, source_name string, p_genes_xmap *bgw.
 								//Because each gene has only one ncbigene ID
 								if ncbigene != "-" {
 									object = rdf.CompU("http://identifiers.org/ncbigene/", ncbigene)
-									triplet = rdf.FormT(old_object, uris_cisreg["sth2exm"], object)
-									map_triplets.Add(old_object, uris_cisreg["sth2exm"], object)
-                                        	                	if map_triplets[old_object][uris_cisreg["sth2exm"]][object] == 1 {
+									triplet = rdf.FormT(old_object, uris_cisreg["sth2clm"], object)
+									map_triplets.Add(old_object, uris_cisreg["sth2clm"], object)
+                                        	                	if map_triplets[old_object][uris_cisreg["sth2clm"]][object] == 1 {
                                                 	                	output_file.WriteString(triplet)
                                                         	        	num_ln++
                                                         		}
@@ -986,9 +925,10 @@ func ExportEnh2rdf(path_source, path_rdf, source_name string, p_genes_xmap *bgw.
                                                 if _, ok := symbol2enrich[tertiarykey]; ok {
                                                         uniprot_ids := symbol2enrich[tertiarykey]["uniprot"].Keys()
                                                         for _,uniprot_id := range uniprot_ids {
-								if upacbgw, ok := genes_xmap.Upac[uniprot_id]["bgwp"]; ok && uniprot_id != "-" {
-									for _,nwupacbgw := range upacbgw.Keys() {
-                                                                        	object = rdf.CompU("http://rdf.biogateway.eu/prot/", nwupacbgw)
+								//if upacbgw, ok := genes_xmap.Upac[uniprot_id]["bgwp"]; ok && uniprot_id != "-" {
+									//for _,nwupacbgw := range upacbgw.Keys() {
+                                                                        	//object = rdf.CompU("http://rdf.biogateway.eu/prot/", nwupacbgw)
+										object = rdf.CompU("http://uniprot.org/uniprot/", uniprot_id)
 										triplet := rdf.FormT(enhid_uriref, seckey2uri[secondarykey], object)
 										triplet_inst := rdf.FormT(instid_uriref, seckey2uri[secondarykey], object)
                                                 				map_triplets.Add(enhid_uriref, seckey2uri[secondarykey], object)
@@ -1030,12 +970,12 @@ func ExportEnh2rdf(path_source, path_rdf, source_name string, p_genes_xmap *bgw.
                                                                 			num_ln++
                                                         			}
 									}
-                                                                } else if uniprot_id != "-" {
+                                                                } else if tertiarykey != "-" {
 									//log.Warn("Warning: Biogateway does not contain the tfactor ", uniprot_id)
-									fmt.Println("Warning: Biogateway does not contain the gene ", tertiarykey)
+									//fmt.Println("Warning: gene not found to indicate its protein ", uniprot_id)
 								}
-                                                        }
-                                                }
+                                                        //}
+                                                //}
 						continue
                                         } else if secondarykey == "biosample_name" {
 						if _, ok := biosamples[tertiarykey]; ok {
@@ -1317,7 +1257,7 @@ func ExportGeneCoord2rdf(path_source, path_rdf, txid string, p_genes_xmap *bgw.X
                         gsymbgw = genes_xmap.Ncbig[geneid]["bgwg"].Keys()
                 } else {
                        //log.Warn("Warning: Biogateway does not contain the gene ", gene_symbol)
-                       fmt.Println("Warning: Biogateway does not contain the gene ", gene_symbol)
+                       //fmt.Println("Warning: Biogateway does not contain the gene ", gene_symbol)
                        continue}
 
 		for _,nwgsymbgw := range gsymbgw {
@@ -1861,6 +1801,7 @@ func ExportTAD2rdf(path_source, path_rdf, source_name string, p_old2new_IDs, p_n
         return map_triplets, old2new_IDs, new2old_IDs, num_ln, nil
 }
 
+
 //Function to save maps with identifiers
 //Input:
         //map_IDs: map which we want to save
@@ -1897,6 +1838,7 @@ func WriteIDFile(map_IDs util.Set3D, path_saveIDs string) (err error){
 }
 
 func main(){
+
 	//Map old2new_IDs
         name_fields := []string{
                 "old_ID",
@@ -1922,102 +1864,31 @@ func main(){
 
 	//Set of cisreg sources
 	enh_sources := map[string][]string{
-		"ENdb":		{"/home/juanmh/ssb1/databases/crm/ENdb.tsv", "/home/juanmh/ssb1/rdfs/crm/ENdb.nt"},
-		"EnDisease":	{"/home/juanmh/ssb1/databases/crm/EnDisease.tsv", "/home/juanmh/ssb1/rdfs/crm/EnDisease.nt"},
-		"dbSUPER":	{"/home/juanmh/ssb1/databases/crm/dbSUPER.tsv", "/home/juanmh/ssb1/rdfs/crm/dbSUPER.nt"},
-		"FANTOM5":	{"/home/juanmh/ssb1/databases/crm/FANTOM5.tsv", "/home/juanmh/ssb1/rdfs/crm/FANTOM5.nt"},
-		"VISTA":	{"/home/juanmh/ssb1/databases/crm/VISTA.tsv", "/home/juanmh/ssb1/rdfs/crm/VISTA.nt"},
-		"Ensembl":	{"/home/juanmh/ssb1/databases/crm/Ensembl.tsv", "/home/juanmh/ssb1/rdfs/crm/Ensembl.nt"},
-		"RefSeq":	{"/home/juanmh/ssb1/databases/crm/RefSeq.tsv", "/home/juanmh/ssb1/rdfs/crm/RefSeq.nt"},
-		"RAEdb":	{"/home/juanmh/ssb1/databases/crm/RAEdb.tsv", "/home/juanmh/ssb1/rdfs/crm/RAEdb.nt"},
-		"EnhancerDB":	{"/home/juanmh/ssb1/databases/crm/EnhancerDB.tsv", "/home/juanmh/ssb1/rdfs/crm/EnhancerDB.nt"},
-		"CancerEnD":	{"/home/juanmh/ssb1/databases/crm/CancerEnD.tsv", "/home/juanmh/ssb1/rdfs/crm/CancerEnD.nt"},
-		"DiseaseEnhancer":	{"/home/juanmh/ssb1/databases/crm/DiseaseEnhancer.tsv", "/home/juanmh/ssb1/rdfs/crm/DiseaseEnhancer.nt"},
-		"EnhFFL":	{"/home/juanmh/ssb1/databases/crm/EnhFFL.tsv", "/home/juanmh/ssb1/rdfs/crm/EnhFFL.nt"},
-                "EnhancerAtlas":        {"/home/juanmh/ssb1/databases/crm/EnhancerAtlas.tsv", "/home/juanmh/ssb1/rdfs/crm/EnhancerAtlas.nt"},
-                "FOCS": {"/home/juanmh/ssb1/databases/crm/FOCS.tsv", "/home/juanmh/ssb1/rdfs/crm/FOCS.nt"},
-                "GenoSTAN":     {"/home/juanmh/ssb1/databases/crm/GenoSTAN.tsv", "/home/juanmh/ssb1/rdfs/crm/GenoSTAN.nt"},
-                "HACER":        {"/home/juanmh/ssb1/databases/crm/HACER.tsv", "/home/juanmh/ssb1/rdfs/crm/HACER.nt"},
-                "SEA":  {"/home/juanmh/ssb1/databases/crm/SEA.tsv", "/home/juanmh/ssb1/rdfs/crm/SEA.nt"},
-                "TiED": {"/home/juanmh/ssb1/databases/crm/TiED.tsv", "/home/juanmh/ssb1/rdfs/crm/TiED.nt"},
-                "ChromHMM":     {"/home/juanmh/ssb1/databases/crm/ChromHMM.tsv", "/home/juanmh/ssb1/rdfs/crm/ChromHMM.nt"},
-		"JEME": {"/home/juanmh/ssb1/databases/crm/JEME.tsv", "/home/juanmh/ssb1/rdfs/crm/JEME.nt"},
-		"GeneHancer":   {"/home/juanmh/ssb1/databases/crm/GeneHancer.tsv", "/home/juanmh/ssb1/rdfs/crm/GeneHancer.nt"},
-		"SCREEN":	{"/home/juanmh/ssb1/databases/crm/SCREEN.tsv", "/home/juanmh/ssb1/rdfs/crm/SCREEN.nt"},
-		"Roadmap":	{"/home/juanmh/ssb1/databases/crm/Roadmap.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap.nt"},
-/*		"Roadmap_chr1":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr1.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr1.nt"},
-                "Roadmap_chr2":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr2.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr2.nt"},
-                "Roadmap_chr3":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr3.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr3.nt"},
-                "Roadmap_chr4":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr4.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr4.nt"},
-                "Roadmap_chr5":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr5.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr5.nt"},
-                "Roadmap_chr6":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr6.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr6.nt"},
-                "Roadmap_chr7":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr7.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr7.nt"},
-                "Roadmap_chr8":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr8.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr8.nt"},
-                "Roadmap_chr9":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr9.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr9.nt"},
-                "Roadmap_chr10":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr10.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr10.nt"},
-                "Roadmap_chr11":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr11.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr11.nt"},
-                "Roadmap_chr12":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr12.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr12.nt"},
-                "Roadmap_chr13":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr13.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr13.nt"},
-                "Roadmap_chr14":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr14.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr14.nt"},
-                "Roadmap_chr15":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr15.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr15.nt"},
-                "Roadmap_chr16":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr16.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr16.nt"},
-                "Roadmap_chr17":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr17.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr17.nt"},
-                "Roadmap_chr18":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr18.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr18.nt"},
-                "Roadmap_chr19":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr19.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr19.nt"},
-                "Roadmap_chr20":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr20.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr20.nt"},
-                "Roadmap_chr21":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr21.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr21.nt"},
-                "Roadmap_chr22":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chr22.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chr22.nt"},
-                "Roadmap_chrX":      {"/home/juanmh/ssb1/databases/crm/Roadmap/Roadmap_chrX.tsv", "/home/juanmh/ssb1/rdfs/crm/Roadmap/Roadmap_chrX.nt"},
-*/		"SEdb":	{"/home/juanmh/ssb1/databases/crm/SEdb.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb.nt"},
-/*		"SEdb_chr1": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr1.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr1.nt"},
-                "SEdb_chr2": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr2.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr2.nt"},
-                "SEdb_chr3": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr3.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr3.nt"},
-                "SEdb_chr4": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr4.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr4.nt"},
-                "SEdb_chr5": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr5.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr5.nt"},
-                "SEdb_chr6": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr6.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr6.nt"},
-                "SEdb_chr7": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr7.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr7.nt"},
-                "SEdb_chr8": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr8.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr8.nt"},
-                "SEdb_chr9": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr9.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr9.nt"},
-                "SEdb_chr10": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr10.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr10.nt"},
-                "SEdb_chr11": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr11.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr11.nt"},
-                "SEdb_chr12": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr12.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr12.nt"},
-                "SEdb_chr13": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr13.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr13.nt"},
-                "SEdb_chr14": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr14.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr14.nt"},
-                "SEdb_chr15": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr15.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr15.nt"},
-                "SEdb_chr16": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr16.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr16.nt"},
-                "SEdb_chr17": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr17.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr17.nt"},
-                "SEdb_chr18": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr18.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr18.nt"},
-                "SEdb_chr19": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr19.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr19.nt"},
-                "SEdb_chr20": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr20.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr20.nt"},
-                "SEdb_chr21": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr21.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr21.nt"},
-                "SEdb_chr22": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chr22.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chr22.nt"},
-                "SEdb_chrX": {"/home/juanmh/ssb1/databases/crm/SEdb/SEdb_chrX.tsv", "/home/juanmh/ssb1/rdfs/crm/SEdb/SEdb_chrX.nt"},
-*/		"scEnhancer":	{{"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer.nt"},
-/*		"scEnhancer_chr1":	{"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr1.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr1.nt"},
-		"scEnhancer_chr2":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr2.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr2.nt"},
-		"scEnhancer_chr3":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr3.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr3.nt"},
-		"scEnhancer_chr4":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr4.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr4.nt"},
-		"scEnhancer_chr5":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr5.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr5.nt"},
-		"scEnhancer_chr6":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr6.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr6.nt"},
-		"scEnhancer_chr7":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr7.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr7.nt"},
-		"scEnhancer_chr8":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr8.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr8.nt"},
-		"scEnhancer_chr9":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr9.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr9.nt"},
-		"scEnhancer_chr10":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr10.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr10.nt"},
-		"scEnhancer_chr11":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr11.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr11.nt"},
-		"scEnhancer_chr12":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr12.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr12.nt"},
-		"scEnhancer_chr13":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr13.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr13.nt"},
-		"scEnhancer_chr14":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr14.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr14.nt"},
-		"scEnhancer_chr15":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr15.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr15.nt"},
-		"scEnhancer_chr16":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr16.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr16.nt"},
-		"scEnhancer_chr17":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr17.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr17.nt"},
-		"scEnhancer_chr18":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr18.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr18.nt"},
-		"scEnhancer_chr19":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr19.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr19.nt"},
-		"scEnhancer_chr20":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr20.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr20.nt"},
-		"scEnhancer_chr21":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr21.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr21.nt"},
-		"scEnhancer_chr22":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chr22.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chr22.nt"},
-		"scEnhancer_chrX":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chrX.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chrX.nt"},
-		"scEnhancer_chrY":      {"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer_chrY.tsv", "/home/juanmh/ssb1/rdfs/crm/scEnhancer/scEnhancer_chrY.nt"},
-*/
+		"ENdb":		{"/home/juanmh/ssb1/databases/crm/ENdb.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/ENdb.nt"},
+		"EnDisease":	{"/home/juanmh/ssb1/databases/crm/EnDisease.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/EnDisease.nt"},
+		"dbSUPER":	{"/home/juanmh/ssb1/databases/crm/dbSUPER.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/dbSUPER.nt"},
+		"FANTOM5":	{"/home/juanmh/ssb1/databases/crm/FANTOM5.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/FANTOM5.nt"},
+		"VISTA":	{"/home/juanmh/ssb1/databases/crm/VISTA.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/VISTA.nt"},
+		"Ensembl":	{"/home/juanmh/ssb1/databases/crm/Ensembl.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/Ensembl.nt"},
+		"RefSeq":	{"/home/juanmh/ssb1/databases/crm/RefSeq.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/RefSeq.nt"},
+		"RAEdb":	{"/home/juanmh/ssb1/databases/crm/RAEdb.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/RAEdb.nt"},
+		"EnhancerDB":	{"/home/juanmh/ssb1/databases/crm/EnhancerDB.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/EnhancerDB.nt"},
+		"CancerEnD":	{"/home/juanmh/ssb1/databases/crm/CancerEnD.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/CancerEnD.nt"},
+		"DiseaseEnhancer":	{"/home/juanmh/ssb1/databases/crm/DiseaseEnhancer.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/DiseaseEnhancer.nt"},
+		"EnhFFL":	{"/home/juanmh/ssb1/databases/crm/EnhFFL.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/EnhFFL.nt"},
+                "EnhancerAtlas":        {"/home/juanmh/ssb1/databases/crm/EnhancerAtlas.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/EnhancerAtlas.nt"},
+                "FOCS": {"/home/juanmh/ssb1/databases/crm/FOCS.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/FOCS.nt"},
+                "GenoSTAN":     {"/home/juanmh/ssb1/databases/crm/GenoSTAN.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/GenoSTAN.nt"},
+                "HACER":        {"/home/juanmh/ssb1/databases/crm/HACER.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/HACER.nt"},
+                "SEA":  {"/home/juanmh/ssb1/databases/crm/SEA.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/SEA.nt"},
+                "TiED": {"/home/juanmh/ssb1/databases/crm/TiED.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/TiED.nt"},
+                "ChromHMM":     {"/home/juanmh/ssb1/databases/crm/ChromHMM.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/ChromHMM.nt"},
+		"JEME": {"/home/juanmh/ssb1/databases/crm/JEME.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/JEME.nt"},
+		"GeneHancer":   {"/home/juanmh/ssb1/databases/crm/GeneHancer.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/GeneHancer.nt"},
+		"SCREEN":	{"/home/juanmh/ssb1/databases/crm/SCREEN.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/SCREEN.nt"},
+		"Roadmap":	{"/home/juanmh/ssb1/databases/crm/Roadmap.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/Roadmap.nt"},
+		"SEdb":	{"/home/juanmh/ssb1/databases/crm/SEdb.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/SEdb.nt"},
+		"scEnhancer":	{"/home/juanmh/ssb1/databases/crm/scEnhancer/scEnhancer.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/crm/scEnhancer/scEnhancer.nt"},
 	}
 
 	//Map of human genes of BGW
@@ -2046,8 +1917,8 @@ func main(){
 
 	//Set of TAD sources
 	tad_sources := map[string][]string{
-		"3DGB":	{"/home/juanmh/ssb1/databases/tad/3DGB.tsv", "/home/juanmh/ssb1/rdfs/tad/3DGB.nt"},
-		"TADKB":	{"/home/juanmh/ssb1/databases/tad/TADKB.tsv", "/home/juanmh/ssb1/rdfs/tad/TADKB.nt"},
+		"3DGB":	{"/home/juanmh/ssb1/databases/tad/3DGB.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/tad/3DGB.nt"},
+		"TADKB":	{"/home/juanmh/ssb1/databases/tad/TADKB.tsv", "/pool_discos_hdd/data/datos-jmulero/rdfs/tad/TADKB.nt"},
 	}
 
 	//TAD tables to RDF
@@ -2089,7 +1960,7 @@ func main(){
         	util.CheckE(err)
 
 		_, num_ln, err := ExportGeneCoord2rdf(strings.Join([]string{"/home/juanmh/ssb1/databases/gene/", file.Name()}, ""),
-					strings.Join([]string{"/home/juanmh/ssb1/rdfs/gene/gene_coord_", txid, ".nt"}, ""),
+					strings.Join([]string{"/pool_discos_hdd/data/datos-jmulero/rdfs/gene/gene_coord_", txid, ".nt"}, ""),
 					txid, &genes_xmap, &map_chr)
 
 		if err != nil {
@@ -2097,6 +1968,17 @@ func main(){
         	}
       		fmt.Printf("Number of triplets in Gene coordinates of txid %v: %v\n", txid, num_ln)
 	}
+
+        //We save the updated maps with the sequence identifiers
+        err = WriteIDFile(tfbs_old2new_IDs, "/home/juanmh/ssb1/data/tfbs/tfbs_old2new_IDs.tsv")
+        if err != nil {
+                panic(err)
+        }
+        err = WriteIDFile(tfbs_new2old_IDs, "/home/juanmh/ssb1/data/tfbs/tfbs_new2old_IDs.tsv")
+        if err != nil {
+                panic(err)
+        }
+
 }
 
 
