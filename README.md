@@ -31,6 +31,8 @@ The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - prot2mf : Protein - Molecular functions relations.
 - ortho : Protein-protein orthology relations.  
 
+Network statistics can also be found [here](./hBGW_statistics.xlsx).
+
 hBGW is an integrative model in which classes represent entities and instances represent individuals of the classes. Classes collect information from the different databases used as sources of information, so they are useful nodes to extract integrated information. Instances collect the information from each original database, so they are useful nodes for representing the information from each source and its metadata.
 
 ![Classes_and_intances_2](./images/classes_instances_2.PNG)
