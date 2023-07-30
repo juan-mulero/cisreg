@@ -8,3 +8,5 @@ cd cisreg/cisreg/
 go run cisreg.go
 ```
 Execution requires to specify input and output paths for files. Also the paths of the files used for the enrichment and mapping of data. Therefore, check these paths before execution.
+
+Recommendation: to avoid memory saturation, split databases by chromosomes if the databases to be converted to RDF are large.
