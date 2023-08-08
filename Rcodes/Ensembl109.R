@@ -31,7 +31,7 @@ rownames(activity_enh_ensembl) = enhancers$V9
 
 t = proc.time()
 for (i in i:length(epigenome_names)){
-  #Release 108
+  #Release 109
   file = paste0(url, epigenome_names[i], "/homo_sapiens.GRCh38.", epigenome_names[i], 
                 ".Regulatory_Build.regulatory_activity.20221007.gff.gz")
   file = data.frame(fread(file))
@@ -80,7 +80,7 @@ set2$enh_method = "ChIP-seq"
 split_enh_Ensembl = rbind(set1, set2)
 rm(set1, set2, coord, crossref, read, epigenome_names, file, i, j, split, url)
 
-dir.create("./Ensembl108_results")
-save.image("./Ensembl108_results/Data_Ensembl108.RData")
-write.table(split_enh_Ensembl, "./Ensembl108_results/Ensembl.tsv", quote = F, sep = "\t", col.names = T, row.names = F, 
+dir.create("./Ensembl109_results")
+save.image("./Ensembl109_results/Data_Ensembl109.RData")
+write.table(split_enh_Ensembl, "./Ensembl109_results/Ensembl.tsv", quote = F, sep = "\t", col.names = T, row.names = F, 
             fileEncoding = "utf8")
