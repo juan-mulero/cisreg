@@ -7,7 +7,7 @@
 #Note: This function is only useful if the values of the other variables are linked equally to each of these multiple values. 
 #Do not use if another variable also has multiple values and there is a direct relationship between 
 #the position of these multiple values.
-SplitColumn = function(table, column2split, marksplit){
+SplitIntoAtomicValues = function(table, column2split, marksplit){
   table = data.frame(table)
   colname = colnames(table)[column2split]
   indexes = grep(marksplit, table[,column2split])
