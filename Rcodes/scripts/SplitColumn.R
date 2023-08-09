@@ -41,6 +41,7 @@ SplitColumn = function(table, column2split, marksplit){
       
       new_row_ID = c(new_row_ID, set_row_ID)
       new_column = c(new_column, set_column)
+      init = final + 1
     }
   
     new_table = cbind(row_ID = new_row_ID, new_column)
