@@ -1,5 +1,3 @@
-#Version of filtAfterSizeComp.R with parallel computing
-
 filtAfterSizeComp_parallel = function(result_hgtohg, result_size_comp, orig_bedTable){
   indexes = c(result_size_comp$indexes_seq_notAcceptDiff, result_size_comp$indexes_NAs)
   index_NA = which(is.na(indexes))

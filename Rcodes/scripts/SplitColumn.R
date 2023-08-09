@@ -18,11 +18,29 @@ SplitColumn = function(table, column2split, marksplit){
     
     column = set2[[column2split]]
     new_row_ID = new_column = c()
-    for (i in 1:length(column)){
-      split = unlist(strsplit(column[i], marksplit))
-      new_column = c(new_column, split)
-      IDs = rep(row_ID[i], length(split))
-      new_row_ID = c(new_row_ID, IDs)
+    
+    n = 50000
+    n_groups = ceiling(length(column)/n)
+    init = 1
+    t = proc.time()
+    for (group in 1:n_groups){
+      cat("Group", group, "of", n_groups, "with a size of", n, "\n", proc.time() - t, "\n")
+      if (group == n_groups){
+        final = length(column)
+      } else {
+        final = init + n - 1
+      }
+      
+      set_row_ID = set_column = c()
+      for (i in init:final){
+        split = unlist(strsplit(column[i], marksplit))
+        set_column = c(set_column, split)
+        IDs = rep(row_ID[i], length(split))
+        set_row_ID = c(set_row_ID, IDs)
+      }
+      
+      new_row_ID = c(new_row_ID, set_row_ID)
+      new_column = c(new_column, set_column)
     }
   
     new_table = cbind(row_ID = new_row_ID, new_column)

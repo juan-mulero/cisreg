@@ -1,5 +1,3 @@
-#Version of size_comparison.R with parallel computing
-
 size_comparison_parallel = function(result_hgtohg, acceptDiffRatio){
   colnames(result_hgtohg$table_oldHgtoNewHg) = c("orig_chr", "orig_start", "orig_end", "orig_coord", 
                                                  "new_chr", "new_start", "new_end", "new_coord")

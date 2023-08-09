@@ -1,5 +1,3 @@
-#Same as UpdateGeneSymbol.R, but performing queries on the .txt file instead of REST queries (faster)
-
 UpdateGenes = function(external_gene_name){
   library(biomaRt)
   
