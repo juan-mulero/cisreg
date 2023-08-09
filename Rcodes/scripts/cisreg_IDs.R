@@ -1,6 +1,6 @@
-#function to transform the IDs of the tsv, based on coordinates, into the IDs used in the RDF. 
+#function to transform the crm coordinates of the tsv into the IDs used in the RDF. 
 #The prior generation of IDs speeds up the execution of the cisreg go code.
-#old_IDs --> vector with the identifiers to convert
+#old_IDs --> vector with the hg38 coordinatates to convert (format: assembly_chr_start_end --> Ex: hg38_chr1_1234_5678)
 #n --> splitting the identifier vector into groups of size n reduces execution time by reducing memory usage.
 
 cisreg_IDs = function(old_IDs, n) {
