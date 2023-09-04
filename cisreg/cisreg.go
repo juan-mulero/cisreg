@@ -1117,6 +1117,7 @@ func ExportGeneCoord2rdf(path_source, path_rdf, txid string, p_genes_xmap *bgw.X
 		"seq2version",
 		"biolinkcat",
 		"sth2exm",
+		"sth2clm",
         }
 
         //Annotation properties
@@ -1267,9 +1268,9 @@ func ExportGeneCoord2rdf(path_source, path_rdf, txid string, p_genes_xmap *bgw.X
                         	ncbigene := symbol2enrich[gene_symbol]["ncbigene"].Keys()[0]
 				if ncbigene != "-" {
                                 	object = rdf.CompU("http://identifiers.org/ncbigene/", ncbigene)
-                                        triplet = rdf.FormT(subject, uris["sth2exm"], object)
-                                        map_triplets.Add(object, uris["sth2exm"], object)
-                                        if map_triplets[object][uris["sth2exm"]][object] == 1 {
+                                        triplet = rdf.FormT(subject, uris["sth2clm"], object)
+                                        map_triplets.Add(object, uris["sth2clm"], object)
+                                        if map_triplets[object][uris["sth2clm"]][object] == 1 {
                                         	output_file.WriteString(triplet)
                                                 num_ln++
                                         }
