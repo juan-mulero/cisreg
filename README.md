@@ -1,7 +1,7 @@
-# hBGW
+# BioGateway for gene regulation knowledge
 
 ## Introduction
-hBGW is a knowledge network based on graphs and RDF triples to query biological information corresponding to *Homo sapiens*. hBGW is a model that uses semantic web technologies to integrate information from different databases through a model that, by reusing available resources, aims to standardize biological data and improve web interoperability. In addition, the knowledge network includes biological coordinates to allow the development of query strategies that exploit the location of sequences, an aspect that other semantic biological knowledge networks do not usually exploit.
+BioGateway is a knowledge network based on graphs and RDF triples to query biological information corresponding to *Homo sapiens* and other organisms. BioGateway is a model that uses semantic web technologies to integrate information from different databases through a model that, by reusing available resources, aims to standardize biological data and improve web interoperability. In addition, the knowledge network includes biological coordinates to allow the development of query strategies that exploit the location of sequences, an aspect that other semantic biological knowledge networks do not usually exploit.
 
 The knowledge network is available through its endpoint [https://biogateway.eu/sparql-endpoint/](https://biogateway.eu/sparql-endpoint/) and SPARQL. A short SPARQL [tutorial](./SPARQL_Tutorial.pdf) is available to introduce potencial users to this query language as well as to the use of the knowledge network.
 
@@ -33,11 +33,11 @@ The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 
 Network statistics can also be found [here](./hBGW_statistics.xlsx).
 
-hBGW is an integrative model in which classes represent entities and instances represent individuals of the classes. Classes have relations with those entities and data that model the entity. Instances collect the information from each original database, so they have the relations specific of each individual. Therefore, they are useful nodes for representing the information from each source and its metadata.
+BioGateway is an integrative model in which classes represent entities and instances represent individuals of the classes. Classes have relations with those entities and data that model the entity. Instances collect the information from each original database, so they have the relations specific of each individual. Therefore, they are useful nodes for representing the information from each source and its metadata.
 
 ## Workflow
 
-The current version of hBGW integrates the BioGateway human classes and instances, and domains associated with gene regulation (CRM and TADs). It also extends the gene graph to include aspects of genome location and provides relations to the [Biolink model](https://biolink.github.io/biolink-model/), focused on the standardization of knowledge graphs.
+The current version of BioGateway integrates domains associated with gene regulation (CRM and TADs). It also extends the gene graph to include aspects of genome location and provides relations to the [Biolink model](https://biolink.github.io/biolink-model/), focused on the standardization of knowledge graphs.
 
 The following steps were taken to generate the new hBGW domains:
 1. Compilation of the [databases used as sources](./images/databases.PNG).
