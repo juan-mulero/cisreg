@@ -14,7 +14,7 @@ The generated knowledge network is structured in graphs, being each graph a diff
 ![Graph_types](./images/graphs.png)
 
 The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
-- crm : Cis Regulatory Modules. Currently only enhancer sequences, that increase gene transcription levels.
+- crm : Cis Regulatory Modules (CRM). Currently only enhancer sequences, that increase gene transcription levels.
 - crm2phen: Relations between CRM and phenotypes.
 - crm2gene: Relations between CRM and target genes.
 - crm2tfac: Relations between CRM and transcription factors.
@@ -26,7 +26,7 @@ The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - mi : Molecular Interaction Ontology.
 - taxon : NCBI Taxon Ontology.
 - gene2phe : Genes - Phenotypes (omim) relations .
-- tfac2gene : Relations between Transcription factors (TF) and their target genes.
+- tfac2gene : Relations between transcription factors and their target genes.
 - prot2prot : Protein-protein interactions.
 - reg2targ : Protein - Protein regulatory relations
 - prot2cc : Protein - Celullar components relations.
