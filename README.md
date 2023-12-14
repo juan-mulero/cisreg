@@ -15,6 +15,9 @@ The generated knowledge network is structured in graphs, being each graph a diff
 
 The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - crm : Cis Regulatory Modules. Currently only enhancer sequences, that increase gene transcription levels.
+- crm2phen: Relations between CRM and phenotypes.
+- crm2gene: Relations between CRM and target genes.
+- crm2tfac: Relations between CRM and transcription factors.
 - tad : Topologically associating domain. Domains of genome structure and regulation.
 - gene : Genes.
 - prot : Proteins.
