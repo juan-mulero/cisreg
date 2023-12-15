@@ -25,7 +25,7 @@ The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - go : GO ontology (biological processes, molecular functions and cellular components).
 - mi : Molecular Interaction Ontology.
 - taxon : NCBI Taxon Ontology.
-- gene2phe : Genes - Phenotypes (omim) relations .
+- gene2phen : Genes - Phenotypes (omim) relations .
 - tfac2gene : Relations between transcription factors and their target genes.
 - prot2prot : Protein-protein interactions.
 - reg2targ : Protein - Protein regulatory relations
