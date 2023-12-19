@@ -1,0 +1,114 @@
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2004/02/skos/core#prefLabel> "has definition" .
+<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> "has name" .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#prefLabel> "is instance of" .
+<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#prefLabel> "is subclass of" .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://www.w3.org/2004/02/skos/core#prefLabel> "subject" .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.w3.org/2004/02/skos/core#prefLabel> "predicate" .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://www.w3.org/2004/02/skos/core#prefLabel> "object" .
+<http://purl.obolibrary.org/obo/RO_0002331> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0002331> <http://www.w3.org/2004/02/skos/core#prefLabel> "involved in" .
+<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2004/02/skos/core#prefLabel> "has evidence" .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2004/02/skos/core#prefLabel> "is defined by" .
+<http://schema.org/evidenceOrigin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://schema.org/evidenceOrigin> <http://www.w3.org/2004/02/skos/core#prefLabel> "has evidence origin" .
+<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2004/02/skos/core#prefLabel> "has source" .
+<https://w3id.org/biolink/vocab/category> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/biolink/vocab/category> <http://www.w3.org/2004/02/skos/core#prefLabel> "category" .
+<http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.w3.org/2004/02/skos/core#prefLabel> "has exact match" .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement> <http://www.w3.org/2004/02/skos/core#prefLabel> "Triple" .
+<http://purl.obolibrary.org/obo/NCIT_C15426> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://purl.obolibrary.org/obo/NCIT_C15426> <http://www.w3.org/2004/02/skos/core#prefLabel> "Database" .
+<https://w3id.org/biolink/vocab/EntityToDiseaseAssociationMixin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://w3id.org/biolink/vocab/EntityToDiseaseAssociationMixin> <http://www.w3.org/2004/02/skos/core#prefLabel> "entity to disease association mixin" .
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/description> .
+<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/linkml/alias> .
+<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/linkml/is_a> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/subject> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/predicate> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/object> .
+<http://purl.obolibrary.org/obo/RO_0002331> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/genotype_to_disease_association_object> .
+<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/publication_id> .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/has_evidence> .
+<http://schema.org/evidenceOrigin> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/download_url> .
+<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/supporting_data_source> .
+<http://www.licpathway.net/ENdb/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://www.licpathway.net/ENdb/> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/NCIT_C15426> .
+<http://www.licpathway.net/ENdb/> <http://www.w3.org/2004/02/skos/core#prefLabel> "ENdb" .
+<http://www.licpathway.net/ENdb/> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/InformationResource> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/EntityToDiseaseAssociationMixin> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://purl.obolibrary.org/obo/RO_0002331> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003515--doid!1682" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003515 and disease DOID:1682" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://purl.obolibrary.org/obo/DOID_1682> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000003515> <http://purl.obolibrary.org/obo/RO_0002331> <http://purl.obolibrary.org/obo/DOID_1682> .
+<http://purl.obolibrary.org/obo/DOID_1682> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Disease> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://rdf.biogateway.eu/crm/9606/CRMHS00000003515> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682#endb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682#endb> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003515--doid!1682#endb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682#endb> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003515 and disease DOID:1682 according to ENdb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682#endb> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_358> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682#endb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/22543974> .
+<http://identifiers.org/pubmed/22543974> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.ncbi.nlm.nih.gov/pubmed/22543974> .
+<http://www.ncbi.nlm.nih.gov/pubmed/22543974> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Article> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--doid!1682#endb> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/EntityToDiseaseAssociationMixin> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://purl.obolibrary.org/obo/RO_0002331> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003515--mesh!D006330" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003515 and disease mesh:D006330" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <https://id.nlm.nih.gov/mesh/D006330> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000003515> <http://purl.obolibrary.org/obo/RO_0002331> <https://id.nlm.nih.gov/mesh/D006330> .
+<https://id.nlm.nih.gov/mesh/D006330> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://identifiers.org/mesh/D006330> .
+<https://id.nlm.nih.gov/mesh/D006330> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Disease> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://rdf.biogateway.eu/crm/9606/CRMHS00000003515> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330#endb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330#endb> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003515--mesh!D006330#endb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330#endb> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003515 and disease mesh:D006330 according to ENdb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330#endb> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_358> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330#endb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/22543974> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003515--mesh!D006330#endb> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/EntityToDiseaseAssociationMixin> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://purl.obolibrary.org/obo/RO_0002331> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003517--doid!1682" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003517 and disease DOID:1682" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://purl.obolibrary.org/obo/DOID_1682> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000003517> <http://purl.obolibrary.org/obo/RO_0002331> <http://purl.obolibrary.org/obo/DOID_1682> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://rdf.biogateway.eu/crm/9606/CRMHS00000003517> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682#endb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682#endb> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003517--doid!1682#endb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682#endb> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003517 and disease DOID:1682 according to ENdb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682#endb> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_359> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682#endb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/22543974> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--doid!1682#endb> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/EntityToDiseaseAssociationMixin> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://purl.obolibrary.org/obo/RO_0002331> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003517--mesh!D006330" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003517 and disease mesh:D006330" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <https://id.nlm.nih.gov/mesh/D006330> .
+<http://rdf.biogateway.eu/crm/9606/CRMHS00000003517> <http://purl.obolibrary.org/obo/RO_0002331> <https://id.nlm.nih.gov/mesh/D006330> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://rdf.biogateway.eu/crm/9606/CRMHS00000003517> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330#endb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330#endb> <http://www.w3.org/2004/02/skos/core#prefLabel> "bgw!CRMHS00000003517--mesh!D006330#endb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330#endb> <http://www.w3.org/2004/02/skos/core#definition> "Association between cis-regulatory module CRMHS00000003517 and disease mesh:D006330 according to ENdb" .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330#endb> <http://schema.org/evidenceOrigin> <http://www.licpathway.net/ENdb/search/Detail.php?Species=Human&Enhancer_id=E_01_359> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330#endb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/22543974> .
+<http://rdf.biogateway.eu/crm2phen/bgw!CRMHS00000003517--mesh!D006330#endb> <http://semanticscience.org/resource/SIO_000253> <http://www.licpathway.net/ENdb/> .
