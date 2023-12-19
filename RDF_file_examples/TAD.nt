@@ -1,38 +1,34 @@
-<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
 <http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2004/02/skos/core#prefLabel> "has definition" .
-<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
 <http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> "has name" .
-<http://www.w3.org/2004/02/skos/core#altLabel> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
+<http://www.w3.org/2004/02/skos/core#altLabel> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AnnotationProperty> .
 <http://www.w3.org/2004/02/skos/core#altLabel> <http://www.w3.org/2004/02/skos/core#prefLabel> "has synonym" .
-<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#prefLabel> "is instance of" .
-<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#prefLabel> "is subclass of" .
-<http://schema.org/evidenceOrigin> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://schema.org/evidenceOrigin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://schema.org/evidenceOrigin> <http://www.w3.org/2004/02/skos/core#prefLabel> "has evidence origin" .
-<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2004/02/skos/core#prefLabel> "has evidence" .
-<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2004/02/skos/core#prefLabel> "is defined by" .
-<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2004/02/skos/core#prefLabel> "has source" .
-<http://purl.obolibrary.org/obo/RO_0000052> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://purl.obolibrary.org/obo/RO_0000052> <http://www.w3.org/2004/02/skos/core#prefLabel> "characteristic of" .
-<http://purl.obolibrary.org/obo/RO_0001025> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://purl.obolibrary.org/obo/RO_0001025> <http://www.w3.org/2004/02/skos/core#prefLabel> "located in" .
-<http://purl.org/dc/terms/hasVersion> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0002162> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/RO_0002162> <http://www.w3.org/2004/02/skos/core#prefLabel> "in taxon" .
+<http://purl.obolibrary.org/obo/BFO_0000050> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/BFO_0000050> <http://www.w3.org/2004/02/skos/core#prefLabel> "part of" .
+<http://purl.org/dc/terms/hasVersion> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://purl.org/dc/terms/hasVersion> <http://www.w3.org/2004/02/skos/core#prefLabel> "has version" .
-<http://purl.obolibrary.org/obo/CLO_0037210> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://purl.obolibrary.org/obo/CLO_0037210> <http://www.w3.org/2004/02/skos/core#prefLabel> "derived from cell line" .
-<http://purl.obolibrary.org/obo/CLO_0037209> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://purl.obolibrary.org/obo/CLO_0037209> <http://www.w3.org/2004/02/skos/core#prefLabel> "derived from cell" .
-<http://purl.obolibrary.org/obo/CLO_0037208> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
-<http://purl.obolibrary.org/obo/CLO_0037208> <http://www.w3.org/2004/02/skos/core#prefLabel> "derived from anatomic part" .
-<https://w3id.org/biolink/vocab/category> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/TXPO_0003500> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://purl.obolibrary.org/obo/TXPO_0003500> <http://www.w3.org/2004/02/skos/core#prefLabel> "observed in" .
+<https://w3id.org/biolink/vocab/category> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/biolink/vocab/category> <http://www.w3.org/2004/02/skos/core#prefLabel> "category" .
-<https://w3id.org/linkml/is_a> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://w3id.org/linkml/is_a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <https://w3id.org/linkml/is_a> <http://www.w3.org/2004/02/skos/core#prefLabel> "is a" .
-<http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.w3.org/2004/02/skos/core#prefLabel> "has exact match" .
 <http://purl.obolibrary.org/obo/SO_0002304> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://purl.obolibrary.org/obo/SO_0002304> <http://www.w3.org/2004/02/skos/core#prefLabel> "TAD" .
@@ -42,24 +38,23 @@
 <http://purl.obolibrary.org/obo/SO_0000340> <http://www.w3.org/2004/02/skos/core#prefLabel> "chromosome" .
 <http://purl.obolibrary.org/obo/NCIT_C15426> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://purl.obolibrary.org/obo/NCIT_C15426> <http://www.w3.org/2004/02/skos/core#prefLabel> "Database" .
+<http://www.w3.org/2004/02/skos/core#definition> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/description> .
 <http://www.w3.org/2004/02/skos/core#prefLabel> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/linkml/alias> .
 <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/linkml/is_a> .
 <http://schema.org/evidenceOrigin> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/download_url> .
 <http://semanticscience.org/resource/SIO_000772> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/publication_id> .
 <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/has_evidence> .
 <http://semanticscience.org/resource/SIO_000253> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/supporting_data_source> .
-<http://purl.obolibrary.org/obo/RO_0000052> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/in_taxon> .
-<http://purl.obolibrary.org/obo/RO_0001025> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/genomic_sequence_localization_object> .
+<http://purl.obolibrary.org/obo/RO_0002162> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/in_taxon> .
+<http://purl.obolibrary.org/obo/BFO_0000050> <http://www.w3.org/2004/02/skos/core#exactMatch> <https://w3id.org/biolink/vocab/part_of> .
 <http://purl.org/dc/terms/hasVersion> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/genome_build> .
-<http://purl.obolibrary.org/obo/CLO_0037210> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/supporting_study_context> .
-<http://purl.obolibrary.org/obo/CLO_0037209> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/supporting_study_context> .
-<http://purl.obolibrary.org/obo/CLO_0037208> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/supporting_study_context> .
-<http://purl.obolibrary.org/obo/OGI_1000004> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
-<http://purl.obolibrary.org/obo/OGI_1000004> <http://www.w3.org/2004/02/skos/core#prefLabel> "start point of interval" .
-<http://purl.obolibrary.org/obo/OGI_1000004> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/start_coordinate> .
-<http://purl.obolibrary.org/obo/OGI_1000003> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
-<http://purl.obolibrary.org/obo/OGI_1000003> <http://www.w3.org/2004/02/skos/core#prefLabel> "end point of interval" .
-<http://purl.obolibrary.org/obo/OGI_1000003> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/end_coordinate> .
+<http://purl.obolibrary.org/obo/TXPO_0003500> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/supporting_study_context> .
+<http://purl.obolibrary.org/obo/GENO_0000894> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://purl.obolibrary.org/obo/GENO_0000894> <http://www.w3.org/2004/02/skos/core#prefLabel> "start position" .
+<http://purl.obolibrary.org/obo/GENO_0000894> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/start_coordinate> .
+<http://purl.obolibrary.org/obo/GENO_0000895> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<http://purl.obolibrary.org/obo/GENO_0000895> <http://www.w3.org/2004/02/skos/core#prefLabel> "end position" .
+<http://purl.obolibrary.org/obo/GENO_0000895> <http://www.w3.org/2004/02/skos/core#closeMatch> <https://w3id.org/biolink/vocab/end_coordinate> .
 <http://purl.obolibrary.org/obo/SO_0002304> <http://www.w3.org/2004/02/skos/core#altLabel> "topologically associated domain" .
 <http://purl.obolibrary.org/obo/SO_0002304> <https://w3id.org/linkml/is_a> <https://w3id.org/biolink/vocab/NucleicAcidEntity> .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000001.11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
@@ -152,7 +147,7 @@
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GenomicSequenceLocalization> .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000340> .
-<https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-MT" .
+<https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-M" .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_012920.1> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GenomicSequenceLocalization> .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000023.11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000023.11> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000340> .
@@ -162,10 +157,11 @@
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000024.10> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000340> .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000024.10> <http://www.w3.org/2004/02/skos/core#prefLabel> "chr-Y" .
 <https://www.ncbi.nlm.nih.gov/nuccore/NC_000024.10> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GenomicSequenceLocalization> .
-<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001505> .
-<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> <http://www.w3.org/2004/02/skos/core#prefLabel> "GRCh38.p13" .
-<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Genome> .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0001505> .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> <http://www.w3.org/2004/02/skos/core#prefLabel> "GRCh38" .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> <http://www.w3.org/2004/02/skos/core#altLabel> "hg38" .
+<https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Genome> .
 <http://dna.cs.miami.edu/TADKB/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://dna.cs.miami.edu/TADKB/> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/NCIT_C15426> .
 <http://dna.cs.miami.edu/TADKB/> <http://www.w3.org/2004/02/skos/core#prefLabel> "TADKB" .
@@ -174,126 +170,59 @@
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0002304> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://www.w3.org/2004/02/skos/core#definition> "Topologically associated domain located in Homo sapiens chr9 between 6800000 and 10000000" .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://www.w3.org/2004/02/skos/core#prefLabel> "tad/TADHS00000001002" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/RO_0002162> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
 <http://purl.obolibrary.org/obo/NCBITaxon_9606> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/OrganismTaxon> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0006353> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000236> .
-<http://purl.obolibrary.org/obo/CL_0000236> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Cell> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0022851> .
-<http://purl.obolibrary.org/obo/CLO_0022851> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0000178> .
-<http://purl.obolibrary.org/obo/UBERON_0000178> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GrossAnatomicalStructure> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0005775> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000763> .
-<http://purl.obolibrary.org/obo/CL_0000763> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Cell> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=GM12878&rg=hg19&chr=9&se=6800000_10000000&id=7&res=50kb&caller=DI> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=KBM7&rg=hg19&chr=9&se=6800000_10000000&id=6&res=50kb&caller=DI> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/OGI_1000003> "10000000"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000238> .
-<http://purl.obolibrary.org/obo/ECO_0000238> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/EvidenceType> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0007693> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0002440> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/30871473> .
-<http://identifiers.org/pubmed/30871473> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.ncbi.nlm.nih.gov/pubmed/30871473> .
-<http://www.ncbi.nlm.nih.gov/pubmed/30871473> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Article> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://semanticscience.org/resource/SIO_000253> <http://dna.cs.miami.edu/TADKB/> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/OGI_1000004> "6800000"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/BFO_0000050> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/GENO_0000895> "10000000"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002> <http://purl.obolibrary.org/obo/GENO_0000894> "6800000"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/tad/9606/TADHS00000001002> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://www.w3.org/2004/02/skos/core#definition> "Topologically associated domain located in Homo sapiens chr9 between 6800000 and 10000000 according to TADKB" .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://www.w3.org/2004/02/skos/core#prefLabel> "tad#TADHS00000001002#tadkb" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0006353> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000236> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0022851> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0000178> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0005775> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000763> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/BTO_0006353> .
+<http://purl.obolibrary.org/obo/BTO_0006353> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/CL_0000236> .
+<http://purl.obolibrary.org/obo/CL_0000236> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Cell> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/CLO_0022851> .
+<http://purl.obolibrary.org/obo/CLO_0022851> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/UBERON_0000178> .
+<http://purl.obolibrary.org/obo/UBERON_0000178> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GrossAnatomicalStructure> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/BTO_0005775> .
+<http://purl.obolibrary.org/obo/BTO_0005775> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/CL_0000763> .
+<http://purl.obolibrary.org/obo/CL_0000763> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Cell> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=GM12878&rg=hg19&chr=9&se=6800000_10000000&id=7&res=50kb&caller=DI> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=KBM7&rg=hg19&chr=9&se=6800000_10000000&id=6&res=50kb&caller=DI> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/OGI_1000003> "10000000"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000238> .
+<http://purl.obolibrary.org/obo/ECO_0000238> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/EvidenceType> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0007693> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0002440> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/30871473> .
+<http://identifiers.org/pubmed/30871473> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.ncbi.nlm.nih.gov/pubmed/30871473> .
+<http://www.ncbi.nlm.nih.gov/pubmed/30871473> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Article> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://semanticscience.org/resource/SIO_000253> <http://dna.cs.miami.edu/TADKB/> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000001002#tadkb> <http://purl.obolibrary.org/obo/OGI_1000004> "6800000"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0002304> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/2004/02/skos/core#definition> "Topologically associated domain located in Homo sapiens chr18 between 3720000 and 4000000" .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/2004/02/skos/core#prefLabel> "tad/TADHS00000013570" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0000664> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000763> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0007059> .
-<http://purl.obolibrary.org/obo/CLO_0007059> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0002371> .
-<http://purl.obolibrary.org/obo/UBERON_0002371> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GrossAnatomicalStructure> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000018.10> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=K562&rg=hg19&chr=18&se=3720000_4000000&id=5&res=10kb&caller=DI> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/OGI_1000003> "4000000"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000238> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0007693> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0002440> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/30871473> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://semanticscience.org/resource/SIO_000253> <http://dna.cs.miami.edu/TADKB/> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/OGI_1000004> "3720000"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/RO_0002162> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/BFO_0000050> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000018.10> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/GENO_0000895> "4000000"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570> <http://purl.obolibrary.org/obo/GENO_0000894> "3720000"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/tad/9606/TADHS00000013570> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://www.w3.org/2004/02/skos/core#definition> "Topologically associated domain located in Homo sapiens chr18 between 3720000 and 4000000 according to TADKB" .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://www.w3.org/2004/02/skos/core#prefLabel> "tad#TADHS00000013570#tadkb" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0000664> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0000763> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0007059> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0002371> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000018.10> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/BTO_0000664> .
+<http://purl.obolibrary.org/obo/BTO_0000664> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/CL_0000763> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/CLO_0007059> .
+<http://purl.obolibrary.org/obo/CLO_0007059> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
+<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/UBERON_0002371> .
+<http://purl.obolibrary.org/obo/UBERON_0002371> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GrossAnatomicalStructure> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=K562&rg=hg19&chr=18&se=3720000_4000000&id=5&res=10kb&caller=DI> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/OGI_1000003> "4000000"^^<http://www.w3.org/2001/XMLSchema#integer> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000238> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0007693> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0002440> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/30871473> .
 <http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://semanticscience.org/resource/SIO_000253> <http://dna.cs.miami.edu/TADKB/> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000013570#tadkb> <http://purl.obolibrary.org/obo/OGI_1000004> "3720000"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0002304> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/2004/02/skos/core#definition> "Topologically associated domain located in Homo sapiens chr9 between 5760000 and 6760000" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/2004/02/skos/core#prefLabel> "tad/TADHS00000020654" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0001949> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0002618> .
-<http://purl.obolibrary.org/obo/CL_0002618> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/Cell> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0004307> .
-<http://purl.obolibrary.org/obo/CLO_0004307> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/CellLine> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0002331> .
-<http://purl.obolibrary.org/obo/UBERON_0002331> <https://w3id.org/biolink/vocab/category> <https://w3id.org/biolink/vocab/GrossAnatomicalStructure> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=HUVEC&rg=hg19&chr=9&se=5760000_6760000&id=6&res=10kb&caller=IS> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/OGI_1000003> "6760000"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000238> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0007693> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0002440> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/30871473> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://semanticscience.org/resource/SIO_000253> <http://dna.cs.miami.edu/TADKB/> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654> <http://purl.obolibrary.org/obo/OGI_1000004> "5760000"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdf.biogateway.eu/tad/9606/TADHS00000020654> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://www.w3.org/2004/02/skos/core#prefLabel> "tad#TADHS00000020654#tadkb" .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.org/dc/terms/hasVersion> <https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.39> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/BTO_0001949> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/CLO_0037209> <http://purl.obolibrary.org/obo/CL_0002618> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/CLO_0037210> <http://purl.obolibrary.org/obo/CLO_0004307> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/CLO_0037208> <http://purl.obolibrary.org/obo/UBERON_0002331> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/RO_0001025> <https://www.ncbi.nlm.nih.gov/nuccore/NC_000009.12> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://schema.org/evidenceOrigin> <http://dna.cs.miami.edu/TADKB/domain.php?sp=hum&cl=HUVEC&rg=hg19&chr=9&se=5760000_6760000&id=6&res=10kb&caller=IS> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/OGI_1000003> "6760000"^^<http://www.w3.org/2001/XMLSchema#integer> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/ECO_0000238> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.ebi.ac.uk/efo/EFO_0007693> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://purl.obolibrary.org/obo/OBI_0002440> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://semanticscience.org/resource/SIO_000772> <http://identifiers.org/pubmed/30871473> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://semanticscience.org/resource/SIO_000253> <http://dna.cs.miami.edu/TADKB/> .
-<http://rdf.biogateway.eu/tad/9606/TADHS00000020654#tadkb> <http://purl.obolibrary.org/obo/OGI_1000004> "5760000"^^<http://www.w3.org/2001/XMLSchema#integer> .
