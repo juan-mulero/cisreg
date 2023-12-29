@@ -7,6 +7,9 @@ WHERE {
 } 
 ORDER BY ?graph
 
+### New BGW graphs:
+
+## CRM graph
 # Count of unique enhancers (classes):
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -22,51 +25,29 @@ WHERE {
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX resource: <http://semanticscience.org/resource/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT ?label_chr (count(distinct ?enhID) as ?count)
 WHERE {
         GRAPH <crm> {
                 ?enhID rdfs:subClassOf obo:SO_0000727 ;
-                        obo:RO_0001025 ?chr .
+                        obo:BFO_0000050 ?chr .
                 ?chr skos:prefLabel ?label_chr
         }
 }
 ORDER BY ?label_chr
 
-# Count of unique enhancers per database
+#Count of unique enhancers per database
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX resource: <http://semanticscience.org/resource/>
+PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT ?label_database (count(distinct ?enhID) as ?count)
 WHERE {
         GRAPH <crm> {
-                ?enhID rdfs:subClassOf obo:SO_0000727 ;
-                        resource:SIO_000253 ?database .
+                ?enhID a/rdfs:subClassOf obo:SO_0000727 ;
+                        sio:SIO_000253 ?database .
                 ?database skos:prefLabel ?label_database
-        }
-}
-
-#Count of unique TADs (classes):
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?tadID)
-WHERE {
-        GRAPH <tad> {
-                ?tadID rdfs:subClassOf obo:SO_0002304
-        }
-}
-
-#Count of unique human genes (classes):
-SELECT COUNT(DISTINCT ?s)
-WHERE {
-        GRAPH <http://rdf.biogateway.eu/graph/gene>{
-                ?s a <http://www.w3.org/2002/07/owl#Class> ;
-                        <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/SIO_010035>;
-                        <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606>
         }
 }
 
@@ -82,6 +63,116 @@ WHERE {
         }
 }
 
+#Count of pubmed articles linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID <http://semanticscience.org/resource/SIO_000772> ?pubmed
+        }
+}
+
+#Count of enhancer databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?database)
+WHERE {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID <http://semanticscience.org/resource/SIO_000253> ?database
+        }
+}
+
+#Count of cell lines linked to enhancers (Cell Line Ontology terms, clo terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?clo)
+WHERE {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID obo:TXPO_0003500 ?clo .
+                FILTER(REGEX(?clo, "CLO_"))
+        }
+}
+
+#Count of cell types linked to enhancers (Cell Ontology terms, cl terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?cl)
+WHERE {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID obo:TXPO_0003500 ?cl .
+                FILTER(REGEX(?cl, "CL_"))
+        }
+}
+
+#Count of anatomical structures linked to enhancers (UBERON Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?uberon)
+WHERE {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID obo:TXPO_0003500 ?uberon .
+                FILTER(REGEX(?uberon, "UBERON_"))
+        }
+}
+
+## TAD graph
+#Count of unique TADs (classes):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?tadID)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdfs:subClassOf obo:SO_0002304
+        }
+}
+
+#Count of unique TADs per chromosome:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?label_chr (count(distinct ?tadID) as ?count)
+WHERE {
+        GRAPH <tad> {
+                ?tadID rdfs:subClassOf obo:SO_0002304 ;
+                        obo:BFO_0000050 ?chr .
+                ?chr skos:prefLabel ?label_chr
+        }
+}
+ORDER BY ?label_chr
+
+#Count of unique TADs per database:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT ?label_database (count(distinct ?tadID) as ?count)
+WHERE {
+        GRAPH <tad> {
+                ?tadID a/rdfs:subClassOf obo:SO_0002304 ;
+                        sio:SIO_000253 ?database .
+                ?database skos:prefLabel ?label_database
+        }
+}
+
 #Count of TAD instances:
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -94,210 +185,2062 @@ WHERE {
         }
 }
 
-#Count of human gene instances:
-SELECT COUNT(DISTINCT ?s)
-WHERE {
-        GRAPH <http://rdf.biogateway.eu/graph/gene>{
-                ?s a ?o .
-                ?o <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/SIO_010035>;
-                        <http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606>
-        }
-}
-
-#Count of enhancer target genes:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT COUNT(DISTINCT ?tgene)
-WHERE {
-        GRAPH <crm> {
-                ?enhID obo:RO_0002428 ?tgene
-        }
-	GRAPH <gene> {
-		?tgene <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://semanticscience.org/resource/SIO_010035>;
-			<http://purl.obolibrary.org/obo/RO_0000052> <http://purl.obolibrary.org/obo/NCBITaxon_9606>
-	}
-}
-
-#Count of transcription factor that interact with the enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?tfactor)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:RO_0002436 ?tfactor
-        }
-}
-
-#Count of disease ontology terms linked to enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?disease)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:RO_0002331 ?disease
-        }
-}
-
-#Count of OMIM ontology terms linked to enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?disease)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:RO_0002331 ?disease
-                FILTER(REGEX(?disease, "http://purl.bioontology.org/ontology/OMIM/"))
-        }
-}
-
-#Count of DOID ontology terms linked to enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?disease)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:RO_0002331 ?disease
-                FILTER(REGEX(?disease, "http://purl.obolibrary.org/obo/DOID_"))
-        }
-}
-
-#Count of MeSH ontology terms linked to enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?disease)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:RO_0002331 ?disease
-                FILTER(REGEX(?disease, "https://id.nlm.nih.gov/mesh/"))
-        }
-}
-
-#Count of pubmed articles linked to enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?pubmed)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                    <http://semanticscience.org/resource/SIO_000772> ?pubmed
-        }
-}
-
 #Count of pubmed articles linked to TADs:
 BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?pubmed)
 WHERE {
         GRAPH <tad> {
-                ?tadID rdf:type owl:Class ;
-                    <http://semanticscience.org/resource/SIO_000772> ?pubmed
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304 .
+                ?tadID sio:SIO_000772 ?pubmed
         }
 }
 
-#Count of cell types linked to enhancers (Cell Ontology terms):
+# Count of TAD databases:
 BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?cell_type)
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?database)
 WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:CLO_0037209 ?cell_type
-                FILTER(REGEX(?cell_type, "http://purl.obolibrary.org/obo/CL_"))
+        GRAPH <tad> {
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304 .
+                ?tadID sio:SIO_000253 ?database
         }
 }
-
 
 #Count of cell types linked to TADs (Cell Ontology terms):
 BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?cell_type)
+SELECT COUNT(DISTINCT ?cl)
 WHERE {
         GRAPH <tad> {
-                ?tadID rdf:type owl:Class ;
-                        obo:CLO_0037209 ?cell_type
-                FILTER(REGEX(?cell_type, "http://purl.obolibrary.org/obo/CL_"))
-        }
-}
-
-
-#Count of cell lines linked to enhancers (Cell Line Ontology terms):
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?cell_line)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:CLO_0037210 ?cell_line
-                FILTER(REGEX(?cell_line, "http://purl.obolibrary.org/obo/CLO_"))
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304 .
+                ?tadID obo:TXPO_0003500 ?cl .
+                FILTER(REGEX(?cl, "CL_"))
         }
 }
 
 #Count of cell lines linked to TADs (Cell Line Ontology terms):
 BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?cell_line)
+SELECT COUNT(DISTINCT ?clo)
 WHERE {
         GRAPH <tad> {
-                ?tadID rdf:type owl:Class ;
-                        obo:CLO_0037210 ?cell_line
-                FILTER(REGEX(?cell_line, "http://purl.obolibrary.org/obo/CLO_"))
-        }
-}
-
-#Count of anatomical structures linked to enhances (UBERON Ontology terms):
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?anatomy)
-WHERE {
-        GRAPH <crm> {
-                ?enhID rdf:type owl:Class ;
-                        obo:CLO_0037208 ?anatomy
-                FILTER(REGEX(?anatomy, "http://purl.obolibrary.org/obo/UBERON_"))
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304 .
+                ?tadID obo:TXPO_0003500 ?clo .
+                FILTER(REGEX(?clo, "CLO_"))
         }
 }
 
 #Count of anatomical structures linked to TADs (UBERON Ontology terms):
 BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT COUNT(DISTINCT ?anatomy)
+SELECT COUNT(DISTINCT ?uberon)
 WHERE {
         GRAPH <tad> {
-                ?tadID rdf:type owl:Class ;
-                        obo:CLO_0037208 ?anatomy
-                FILTER(REGEX(?anatomy, "http://purl.obolibrary.org/obo/UBERON_"))
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304 .
+                ?tadID obo:TXPO_0003500 ?uberon .
+                FILTER(REGEX(?uberon, "UBERON_"))
         }
 }
 
+##crm2gene graph
+#Count of unique relations (classes)
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
 
+#Count of unique relations involving genes modelled in BGW (protein coding genes):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(*)
+WHERE {
+        GRAPH <crm2gene> {
+                ?crm obo:RO_0002429 ?target
+                FILTER(REGEX(?target, "http://rdf.biogateway.eu/gene/9606/"))
+        }
+}
 
+#Count of unique relations involving genes not modelled in BGW (ncRNAs):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(*)
+WHERE {
+        GRAPH <crm2gene> {
+                ?crm obo:RO_0002429 ?target
+                FILTER(REGEX(?target, "https://identifiers.org/hgnc.symbol:"))
+        }
+}
 
+#Count of unique enhancers linked to target genes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?crm)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?crm
+        }
+}
+
+#Count of unique enhancers linked to target genes modelled in BGW (protein coding genes):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?crm)
+WHERE {
+        GRAPH <crm2gene> {
+                ?crm obo:RO_0002429 ?target
+                FILTER(REGEX(?target, "http://rdf.biogateway.eu/gene/9606/"))
+        }
+}
+
+#Count of unique enhancers linked to target genes not modelled in BGW (ncRNAs):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?crm)
+WHERE {
+        GRAPH <crm2gene> {
+                ?crm obo:RO_0002429 ?target
+                FILTER(REGEX(?target, "https://identifiers.org/hgnc.symbol:"))
+        }
+}
+
+#Count of unique target genes linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?target)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?target
+        }
+}
+
+#Count of unique BGW target genes (protein coding genes) linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?target)
+WHERE {
+        GRAPH <crm2gene> {
+                ?crm obo:RO_0002429 ?target
+                FILTER(REGEX(?target, "http://rdf.biogateway.eu/gene/9606/"))
+        }
+}
+
+#Count of other unique target genes (ncRNAs) linked to enhancers:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?target)
+WHERE {
+        GRAPH <crm2gene> {
+                ?crm obo:RO_0002429 ?target
+                FILTER(REGEX(?target, "https://identifiers.org/hgnc.symbol:"))
+        }
+}
+
+#Count of unique relation instances:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement
+        }
+}
+
+#Count of distinct pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID sio:SIO_000772 ?pubmed
+        }
+}
+
+#Count of different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?source)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID sio:SIO_000253 ?source
+        }
+}
+
+#Count of different cell lines (CLO):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?clo)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID obo:TXPO_0003500 ?clo .
+                FILTER(REGEX(?clo, "CLO_"))
+        }
+}
+
+#Count of different cell types (CL):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?cl)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID obo:TXPO_0003500 ?cl .
+                FILTER(REGEX(?cl, "CL_"))
+        }
+}
+
+#Count of different annatomical structures (UBERON):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?uberon)
+WHERE {
+        GRAPH <crm2gene> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID obo:TXPO_0003500 ?uberon .
+                FILTER(REGEX(?uberon, "UBERON_"))
+        }
+}
+
+##crm2tfac graph
+#Count of different relations (classes):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
+
+#Count of different enhancers in crm2tfac relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?subject)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?subject obo:RO_0002436 ?object
+        }
+
+        GRAPH <crm> {
+                ?subject rdfs:subClassOf obo:SO_0000727
+        }
+}
+
+#Count of different dbTFs in crm2tfac relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?object)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?subject obo:RO_0002436 ?object .
+                ?object rdfs:subClassOf obo:NCIT_C17207
+        }
+}
+
+#Count of different relation instances:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement
+        }
+}
+
+#Count of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID sio:SIO_000772 ?pubmed
+        }
+}
+
+#Count of different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?source)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID sio:SIO_000253 ?source
+        }
+}
+
+#Count of different cell lines (CLO):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?clo)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID obo:TXPO_0003500 ?clo .
+                FILTER(REGEX(?clo, "CLO_"))
+        }
+}
+
+#Count of different cell types (CL):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?cl)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID obo:TXPO_0003500 ?cl .
+                FILTER(REGEX(?cl, "CL_"))
+        }
+}
+
+#Count of different annatomical structures (UBERON):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?uberon)
+WHERE {
+        GRAPH <crm2tfac> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID obo:TXPO_0003500 ?uberon .
+                FILTER(REGEX(?uberon, "UBERON_"))
+        }
+}
+
+##crm2phen graph
+#Count of different relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <crm2phen> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+};
+
+#Count of differents crm:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(distinct ?crm)
+WHERE {
+        GRAPH <crm2phen> {
+                ?crm obo:RO_0002331 ?disease
+        }
+}
+
+#Count of different disease entities:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(distinct ?disease)
+WHERE {
+        GRAPH <crm2phen> {
+                ?crm obo:RO_0002331 ?disease
+        }
+}
+
+#DOID:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(distinct ?disease)
+WHERE {
+        GRAPH <crm2phen> {
+                ?crm obo:RO_0002331 ?disease
+                FILTER(REGEX(?disease, "/DOID_"))
+        }
+}
+
+#OMIM:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(distinct ?disease)
+WHERE {
+        GRAPH <crm2phen> {
+                ?crm obo:RO_0002331 ?disease
+                FILTER(REGEX(?disease, "/OMIM/"))
+        }
+}
+
+#MESH:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(distinct ?disease)
+WHERE {
+        GRAPH <crm2phen> {
+                ?crm obo:RO_0002331 ?disease
+                FILTER(REGEX(?disease, "/mesh/"))
+        }
+}
+
+#Count of different instances:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <crm2phen> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement
+        }
+}
+
+#Count of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <crm2phen> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID <http://semanticscience.org/resource/SIO_000772> ?pubmed
+        }
+}
+
+#Count of different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT COUNT(DISTINCT ?database)
+WHERE {
+        GRAPH <crm2phen> {
+                ?ID a ?class .
+                ?class rdfs:subClassOf rdf:Statement .
+                ?ID <http://semanticscience.org/resource/SIO_000253> ?database
+        }
+}
+
+##Other queries
+#Count of pubmed articles linked to enhancers and their relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID sio:SIO_000772 ?pubmed
+        }
+        } UNION {
+        ?crm2entity a ?class .
+        ?class rdfs:subClassOf rdf:Statement ;
+                rdf:subject ?crm .
+        ?crm rdfs:subClassOf obo:SO_0000727 .
+        ?crm2entity sio:SIO_000772 ?pubmed
+        }
+}
+
+#Count of cell lines linked to enhancers and their relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT COUNT(DISTINCT ?clo)
+WHERE {
+        {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID obo:TXPO_0003500 ?clo .
+        }
+        } UNION {
+        ?crm2entity a ?class .
+        ?class rdfs:subClassOf rdf:Statement ;
+                rdf:subject ?crm .
+        ?crm rdfs:subClassOf obo:SO_0000727 .
+        ?crm2entity obo:TXPO_0003500 ?clo .
+        }
+        FILTER(REGEX(?clo, "CLO_"))
+}
+
+#Count of cell types linked to enhancers and their relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT COUNT(DISTINCT ?cl)
+WHERE {
+        {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID obo:TXPO_0003500 ?cl .
+        }
+        } UNION {
+        ?crm2entity a ?class .
+        ?class rdfs:subClassOf rdf:Statement ;
+                rdf:subject ?crm .
+        ?crm rdfs:subClassOf obo:SO_0000727 .
+        ?crm2entity obo:TXPO_0003500 ?cl .
+        }
+        FILTER(REGEX(?cl, "CL_"))
+}
+
+#Count of annatomical structures linked to enhancers and their relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT COUNT(DISTINCT ?uberon)
+WHERE {
+        {
+        GRAPH <crm> {
+                ?enhID a ?class .
+                ?class rdfs:subClassOf obo:SO_0000727 .
+                ?enhID obo:TXPO_0003500 ?uberon .
+        }
+        } UNION {
+        ?crm2entity a ?class .
+        ?class rdfs:subClassOf rdf:Statement ;
+                rdf:subject ?crm .
+        ?crm rdfs:subClassOf obo:SO_0000727 .
+        ?crm2entity obo:TXPO_0003500 ?uberon .
+        }
+        FILTER(REGEX(?uberon, "UBERON_"))
+}
+
+### Other BGW graphs:
+
+## Gene graph
+#Number of different genes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?gene)
+WHERE {
+        GRAPH <gene> {
+                ?gene a owl:Class ;
+                        rdfs:subClassOf sio:SIO_010035 .
+        }
+}
+
+#Number of different human genes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?gene)
+WHERE {
+        GRAPH <gene> {
+                ?gene a owl:Class ;
+                        rdfs:subClassOf sio:SIO_010035 ;
+                        obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?taxon)
+WHERE {
+        GRAPH <gene> {
+                ?gene a owl:Class ;
+                        rdfs:subClassOf sio:SIO_010035 ;
+                        obo:RO_0002153 ?taxon .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <gene> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different encoded proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?protein)
+WHERE {
+        GRAPH <gene> {
+                ?gene sio:SIO_010078 ?protein
+        }
+}
+
+#Number of different human encoded proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?protein)
+WHERE {
+        GRAPH <gene> {
+                ?gene sio:SIO_010078 ?protein ;
+                        obo:RO_0002153 ?taxon .
+        }
+}
+
+## Protein graph
+#Number of different proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?prot)
+WHERE {
+        GRAPH <prot> {
+                ?prot a owl:Class ;
+                        rdfs:subClassOf sio:SIO_010043 .
+        }
+}
+
+#Number of different human proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?prot)
+WHERE {
+        GRAPH <prot> {
+                ?prot a owl:Class ;
+                        rdfs:subClassOf sio:SIO_010043 ;
+                        obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?taxon)
+WHERE {
+        GRAPH <prot> {
+                ?prot a owl:Class ;
+                        rdfs:subClassOf sio:SIO_010043 ;
+                        obo:RO_0002153 ?taxon .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <prot> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <prot> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Different evidence levels:
+BASE <http://rdf.biogateway.eu/graph/>
+SELECT COUNT(DISTINCT ?level)
+WHERE {
+        GRAPH <prot> {
+                ?s <http://schema.org/evidenceLevel> ?level
+        }
+}
+
+##OMIM graph
+#Number of different classes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?omim)
+WHERE {
+        GRAPH <omim> {
+                ?omim a owl:Class 
+        }
+}
+
+##MI graph
+#Number of different classes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?mi)
+WHERE {
+        GRAPH <mi> {
+                ?mi a owl:Class 
+        }
+}
+
+##Taxon graph
+#Number of different classes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?taxon)
+WHERE {
+        GRAPH <taxon> {
+                ?taxon a owl:Class 
+        }
+}
+
+##Gene Ontology graph
+#Number of different classes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT COUNT(DISTINCT ?go)
+WHERE {
+        GRAPH <go> {
+                ?go a owl:Class 
+        }
+}
+
+#Number of different biological processes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?go)
+WHERE {
+        GRAPH <go> {
+                ?go a owl:Class ;
+                        rdfs:subClassOf obo:GO_0008150
+        }
+}
+
+#Number of different cellular components:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?go)
+WHERE {
+        GRAPH <go> {
+                ?go a owl:Class ;
+                        rdfs:subClassOf obo:GO_0005575
+        }
+}
+
+#Number of different molecular functions:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?go)
+WHERE {
+        GRAPH <go> {
+                ?go a owl:Class ;
+                        rdfs:subClassOf obo:GO_0003674
+        }
+}
+
+## gene2phen graph
+#Number of different relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <gene2phen> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
+
+#Number of different genes involved:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <gene2phen> {
+                ?ID rdf:subject ?gene
+        }
+}
+
+#Number of different phenotypes involved:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT count(distinct ?omim)
+WHERE {
+        GRAPH <gene2phen> {
+                ?ID rdf:object ?omim
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT distinct ?database
+WHERE {
+        GRAPH <gene2phen> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT distinct ?taxon
+WHERE {
+        GRAPH <gene2phen> {
+                ?ID rdf:subject ?gene
+        }
+        GRAPH <gene> {
+                ?gene obo:RO_0002153 ?taxon
+        }
+}
+
+## prot2bp graph
+#Number of different relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
+
+#Number of different human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?taxon)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon .
+        }
+}
+
+#Number of different proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+}
+
+#Number of different human proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different biological processes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?bp)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?bp .
+        }
+}
+
+#Number of different human biological processes:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?bp)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?bp ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <prot2bp> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <prot2bp> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different pubmed articles about human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?pubmed)
+WHERE {
+        GRAPH <prot2bp> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?bp ;
+                        rdf:subject ?prot .
+                ?inst a ?ID ;
+                        sio:SIO_000772 ?pubmed .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+## prot2cc graph
+#Number of different relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
+
+#Number of different human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?taxon)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon .
+        }
+}
+
+#Number of different proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+}
+
+#Number of different human proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different cellular components:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?cc)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?cc .
+        }
+}
+
+#Number of different human cellular components:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?cc)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?cc ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <prot2cc> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <prot2cc> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different pubmed articles about human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?pubmed)
+WHERE {
+        GRAPH <prot2cc> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?cc ;
+                        rdf:subject ?prot .
+                ?inst a ?ID ;
+                        sio:SIO_000772 ?pubmed .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+## prot2mf graph
+#Number of different relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
+
+#Number of different human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?taxon)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon .
+        }
+}
+
+#Number of different proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+}
+
+#Number of different human proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different molecular functions:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?mf)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?mf .
+        }
+}
+
+#Number of different human molecular functions:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?mf)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?mf ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <prot2mf> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <prot2mf> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different pubmed articles about human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?pubmed)
+WHERE {
+        GRAPH <prot2mf> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:object ?mf ;
+                        rdf:subject ?prot .
+                ?inst a ?ID ;
+                        sio:SIO_000772 ?pubmed .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+## prot2prot graph
+#Number of different relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct *)
+WHERE {
+        GRAPH <prot2prot> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+        }
+}
+
+#Number of different human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <prot2prot> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?taxon)
+WHERE {
+        GRAPH <prot2prot> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon .
+        }
+}
+
+#Number of different proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?s)
+WHERE {
+        GRAPH <prot2prot> {
+                ?s obo:RO_0002436 ?o
+        }
+}
+
+#Number of different human proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?s)
+WHERE {
+        GRAPH <prot2prot> {
+                ?s obo:RO_0002436 ?o
+        }
+        GRAPH <prot> {
+                ?s obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <prot2prot> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <prot2prot> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different pubmed articles about human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?pubmed)
+WHERE {
+        GRAPH <prot2prot> {
+                ?inst sio:SIO_000772 ?pubmed ;
+                        rdf:type ?class .
+                {?class rdf:subject ?prot} UNION {?class rdf:object ?prot}
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+## tfac2gene graph
+#Number of different general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428
+        }
+}
+
+#Number of different human general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?taxon)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon .
+        }
+}
+
+#Number of different proteins in general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:subject ?prot .
+        }
+}
+
+#Number of different human proteins in general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different target genes in general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:object ?gene .
+        }
+}
+
+#Number of different human target genes in general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:object ?gene .
+        }
+        GRAPH <gene> {
+                ?gene obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429
+        }
+}
+
+#Number of different human positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different proteins in positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429 ;
+                        rdf:subject ?prot .
+        }
+}
+
+#Number of different human proteins in positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different target genes in positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429 ;
+                        rdf:object ?gene .
+        }
+}
+
+#Number of different human target genes in positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429 ;
+                        rdf:object ?gene .
+        }
+        GRAPH <gene> {
+                ?gene obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430
+        }
+}
+
+#Number of different human negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different proteins in negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430 ;
+                        rdf:subject ?prot .
+        }
+}
+
+#Number of different human proteins in negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different target genes in negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430 ;
+                        rdf:object ?gene .
+        }
+}
+
+#Number of different human target genes in negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?gene)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430 ;
+                        rdf:object ?gene .
+        }
+        GRAPH <gene> {
+                ?gene obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <tfac2gene> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different pubmed articles about human relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?pubmed)
+WHERE {
+        GRAPH <tfac2gene> {
+                ?inst sio:SIO_000772 ?pubmed ;
+                        rdf:type ?class .
+                ?class rdf:subject ?prot
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+## reg2targ graph
+#Different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT distinct ?taxon
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon
+        }
+}
+
+#Number of different general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428
+        }
+}
+
+#Number of different proteins in general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002428 ?o} UNION {?s obo:RO_0002428 ?prot}
+        }
+}
+
+#Number of different positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429
+        }
+}
+
+#Number of different proteins in positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002429 ?o} UNION {?s obo:RO_0002429 ?prot}
+        }
+}
+
+#Number of different negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430
+        }
+}
+
+#Number of different proteins in negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002430 ?o} UNION {?s obo:RO_0002430 ?prot}
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <reg2targ> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <reg2targ> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different direct relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct *)
+WHERE {
+        GRAPH <reg2targ> {
+                ?s obo:RO_0002578 ?o
+        }
+}
+
+#Number of different proteins in direct relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002578 ?o} UNION {?s obo:RO_0002578 ?prot}
+        }
+}
+
+#Number of different indirect relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct *)
+WHERE {
+        GRAPH <reg2targ> {
+                ?s obo:RO_0012012 ?o
+        }
+}
+
+#Number of different proteins in indirect relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0012012 ?o} UNION {?s obo:RO_0012012 ?prot}
+        }
+}
+
+## ortho graph
+#Number of different relations
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <ortho> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement 
+        }
+}
+
+#Number of different proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <ortho> {
+                {?prot sio:SIO_000558 ?o} UNION {?s sio:SIO_000558 ?prot}
+        }
+}
+
+#Number of different human proteins:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <ortho> {
+                {?prot sio:SIO_000558 ?o} UNION {?s sio:SIO_000558 ?prot}
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+        }
+}
+
+#Number of different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?taxon)
+WHERE {
+        GRAPH <ortho> {
+                {?prot sio:SIO_000558 ?o} UNION {?s sio:SIO_000558 ?prot}
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002153 ?taxon .
+        }
+}
+
+#Databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <ortho> {
+                ?inst a ?ID .
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement .
+                ?inst sio:SIO_000253 ?database
+        }
+}
