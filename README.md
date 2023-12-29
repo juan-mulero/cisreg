@@ -13,7 +13,7 @@ The generated knowledge network is structured in graphs, being each graph a diff
 
 ![Graph_types](./images/graphs.png)
 
-The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
+The knowledge network has the following [graphs](./BGW_graphs.xlsx):
 - crm : Cis Regulatory Modules (CRM). Currently only enhancer sequences, that increase gene transcription levels.
 - crm2phen: Relations between CRM and phenotypes.
 - crm2gene: Relations between CRM and target genes.
@@ -34,7 +34,7 @@ The knowledge network has the following [graphs](./hBGW_graphs.xlsx):
 - prot2mf : Protein - Molecular functions relations.
 - ortho : Protein-protein orthology relations.  
 
-Network statistics can also be found [here](./hBGW_statistics.xlsx).
+Network statistics can also be found [here](./BGW_statistics.xlsx).
 
 BioGateway is an integrative model in which classes represent entities and instances represent individuals of the classes. Classes have relations with those entities and data that model the entity. Instances collect the information from each original database, so they have the relations specific of each individual. Therefore, they are useful nodes for representing the information from each source and its metadata.
 
@@ -42,7 +42,7 @@ BioGateway is an integrative model in which classes represent entities and insta
 
 The current version of BioGateway integrates domains associated with gene regulation (CRM and TADs). It also extends the gene graph to include aspects of genome location and provides relations to the [Biolink model](https://biolink.github.io/biolink-model/), focused on the standardization of knowledge graphs.
 
-The following steps were taken to generate the new hBGW domains:
+The following steps were taken to generate the new BGW domains:
 1. Compilation of the [databases used as sources](./images/databases.PNG).
 2. Preprocessing of files [(Rcodes folder)](./Rcodes).
 3. Generation of RDF files [(cisreg folder)](./cisreg). This code requires functions of the project: https://github.com/vlmir/bgw3. An RDF file fragment corresponding to [enhancers](./RDF_file_examples/CRM.nt) and [TADs](./RDF_file_examples/TAD.nt) is included in the repository as an illustrative example of output.
