@@ -1,0 +1,5 @@
+tad_ID	orig_chr	orig_start	orig_end	orig_assembly	current_chr	current_start	current_end	current_assembly	minimum_ratio	score	original_ID	crossref	TAD_PMID	biosample_name	TAD_method	resolution	type	source
+TADHS00000035206	chr1	100240000	101360000	hg38	chr1	100240000	101360000	hg38	-	-	-	-	30286773	SJCRH30	Hi-C	-	TAD	3DGB
+TADHS00000022800	chr1	100480000	100920000	hg38	chr1	100480000	100920000	hg38	-	-	-	-	30286773	IMR90	Hi-C	-	TAD	3DGB
+TADHS00000037509	chr1	100880000	101320000	hg38	chr1	100880000	101320000	hg38	-	-	-	-	30286773	SKNMC	Hi-C	-	TAD	3DGB
+TADHS00000010246	chr1	100880000	101480000	hg38	chr1	100880000	101480000	hg38	-	-	-	-	30286773	GM12878	Hi-C	-	TAD	3DGB
