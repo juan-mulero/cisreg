@@ -2,7 +2,7 @@
 #1. Using OMIM as reference, which phenotypes are subject to study because they contain "breast cancer" in their preferred or alternative label?
 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-SELECT DISTINCT  ?phen ?label
+SELECT DISTINCT ?phen ?label
 WHERE {
 	GRAPH <http://rdf.biogateway.eu/graph/omim> {
 		{?phen skos:prefLabel ?label}
@@ -31,7 +31,7 @@ WHERE {
         FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
-		?gene2phe rdf:object ?phen ;
+		?gene2phen rdf:object ?phen ;
 			rdf:subject ?gene .
 	}	
 
@@ -63,7 +63,6 @@ ORDER BY ?phen ?gene_label ?prot_label ?bp_label
 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX sio: <http://semanticscience.org/resource/>
 SELECT DISTINCT ?phen ?gene_label ?enh_label ?database_label
@@ -76,19 +75,23 @@ WHERE {
         FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
-		?gene2phe rdf:object ?phen ;
+		?gene2phen rdf:object ?phen ;
 			rdf:subject ?gene .
 	}
 
+	GRAPH <http://rdf.biogateway.eu/graph/crm2gene> {
+		?crm2gene rdf:subject ?enhID ;
+			rdf:object ?gene .
+		?inst_crm2gene rdf:type ?crm2gene ;
+			obo:TXPO_0003500 obo:UBERON_0000310 ;
+			obo:TXPO_0003500 ?cell_line .
+	}
+
 	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		?enhID rdf:type owl:Class ;
-			skos:prefLabel ?enh_label ;
-                        obo:RO_0002428 ?gene ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
-			obo:CLO_0037210 ?cell_line ;
+		?enhID skos:prefLabel ?enh_label .
+		?inst_enh rdf:type ?enhID ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
-		FILTER regex(?cell_line, "/CLO_")
 	}
 	
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
@@ -97,7 +100,7 @@ WHERE {
 }
 
 
-#Count of cell lines:
+#Count of cell lines (CLO as reference):
 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -114,19 +117,24 @@ WHERE {
         FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
-		?gene2phe rdf:object ?phen ;
+		?gene2phen rdf:object ?phen ;
 			rdf:subject ?gene .
 	}
 
+	GRAPH <http://rdf.biogateway.eu/graph/crm2gene> {
+		?crm2gene rdf:subject ?enhID ;
+			rdf:object ?gene .
+		?inst_crm2gene rdf:type ?crm2gene ;
+			obo:TXPO_0003500 obo:UBERON_0000310 ;
+			obo:TXPO_0003500 ?cell_line .
+		FILTER regex(?cell_line, "/CLO_")
+	}
+
 	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		?enhID rdf:type owl:Class ;
-			skos:prefLabel ?enh_label ;
-                        obo:RO_0002428 ?gene ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
-			obo:CLO_0037210 ?cell_line ;
+		?enhID skos:prefLabel ?enh_label .
+		?inst_enh rdf:type ?enhID ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
-		FILTER regex(?cell_line, "/CLO_")
 	}
 	
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
@@ -135,7 +143,7 @@ WHERE {
 }
 
 
-#3.2. In what biological processes are the genes regulated by these enhancers involved?
+#3.2. In what biological processes are involved the genes regulated by these enhancers?
 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -152,17 +160,22 @@ WHERE {
         FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
-		?gene2phe rdf:object ?phen ;
+		?gene2phen rdf:object ?phen ;
 			rdf:subject ?gene .
 	}
 
+	GRAPH <http://rdf.biogateway.eu/graph/crm2gene> {
+		?crm2gene rdf:object ?gene ;
+			rdf:subject ?enhID .
+		?inst_crm2gene rdf:type ?crm2gene ;
+			obo:TXPO_0003500 obo:UBERON_0000310 ;
+			obo:TXPO_0003500 ?cell_line .
+		?enhID obo:RO_0002429 ?tgene .
+	}
+
 	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		?enhID rdf:type owl:Class ;
-			skos:prefLabel ?enh_label ;
-                        obo:RO_0002428 ?gene ;
-			obo:RO_0002428 ?tgene ;
-			obo:CLO_0037208 obo:UBERON_0000310 ;
-			obo:CLO_0037210 ?cell_line ;
+		?enhID skos:prefLabel ?enh_label .
+		?inst_enh rdf:type ?enhID ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
 	}
@@ -187,31 +200,80 @@ WHERE {
 }
 ORDER BY ?tgene_label ?prot_label ?bp_label
 
-
-#4. What enhancers are linked in the network to breast cancer? What are the target genes and the TFs linked to enhancers?
-
+#Count of tgene and prot:
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX sio: <http://semanticscience.org/resource/>
+SELECT count(distinct ?tgene) count(distinct ?prot)
+WHERE {
+	GRAPH <http://rdf.biogateway.eu/graph/omim> {
+		{?phen skos:prefLabel ?label}
+		UNION
+		{?phen skos:altLabel ?label}
+	}
+        FILTER regex(?label, "breast cancer", "i")
+
+	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
+		?gene2phen rdf:object ?phen ;
+			rdf:subject ?gene .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm2gene> {
+		?crm2gene rdf:object ?gene ;
+			rdf:subject ?enhID .
+		?inst_crm2gene rdf:type ?crm2gene ;
+			obo:TXPO_0003500 obo:UBERON_0000310 ;
+			obo:TXPO_0003500 ?cell_line .
+		?enhID obo:RO_0002429 ?tgene .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID skos:prefLabel ?enh_label .
+		?inst_enh rdf:type ?enhID ;
+			sio:SIO_000253 ?database .
+		?database skos:prefLabel ?database_label .
+	}
+	
+	GRAPH <http://rdf.biogateway.eu/graph/gene> {
+		?tgene skos:prefLabel ?tgene_label ;
+			sio:SIO_010078 ?prot .
+        }
+	GRAPH <http://rdf.biogateway.eu/graph/prot> {
+               	?prot skos:prefLabel ?prot_label .
+        }
+}
+
+
+#4. What enhancers are linked in the network to breast cancer? What are the target genes and the TFs linked to enhancers?
+
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?enh_label ?tgene ?tf
 WHERE {
-	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		VALUES ?phen {
+	VALUES ?phen {
 			<http://purl.bioontology.org/ontology/OMIM/114480>
 			<http://purl.obolibrary.org/obo/DOID_1612>
 			<https://id.nlm.nih.gov/mesh/D001943>
 		}
-		?enhID rdf:type owl:Class ;
-			skos:prefLabel ?enh_label ;
-			obo:RO_0002331 ?phen ;
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm2phen> {
+		?enhID obo:RO_0002331 ?phen .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID skos:prefLabel ?enh_label .
+		?inst_enh rdf:type ?enhID ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
 	}
 	OPTIONAL {
-		?enhID obo:RO_0002428 ?tgene .
-		?tgene rdfs:subClassOf sio:SIO_010035
+		?enhID obo:RO_0002429 ?tgene .
+		?tgene rdfs:subClassOf sio:SIO_010035 .
 	}
 	OPTIONAL {
 		?enhID obo:RO_0002436 ?tf .
@@ -228,20 +290,24 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?enhID) COUNT(DISTINCT ?tgene) COUNT(DISTINCT ?tf)
 WHERE {
-	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		VALUES ?phen {
+	VALUES ?phen {
 			<http://purl.bioontology.org/ontology/OMIM/114480>
 			<http://purl.obolibrary.org/obo/DOID_1612>
 			<https://id.nlm.nih.gov/mesh/D001943>
 		}
-		?enhID rdf:type owl:Class ;
-			skos:prefLabel ?enh_label ;
-			obo:RO_0002331 ?phen ;
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm2phen> {
+		?enhID obo:RO_0002331 ?phen .
+	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm> {
+		?enhID skos:prefLabel ?enh_label .
+		?inst_enh rdf:type ?enhID ;
 			sio:SIO_000253 ?database .
 		?database skos:prefLabel ?database_label .
 	}
 	OPTIONAL {
-		?enhID obo:RO_0002428 ?tgene .
+		?enhID obo:RO_0002429 ?tgene .
 		?tgene rdfs:subClassOf sio:SIO_010035 .
 	}
 	OPTIONAL {
@@ -258,57 +324,32 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX sio: <http://semanticscience.org/resource/>
-SELECT DISTINCT ?tgene_label ?tf_label
-WHERE {
-	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		VALUES ?phen {
-			<http://purl.bioontology.org/ontology/OMIM/114480>
-			<http://purl.obolibrary.org/obo/DOID_1612>
-			<https://id.nlm.nih.gov/mesh/D001943>
-		}
-		?enhID rdf:type owl:Class ;
-			obo:RO_0002331 ?phen ;
-			obo:RO_0002428 ?tgene .
-	}
-	GRAPH <http://rdf.biogateway.eu/graph/gene> {
-		?tgene rdfs:subClassOf sio:SIO_010035 ;
-			skos:prefLabel ?tgene_label .
-	}
-	GRAPH <http://rdf.biogateway.eu/graph/tfac2gene> {
-		?int rdf:object ?tgene ;
-			rdf:subject ?tf .
-	}
-        GRAPH <http://rdf.biogateway.eu/graph/prot> {
-		?tf skos:prefLabel ?tf_label .
-	}
-}
-
-#Count:
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?tgene_label) COUNT(DISTINCT ?tf_label)
 WHERE {
-	GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		VALUES ?phen {
+	VALUES ?phen {
 			<http://purl.bioontology.org/ontology/OMIM/114480>
 			<http://purl.obolibrary.org/obo/DOID_1612>
 			<https://id.nlm.nih.gov/mesh/D001943>
 		}
-		?enhID rdf:type owl:Class ;
-			obo:RO_0002331 ?phen ;
-			obo:RO_0002428 ?tgene .
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm2phen> {
+		?enhID obo:RO_0002331 ?phen .
 	}
+
+	GRAPH <http://rdf.biogateway.eu/graph/crm2gene> {
+		?enhID obo:RO_0002429 ?tgene .
+	}
+
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
 		?tgene rdfs:subClassOf sio:SIO_010035 ;
 			skos:prefLabel ?tgene_label .
 	}
+
 	GRAPH <http://rdf.biogateway.eu/graph/tfac2gene> {
 		?int rdf:object ?tgene ;
 			rdf:subject ?tf .
 	}
+
         GRAPH <http://rdf.biogateway.eu/graph/prot> {
 		?tf skos:prefLabel ?tf_label .
 	}

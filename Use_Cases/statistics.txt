@@ -272,22 +272,15 @@ WHERE {
 #Count of unique relations involving genes modelled in BGW (protein coding genes):
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT count(*)
 WHERE {
         GRAPH <crm2gene> {
                 ?crm obo:RO_0002429 ?target
-                FILTER(REGEX(?target, "http://rdf.biogateway.eu/gene/9606/"))
         }
-}
-
-#Count of unique relations involving genes not modelled in BGW (ncRNAs):
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(*)
-WHERE {
-        GRAPH <crm2gene> {
-                ?crm obo:RO_0002429 ?target
-                FILTER(REGEX(?target, "https://identifiers.org/hgnc.symbol:"))
+        GRAPH <gene> {
+                ?target rdfs:subClassOf sio:SIO_010035
         }
 }
 
@@ -308,22 +301,15 @@ WHERE {
 #Count of unique enhancers linked to target genes modelled in BGW (protein coding genes):
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT count(distinct ?crm)
 WHERE {
         GRAPH <crm2gene> {
                 ?crm obo:RO_0002429 ?target
-                FILTER(REGEX(?target, "http://rdf.biogateway.eu/gene/9606/"))
         }
-}
-
-#Count of unique enhancers linked to target genes not modelled in BGW (ncRNAs):
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?crm)
-WHERE {
-        GRAPH <crm2gene> {
-                ?crm obo:RO_0002429 ?target
-                FILTER(REGEX(?target, "https://identifiers.org/hgnc.symbol:"))
+        GRAPH <gene> {
+                ?target rdfs:subClassOf sio:SIO_010035
         }
 }
 
@@ -344,22 +330,15 @@ WHERE {
 #Count of unique BGW target genes (protein coding genes) linked to enhancers:
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT count(distinct ?target)
 WHERE {
         GRAPH <crm2gene> {
                 ?crm obo:RO_0002429 ?target
-                FILTER(REGEX(?target, "http://rdf.biogateway.eu/gene/9606/"))
         }
-}
-
-#Count of other unique target genes (ncRNAs) linked to enhancers:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?target)
-WHERE {
-        GRAPH <crm2gene> {
-                ?crm obo:RO_0002429 ?target
-                FILTER(REGEX(?target, "https://identifiers.org/hgnc.symbol:"))
+        GRAPH <gene> {
+                ?target rdfs:subClassOf sio:SIO_010035
         }
 }
 
@@ -472,7 +451,6 @@ WHERE {
         GRAPH <crm2tfac> {
                 ?subject obo:RO_0002436 ?object
         }
-
         GRAPH <crm> {
                 ?subject rdfs:subClassOf obo:SO_0000727
         }
@@ -587,7 +565,7 @@ WHERE {
                 ?ID rdf:type owl:Class ;
                         rdfs:subClassOf rdf:Statement .
         }
-};
+}
 
 #Count of differents crm:
 BASE <http://rdf.biogateway.eu/graph/>
@@ -789,6 +767,16 @@ WHERE {
         }
 }
 
+#Number of human triples:
+BASE <http://rdf.biogateway.eu/graph/>
+SELECT COUNT(*)
+WHERE {
+        GRAPH <gene> {
+                ?s ?p ?o 
+                FILTER(REGEX(?s, "http://rdf.biogateway.eu/gene/9606/"))
+        }
+}
+
 #Number of different human genes:
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -800,7 +788,7 @@ WHERE {
         GRAPH <gene> {
                 ?gene a owl:Class ;
                         rdfs:subClassOf sio:SIO_010035 ;
-                        obo:RO_0002153 obo:NCBITaxon_9606 .
+                        obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -815,17 +803,7 @@ WHERE {
         GRAPH <gene> {
                 ?gene a owl:Class ;
                         rdfs:subClassOf sio:SIO_010035 ;
-                        obo:RO_0002153 ?taxon .
-        }
-}
-
-#Different databases:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX sio: <http://semanticscience.org/resource/>
-SELECT DISTINCT ?database
-WHERE {
-        GRAPH <gene> {
-                ?s sio:SIO_000253 ?database
+                        obo:RO_0002162 ?taxon .
         }
 }
 
@@ -847,7 +825,7 @@ SELECT COUNT(DISTINCT ?protein)
 WHERE {
         GRAPH <gene> {
                 ?gene sio:SIO_010078 ?protein ;
-                        obo:RO_0002153 ?taxon .
+                        obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -876,7 +854,7 @@ WHERE {
         GRAPH <prot> {
                 ?prot a owl:Class ;
                         rdfs:subClassOf sio:SIO_010043 ;
-                        obo:RO_0002153 obo:NCBITaxon_9606 .
+                        obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -891,17 +869,7 @@ WHERE {
         GRAPH <prot> {
                 ?prot a owl:Class ;
                         rdfs:subClassOf sio:SIO_010043 ;
-                        obo:RO_0002153 ?taxon .
-        }
-}
-
-#Different databases:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX sio: <http://semanticscience.org/resource/>
-SELECT DISTINCT ?database
-WHERE {
-        GRAPH <prot> {
-                ?s sio:SIO_000253 ?database
+                        obo:RO_0002162 ?taxon .
         }
 }
 
@@ -977,7 +945,7 @@ SELECT COUNT(DISTINCT ?go)
 WHERE {
         GRAPH <go> {
                 ?go a owl:Class ;
-                        rdfs:subClassOf obo:GO_0008150
+                        rdfs:subClassOf* obo:GO_0008150
         }
 }
 
@@ -990,7 +958,7 @@ SELECT COUNT(DISTINCT ?go)
 WHERE {
         GRAPH <go> {
                 ?go a owl:Class ;
-                        rdfs:subClassOf obo:GO_0005575
+                        rdfs:subClassOf* obo:GO_0005575
         }
 }
 
@@ -1003,7 +971,7 @@ SELECT COUNT(DISTINCT ?go)
 WHERE {
         GRAPH <go> {
                 ?go a owl:Class ;
-                        rdfs:subClassOf obo:GO_0003674
+                        rdfs:subClassOf* obo:GO_0003674
         }
 }
 
@@ -1061,7 +1029,7 @@ WHERE {
                 ?ID rdf:subject ?gene
         }
         GRAPH <gene> {
-                ?gene obo:RO_0002153 ?taxon
+                ?gene obo:RO_0002162 ?taxon
         }
 }
 
@@ -1093,7 +1061,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1111,7 +1079,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon .
+                ?prot obo:RO_0002162 ?taxon .
         }
 }
 
@@ -1144,7 +1112,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1178,7 +1146,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1220,7 +1188,7 @@ WHERE {
                         sio:SIO_000772 ?pubmed .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1252,7 +1220,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1270,7 +1238,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon .
+                ?prot obo:RO_0002162 ?taxon .
         }
 }
 
@@ -1303,7 +1271,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1337,7 +1305,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1379,7 +1347,7 @@ WHERE {
                         sio:SIO_000772 ?pubmed .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1411,7 +1379,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1429,7 +1397,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon .
+                ?prot obo:RO_0002162 ?taxon .
         }
 }
 
@@ -1462,7 +1430,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1496,7 +1464,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1538,7 +1506,7 @@ WHERE {
                         sio:SIO_000772 ?pubmed .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1571,7 +1539,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1589,7 +1557,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon .
+                ?prot obo:RO_0002162 ?taxon .
         }
 }
 
@@ -1612,7 +1580,7 @@ WHERE {
                 ?s obo:RO_0002436 ?o
         }
         GRAPH <prot> {
-                ?s obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?s obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1651,7 +1619,7 @@ WHERE {
                 {?class rdf:subject ?prot} UNION {?class rdf:object ?prot}
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1686,7 +1654,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1704,7 +1672,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon .
+                ?prot obo:RO_0002162 ?taxon .
         }
 }
 
@@ -1739,7 +1707,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1774,7 +1742,7 @@ WHERE {
                         rdf:object ?gene .
         }
         GRAPH <gene> {
-                ?gene obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?gene obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1808,7 +1776,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1843,7 +1811,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1878,7 +1846,7 @@ WHERE {
                         rdf:object ?gene .
         }
         GRAPH <gene> {
-                ?gene obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?gene obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1912,7 +1880,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1947,7 +1915,7 @@ WHERE {
                         rdf:subject ?prot .
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -1982,7 +1950,7 @@ WHERE {
                         rdf:object ?gene .
         }
         GRAPH <gene> {
-                ?gene obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?gene obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -2021,162 +1989,7 @@ WHERE {
                 ?class rdf:subject ?prot
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
-        }
-}
-
-## reg2targ graph
-#Different organisms:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT distinct ?taxon
-WHERE {
-        GRAPH <reg2targ> {
-                ?ID rdf:type owl:Class ;
-                        rdfs:subClassOf rdf:Statement ;
-                        rdf:predicate obo:RO_0002428 ;
-                        rdf:subject ?prot .
-        }
-        GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon
-        }
-}
-
-#Number of different general relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?ID)
-WHERE {
-        GRAPH <reg2targ> {
-                ?ID rdf:type owl:Class ;
-                        rdfs:subClassOf rdf:Statement ;
-                        rdf:predicate obo:RO_0002428
-        }
-}
-
-#Number of different proteins in general relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?prot)
-WHERE {
-        GRAPH <reg2targ> {
-                {?prot obo:RO_0002428 ?o} UNION {?s obo:RO_0002428 ?prot}
-        }
-}
-
-#Number of different positive relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?ID)
-WHERE {
-        GRAPH <reg2targ> {
-                ?ID rdf:type owl:Class ;
-                        rdfs:subClassOf rdf:Statement ;
-                        rdf:predicate obo:RO_0002429
-        }
-}
-
-#Number of different proteins in positive relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?prot)
-WHERE {
-        GRAPH <reg2targ> {
-                {?prot obo:RO_0002429 ?o} UNION {?s obo:RO_0002429 ?prot}
-        }
-}
-
-#Number of different negative relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?ID)
-WHERE {
-        GRAPH <reg2targ> {
-                ?ID rdf:type owl:Class ;
-                        rdfs:subClassOf rdf:Statement ;
-                        rdf:predicate obo:RO_0002430
-        }
-}
-
-#Number of different proteins in negative relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?prot)
-WHERE {
-        GRAPH <reg2targ> {
-                {?prot obo:RO_0002430 ?o} UNION {?s obo:RO_0002430 ?prot}
-        }
-}
-
-#Different databases:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX sio: <http://semanticscience.org/resource/>
-SELECT DISTINCT ?database
-WHERE {
-        GRAPH <reg2targ> {
-                ?s sio:SIO_000253 ?database
-        }
-}
-
-#Number of different pubmed articles:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX sio: <http://semanticscience.org/resource/>
-SELECT COUNT(DISTINCT ?pubmed)
-WHERE {
-        GRAPH <reg2targ> {
-                ?s sio:SIO_000772 ?pubmed
-        }
-}
-
-#Number of different direct relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct *)
-WHERE {
-        GRAPH <reg2targ> {
-                ?s obo:RO_0002578 ?o
-        }
-}
-
-#Number of different proteins in direct relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?prot)
-WHERE {
-        GRAPH <reg2targ> {
-                {?prot obo:RO_0002578 ?o} UNION {?s obo:RO_0002578 ?prot}
-        }
-}
-
-#Number of different indirect relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct *)
-WHERE {
-        GRAPH <reg2targ> {
-                ?s obo:RO_0012012 ?o
-        }
-}
-
-#Number of different proteins in indirect relations:
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT count(distinct ?prot)
-WHERE {
-        GRAPH <reg2targ> {
-                {?prot obo:RO_0012012 ?o} UNION {?s obo:RO_0012012 ?prot}
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -2214,7 +2027,7 @@ WHERE {
                 {?prot sio:SIO_000558 ?o} UNION {?s sio:SIO_000558 ?prot}
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 obo:NCBITaxon_9606 .
+                ?prot obo:RO_0002162 obo:NCBITaxon_9606 .
         }
 }
 
@@ -2228,7 +2041,7 @@ WHERE {
                 {?prot sio:SIO_000558 ?o} UNION {?s sio:SIO_000558 ?prot}
         }
         GRAPH <prot> {
-                ?prot obo:RO_0002153 ?taxon .
+                ?prot obo:RO_0002162 ?taxon .
         }
 }
 
