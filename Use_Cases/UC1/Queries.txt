@@ -243,7 +243,6 @@ WHERE {
 	}
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
-		?tgene rdfs:subClassOf sio:SIO_010035 .
 		{
 		?gene rdfs:subClassOf sio:SIO_010035 ;
 			skos:prefLabel ?gene_label ;
