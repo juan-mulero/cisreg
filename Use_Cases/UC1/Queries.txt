@@ -384,10 +384,8 @@ WHERE {
 		?prot obo:RO_0002331 ?bp .
 	}
 	
-	OPTIONAL {
-		GRAPH <http://rdf.biogateway.eu/graph/go> {
-			?bp rdfs:label ?bp_label .
-		}
+	GRAPH <http://rdf.biogateway.eu/graph/go> {
+		?bp rdfs:label ?bp_label .
 	}
 }
 ORDER BY ?distance
