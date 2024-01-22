@@ -167,8 +167,7 @@ WHERE {
 		?crm2gene rdf:object ?gene ;
 			rdf:subject ?enhID .
 		?inst_crm2gene rdf:type ?crm2gene ;
-			obo:TXPO_0003500 obo:UBERON_0000310 ;
-			obo:TXPO_0003500 ?cell_line .
+			obo:TXPO_0003500 obo:UBERON_0000310 .
 		?enhID obo:RO_0002429 ?tgene .
 	}
 
@@ -223,8 +222,7 @@ WHERE {
 		?crm2gene rdf:object ?gene ;
 			rdf:subject ?enhID .
 		?inst_crm2gene rdf:type ?crm2gene ;
-			obo:TXPO_0003500 obo:UBERON_0000310 ;
-			obo:TXPO_0003500 ?cell_line .
+			obo:TXPO_0003500 obo:UBERON_0000310 .
 		?enhID obo:RO_0002429 ?tgene .
 	}
 
