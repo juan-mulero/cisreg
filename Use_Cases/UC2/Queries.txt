@@ -83,8 +83,7 @@ WHERE {
 		?crm2gene rdf:subject ?enhID ;
 			rdf:object ?gene .
 		?inst_crm2gene rdf:type ?crm2gene ;
-			obo:TXPO_0003500 obo:UBERON_0000310 ;
-			obo:TXPO_0003500 ?cell_line .
+			obo:TXPO_0003500 obo:UBERON_0000310 .
 	}
 
 	GRAPH <http://rdf.biogateway.eu/graph/crm> {
