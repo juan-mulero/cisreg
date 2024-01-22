@@ -59,7 +59,7 @@ ORDER BY ?phen ?gene_label ?prot_label ?bp_label
  
 
 #3.1. What enhancers are involved in the regulation of these genes? 
-#Since we are discussing the "breast cancer" phenotype, have any of these enhancers been identified in any cell line related to breast tissue? 
+#Since we are discussing the "breast cancer" phenotype, have any of these enhancers been identified in any biosample related to breast tissue? 
 
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
