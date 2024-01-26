@@ -182,8 +182,7 @@ WHERE {
         }
 
         GRAPH <http://rdf.biogateway.eu/graph/tad> {
-		?tad_ID rdfs:subClassOf obo:SO_0002304 ;
-			obo:BFO_0000050 ?chr ;
+		?tad_ID obo:BFO_0000050 ?chr ;
 			obo:GENO_0000894 ?tad_start ;
 			obo:GENO_0000895 ?tad_end .
 
@@ -193,11 +192,10 @@ WHERE {
         FILTER(?tad_start < ?TSS_gene && ?tad_end > ?TSS_gene)
 
         GRAPH <http://rdf.biogateway.eu/graph/crm> {
-		?enh_ID rdfs:subClassOf obo:SO_0000727 ;
-                	skos:prefLabel ?enh_label ;
-                        obo:BFO_0000050 ?chr ;
+		?enh_ID obo:BFO_0000050 ?chr ;
                         obo:GENO_0000894 ?enh_start ;
-                        obo:GENO_0000895 ?enh_end .
+                        obo:GENO_0000895 ?enh_end ;
+                	skos:prefLabel ?enh_label .
 
 		?enh_inst rdf:type ?enh_ID ;
 			obo:TXPO_0003500 obo:UBERON_0000310 .
@@ -438,20 +436,6 @@ WHERE {
 	}
         GRAPH <http://rdf.biogateway.eu/graph/prot> {
 		?tf skos:prefLabel ?tf_label
-	}
-}
-
-#Database:
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX hgene: <http://rdf.biogateway.eu/gene/9606/>
-PREFIX sio: <http://semanticscience.org/resource/>
-SELECT ?db (count(distinct ?tf) as ?count)
-WHERE {
-	GRAPH <http://rdf.biogateway.eu/graph/tfac2gene> {
-		?class rdf:object hgene:TOX3 ;
-			rdf:subject ?tf .
-		?inst a ?class ;
-		sio:SIO_000253 ?db .
 	}
 }
 
