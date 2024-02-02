@@ -1,0 +1,734 @@
+{
+  "graphs": [
+    {
+      "id": 0,
+      "label": "Default",
+      "nodes": [
+        {
+          "id": 0,
+          "data": "?Crm___0___URI",
+          "label": "CRM",
+          "color": "#86cccc",
+          "type": "crm",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/crm",
+          "class": "http://purl.obolibrary.org/obo/SO_0000727",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "involved in positive regulation of": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002429",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "end position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+              "data": "52565276",
+              "show": true,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": ">="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "52565276",
+              "show": true,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": "<="
+            }
+          }
+        },
+        {
+          "id": 1,
+          "data": "https://www.ncbi.nlm.nih.gov/nuccore/NC_000016.10",
+          "label": "chr-16",
+          "color": "#3db1fe",
+          "type": "chromosome",
+          "varID": -1,
+          "graph": "http://rdf.biogateway.eu/graph/gene",
+          "class": "http://purl.obolibrary.org/obo/SO_0000340",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "category": {
+              "uri": "https://w3id.org/biolink/vocab/category",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            }
+          }
+        },
+        {
+          "id": 2,
+          "data": "?Database___0___URI",
+          "label": "DATABASE",
+          "color": "#8dd246",
+          "type": "database",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/crm2phen",
+          "class": "http://purl.obolibrary.org/obo/NCIT_C15426",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "category": {
+              "uri": "https://w3id.org/biolink/vocab/category",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            }
+          }
+        },
+        {
+          "id": 3,
+          "data": "?Omim___0___URI",
+          "label": "OMIM",
+          "color": "#d1a689",
+          "type": "omim",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/omim",
+          "class": "http://www.w3.org/2002/07/owl#Thing",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is subclass of": {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#subClassOf",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "Semantic type UMLS property": {
+              "uri": "http://bioportal.bioontology.org/ontologies/umls/hasSTY",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "Has inheritance type": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/has_inheritance_type",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "Has manifestation": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/has_manifestation",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "rdf-schema#comment": {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#comment",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has synonym": {
+              "uri": "http://www.w3.org/2004/02/skos/core#altLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "versionInfo": {
+              "uri": "http://www.w3.org/2002/07/owl#versionInfo",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "tui": {
+              "uri": "http://bioportal.bioontology.org/ontologies/umls/tui",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "Gene Locus": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/GENELOCUS",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "Moved from": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/MOVED_FROM",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "MIMTYPEMEANING": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/MIMTYPEMEANING",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "Gene Symbol": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/GENESYMBOL",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "OMIM Entry Type": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/MIMTYPE",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "OMIM MimType Value": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/MIMTYPEVALUE",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "Scope Statement": {
+              "uri": "http://purl.bioontology.org/ontology/OMIM/SOS",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "core#notation": {
+              "uri": "http://www.w3.org/2004/02/skos/core#notation",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "rdf-schema#label": {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#label",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "cui": {
+              "uri": "http://bioportal.bioontology.org/ontologies/umls/cui",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "imports": {
+              "uri": "http://www.w3.org/2002/07/owl#imports",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            }
+          }
+        },
+        {
+          "id": 4,
+          "data": "?Gene___0___URI",
+          "label": "GENE",
+          "color": "#21c1f9",
+          "type": "gene",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/gene",
+          "class": "http://semanticscience.org/resource/SIO_010035",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "part of": {
+              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "end position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "operator": "="
+            },
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has synonym": {
+              "uri": "http://www.w3.org/2004/02/skos/core#altLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            }
+          }
+        },
+        {
+          "id": 5,
+          "data": "?Protein___0___URI",
+          "label": "PROTEIN",
+          "color": "#21ecf3",
+          "type": "protein",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/prot",
+          "class": "http://semanticscience.org/resource/SIO_010043",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "involved in": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002331",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "part of": {
+              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "enables": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002327",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "operator": "="
+            },
+            "is orthologous to": {
+              "uri": "http://semanticscience.org/resource/SIO_000558",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has synonym": {
+              "uri": "http://www.w3.org/2004/02/skos/core#altLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            },
+            "has evidence level": {
+              "uri": "http://schema.org/evidenceLevel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "operator": "="
+            }
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": 0,
+          "dashes": false,
+          "from": 0,
+          "to": 1,
+          "label": "part of",
+          "data": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        },
+        {
+          "id": 1,
+          "dashes": false,
+          "from": 0,
+          "to": 2,
+          "label": "has source",
+          "data": "http://semanticscience.org/resource/SIO_000253",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": true,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        },
+        {
+          "id": 2,
+          "dashes": true,
+          "from": 0,
+          "to": 3,
+          "label": "involved in (Optional)",
+          "data": "http://purl.obolibrary.org/obo/RO_0002331",
+          "isOptional": true,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        },
+        {
+          "id": 3,
+          "dashes": false,
+          "from": 0,
+          "to": 4,
+          "label": "involved in positive regulation of",
+          "data": "http://purl.obolibrary.org/obo/RO_0002429",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        },
+        {
+          "id": 4,
+          "dashes": false,
+          "from": 4,
+          "to": 5,
+          "label": "encodes",
+          "data": "http://semanticscience.org/resource/SIO_010078",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        }
+      ],
+      "bindings": [],
+      "filters": []
+    }
+  ],
+  "startingVar": {
+    "0": {
+      "isMetric": false,
+      "varID": 0,
+      "type": "crm",
+      "label": "CRM 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/crm",
+      "instance": false,
+      "class": true
+    },
+    "2": {
+      "isMetric": false,
+      "varID": 0,
+      "type": "database",
+      "label": "DATABASE 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/crm2phen",
+      "instance": false,
+      "class": true
+    },
+    "3": {
+      "isMetric": false,
+      "varID": 0,
+      "type": "omim",
+      "label": "OMIM 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/omim",
+      "instance": false,
+      "class": true
+    },
+    "4": {
+      "isMetric": false,
+      "varID": 0,
+      "type": "gene",
+      "label": "GENE 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/gene",
+      "instance": false,
+      "class": true
+    },
+    "5": {
+      "isMetric": false,
+      "varID": 0,
+      "type": "protein",
+      "label": "PROTEIN 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/prot",
+      "instance": false,
+      "class": true
+    }
+  },
+  "isDistinct": true,
+  "isCount": false
+}
