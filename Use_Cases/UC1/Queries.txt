@@ -208,6 +208,40 @@ WHERE {
 }
 ORDER BY ?distance
 
+#Quick version of the same query:
+
+SELECT DISTINCT ?CRM ?CRM_start ?CRM_end ?TSS_gene ?Distance
+WHERE {
+    <http://rdf.biogateway.eu/gene/9606/TOX3> <http://purl.obolibrary.org/obo/BFO_0000050> ?chr .
+    <http://rdf.biogateway.eu/gene/9606/TOX3> <http://purl.obolibrary.org/obo/GENO_0000895> ?TSS_gene .
+
+    ?TAD <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0002304> .
+    ?TAD_inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?TAD .
+    ?TAD <http://purl.obolibrary.org/obo/BFO_0000050> ?chr .
+    ?TAD_inst <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/UBERON_0000310> .
+    ?TAD <http://purl.obolibrary.org/obo/GENO_0000895> ?TAD_end .
+    ?TAD <http://purl.obolibrary.org/obo/GENO_0000894> ?TAD_start .
+    ?chr <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000340> .
+
+    ?CRM <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://purl.obolibrary.org/obo/SO_0000727> .
+    ?CRM_inst <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?CRM .
+    ?CRM <http://purl.obolibrary.org/obo/BFO_0000050> ?chr .
+    ?CRM_inst <http://purl.obolibrary.org/obo/TXPO_0003500> <http://purl.obolibrary.org/obo/UBERON_0000310> .
+    ?CRM <http://purl.obolibrary.org/obo/GENO_0000895> ?CRM_end .
+    ?CRM <http://purl.obolibrary.org/obo/GENO_0000894> ?CRM_start .
+
+    BIND (?CRM_end - ?CRM_start AS ?Enh_range)
+    BIND (?Enh_range / 2 AS ?Enh_div)
+    BIND (?Enh_div + ?CRM_start AS ?Enh_middle)
+    BIND (ABS(?TSS_gene - ?Enh_middle) AS ?Distance)
+
+    FILTER ( ?TAD_start < ?TSS_gene ) .
+    FILTER ( ?TAD_end > ?TSS_gene ) .
+    FILTER ( ?CRM_start > ?TAD_start ) .
+    FILTER ( ?CRM_end < ?TAD_end ) .
+}
+ORDER BY ?Distance
+
 
 #4. If the enhancer is affected, in addition to the target gene provided by the databases, what other genes could be targeted by the same enhancer?
 
