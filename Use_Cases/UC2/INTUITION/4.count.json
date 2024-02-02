@@ -205,18 +205,27 @@
         },
         {
           "id": 4,
-          "data": "?Transcription_factor___0___URI",
-          "label": "TRANSCRIPTION_FACTOR",
-          "color": "#d4bb7b",
-          "type": "transcription_factor",
+          "data": "?Protein___0___URI",
+          "label": "PROTEIN",
+          "color": "#fe879c",
+          "type": "protein",
           "varID": 0,
-          "graph": "http://rdf.biogateway.eu/graph/crm2tfac",
-          "class": "http://purl.obolibrary.org/obo/NCIT_C17207",
+          "graph": "http://rdf.biogateway.eu/graph/prot",
+          "class": "http://semanticscience.org/resource/SIO_010043",
           "shape": "big ellipse",
           "font": {
             "color": "black"
           },
           "properties": {
+            "part of": {
+              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
             "is instance of": {
               "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
               "data": "",
@@ -235,8 +244,8 @@
               "as": "",
               "operator": "="
             },
-            "part of": {
-              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
+            "enables": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002327",
               "data": "",
               "show": false,
               "type": "link",
@@ -244,8 +253,8 @@
               "as": "",
               "operator": "="
             },
-            "enables": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002327",
+            "involved in": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002331",
               "data": "",
               "show": false,
               "type": "link",
@@ -262,11 +271,11 @@
               "as": "",
               "operator": "="
             },
-            "involved in": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002331",
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
               "data": "",
               "show": false,
-              "type": "link",
+              "type": "text",
               "transitive": false,
               "as": "",
               "operator": "="
@@ -297,17 +306,10 @@
               "transitive": false,
               "as": "",
               "operator": "="
-            },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
             }
-          }
+          },
+          "classTransitive": false,
+          "classOmmited": false
         }
       ],
       "edges": [
@@ -434,9 +436,9 @@
     "4": {
       "isMetric": false,
       "varID": 0,
-      "type": "transcription_factor",
-      "label": "TRANSCRIPTION_FACTOR 0",
-      "uri_graph": "http://rdf.biogateway.eu/graph/crm2tfac",
+      "type": "protein",
+      "label": "PROTEIN 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/prot",
       "instance": false,
       "class": true
     }
