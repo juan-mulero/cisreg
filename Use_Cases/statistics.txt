@@ -1993,6 +1993,161 @@ WHERE {
         }
 }
 
+## reg2targ graph
+#Different organisms:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT distinct ?taxon
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428 ;
+                        rdf:subject ?prot .
+        }
+        GRAPH <prot> {
+                ?prot obo:RO_0002162 ?taxon
+        }
+}
+
+#Number of different general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002428
+        }
+}
+
+#Number of different proteins in general relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002428 ?o} UNION {?s obo:RO_0002428 ?prot}
+        }
+}
+
+#Number of different positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002429
+        }
+}
+
+#Number of different proteins in positive relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002429 ?o} UNION {?s obo:RO_0002429 ?prot}
+        }
+}
+
+#Number of different negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?ID)
+WHERE {
+        GRAPH <reg2targ> {
+                ?ID rdf:type owl:Class ;
+                        rdfs:subClassOf rdf:Statement ;
+                        rdf:predicate obo:RO_0002430
+        }
+}
+
+#Number of different proteins in negative relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002430 ?o} UNION {?s obo:RO_0002430 ?prot}
+        }
+}
+
+#Different databases:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT DISTINCT ?database
+WHERE {
+        GRAPH <reg2targ> {
+                ?s sio:SIO_000253 ?database
+        }
+}
+
+#Number of different pubmed articles:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT COUNT(DISTINCT ?pubmed)
+WHERE {
+        GRAPH <reg2targ> {
+                ?s sio:SIO_000772 ?pubmed
+        }
+}
+
+#Number of different direct relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct *)
+WHERE {
+        GRAPH <reg2targ> {
+                ?s obo:RO_0002578 ?o
+        }
+}
+
+#Number of different proteins in direct relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0002578 ?o} UNION {?s obo:RO_0002578 ?prot}
+        }
+}
+
+#Number of different indirect relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct *)
+WHERE {
+        GRAPH <reg2targ> {
+                ?s obo:RO_0012012 ?o
+        }
+}
+
+#Number of different proteins in indirect relations:
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT count(distinct ?prot)
+WHERE {
+        GRAPH <reg2targ> {
+                {?prot obo:RO_0012012 ?o} UNION {?s obo:RO_0012012 ?prot}
+        }
+}
+
 ## ortho graph
 #Number of different relations
 BASE <http://rdf.biogateway.eu/graph/>
