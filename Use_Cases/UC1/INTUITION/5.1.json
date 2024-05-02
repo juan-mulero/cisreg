@@ -93,46 +93,6 @@
           }
         },
         {
-          "id": 7,
-          "data": "https://www.ncbi.nlm.nih.gov/nuccore/NC_000016.10",
-          "label": "chr-16",
-          "color": "#3db1fe",
-          "type": "chromosome",
-          "varID": -1,
-          "graph": "http://rdf.biogateway.eu/graph/gene",
-          "class": "http://purl.obolibrary.org/obo/SO_0000340",
-          "shape": "big ellipse",
-          "font": {
-            "color": "black"
-          },
-          "properties": {
-            "is instance of": {
-              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "operator": "="
-            },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "operator": "="
-            },
-            "category": {
-              "uri": "https://w3id.org/biolink/vocab/category",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "operator": "="
-            }
-          }
-        },
-        {
           "id": 13,
           "data": "?Gene___0___URI",
           "label": "GENE",
@@ -327,41 +287,55 @@
           },
           "classTransitive": false,
           "classOmmited": false
+        },
+        {
+          "id": 15,
+          "data": "?Chromosome___0___URI",
+          "label": "CHROMOSOME",
+          "color": "#27e5ff",
+          "type": "chromosome",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/tad",
+          "class": "http://purl.obolibrary.org/obo/SO_0000340",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "chr-16",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "category": {
+              "uri": "https://w3id.org/biolink/vocab/category",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
         }
       ],
       "edges": [
-        {
-          "id": 0,
-          "dashes": false,
-          "from": 1,
-          "to": 7,
-          "label": "part of",
-          "data": "http://purl.obolibrary.org/obo/BFO_0000050",
-          "isOptional": false,
-          "isTransitive": false,
-          "isFromInstance": false,
-          "arrows": {
-            "to": {
-              "enabled": true,
-              "scaleFactor": 1,
-              "type": "arrow"
-            },
-            "from": {
-              "enabled": false
-            }
-          },
-          "smooth": {
-            "enabled": false
-          },
-          "width": 1,
-          "chosen": true,
-          "color": {
-            "color": "#000000",
-            "highlight": "#000000",
-            "hover": "#000000",
-            "inherit": false
-          }
-        },
         {
           "id": 1,
           "dashes": false,
@@ -425,6 +399,38 @@
             "hover": "#000000",
             "inherit": false
           }
+        },
+        {
+          "id": 3,
+          "dashes": false,
+          "from": 1,
+          "to": 15,
+          "label": "part of",
+          "data": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
         }
       ],
       "bindings": [],
@@ -456,6 +462,15 @@
       "type": "protein",
       "label": "PROTEIN 0",
       "uri_graph": "http://rdf.biogateway.eu/graph/prot",
+      "instance": false,
+      "class": true
+    },
+    "15": {
+      "isMetric": false,
+      "varID": 0,
+      "type": "chromosome",
+      "label": "CHROMOSOME 0",
+      "uri_graph": "http://rdf.biogateway.eu/graph/tad",
       "instance": false,
       "class": true
     }

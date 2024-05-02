@@ -5,94 +5,6 @@
       "label": "Default",
       "nodes": [
         {
-          "id": 0,
-          "data": "http://rdf.biogateway.eu/gene/9606/TOX3",
-          "label": "TOX3",
-          "color": "#fe859a",
-          "type": "gene",
-          "varID": -1,
-          "graph": "http://rdf.biogateway.eu/graph/gene",
-          "class": "http://semanticscience.org/resource/SIO_010035",
-          "shape": "big ellipse",
-          "font": {
-            "color": "black"
-          },
-          "properties": {
-            "is instance of": {
-              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "part of": {
-              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "in taxon": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
-              "data": "",
-              "show": false,
-              "type": "link",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "start position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
-              "data": "",
-              "show": false,
-              "type": "number",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "end position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
-              "data": "",
-              "show": true,
-              "type": "number",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has synonym": {
-              "uri": "http://www.w3.org/2004/02/skos/core#altLabel",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has definition": {
-              "uri": "http://www.w3.org/2004/02/skos/core#definition",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            }
-          }
-        },
-        {
           "id": 20,
           "data": "?Tfac2gene___0___URI",
           "label": "TFAC2GENE",
@@ -348,16 +260,107 @@
               "operator": "="
             }
           }
+        },
+        {
+          "id": 23,
+          "data": "?Gene___0___URI",
+          "label": "GENE",
+          "color": "#1ec9ce",
+          "type": "gene",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/gene",
+          "class": "http://semanticscience.org/resource/SIO_010035",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "part of": {
+              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
+              "data": "9606",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "as": "",
+              "operator": "⊆"
+            },
+            "end position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has synonym": {
+              "uri": "http://www.w3.org/2004/02/skos/core#altLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "TOX3",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
         }
       ],
       "edges": [
         {
-          "id": 8,
+          "id": 9,
           "dashes": false,
           "from": 20,
-          "to": 0,
-          "label": "object",
-          "data": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
+          "to": 22,
+          "label": "subject",
+          "data": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
           "isOptional": false,
           "isTransitive": false,
           "isFromInstance": false,
@@ -384,12 +387,12 @@
           }
         },
         {
-          "id": 9,
+          "id": 10,
           "dashes": false,
           "from": 20,
-          "to": 22,
-          "label": "subject",
-          "data": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
+          "to": 23,
+          "label": "object",
+          "data": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
           "isOptional": false,
           "isTransitive": false,
           "isFromInstance": false,

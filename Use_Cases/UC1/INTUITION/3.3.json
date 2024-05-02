@@ -6,11 +6,102 @@
       "nodes": [
         {
           "id": 0,
-          "data": "http://rdf.biogateway.eu/gene/9606/TOX3",
-          "label": "TOX3",
-          "color": "#fe859a",
+          "data": "?Crm___0___URI",
+          "label": "CRM",
+          "color": "#86cccc",
+          "type": "crm",
+          "varID": 0,
+          "graph": "http://rdf.biogateway.eu/graph/crm",
+          "class": "http://purl.obolibrary.org/obo/SO_0000727",
+          "shape": "big ellipse",
+          "font": {
+            "color": "black"
+          },
+          "properties": {
+            "involved in positive regulation of": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002429",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "is defined by": {
+              "uri": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
+              "data": "",
+              "show": false,
+              "type": "link",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "end position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+              "data": "",
+              "show": true,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "",
+              "show": true,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
+        },
+        {
+          "id": 1,
+          "data": "?Gene___0___URI",
+          "label": "GENE",
+          "color": "#1ec9ce",
           "type": "gene",
-          "varID": -1,
+          "varID": 0,
           "graph": "http://rdf.biogateway.eu/graph/gene",
           "class": "http://semanticscience.org/resource/SIO_010035",
           "shape": "big ellipse",
@@ -27,15 +118,6 @@
               "as": "",
               "operator": "="
             },
-            "part of": {
-              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
             "in taxon": {
               "uri": "http://purl.obolibrary.org/obo/RO_0002162",
               "data": "",
@@ -45,19 +127,28 @@
               "as": "",
               "operator": "="
             },
-            "start position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+            "part of": {
+              "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
               "data": "",
               "show": false,
-              "type": "number",
+              "type": "text",
               "transitive": false,
               "as": "",
               "operator": "="
             },
-            "end position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
               "data": "",
-              "show": true,
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "",
+              "show": false,
               "type": "number",
               "transitive": false,
               "as": "",
@@ -72,113 +163,37 @@
               "as": "",
               "operator": "="
             },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has definition": {
-              "uri": "http://www.w3.org/2004/02/skos/core#definition",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            }
-          }
-        },
-        {
-          "id": 1,
-          "data": "?Tad___0___URI",
-          "label": "TAD",
-          "color": "#f4c9a7",
-          "type": "tad",
-          "varID": 0,
-          "graph": "http://rdf.biogateway.eu/graph/tad",
-          "class": "http://purl.obolibrary.org/obo/SO_0002304",
-          "shape": "big ellipse",
-          "font": {
-            "color": "black"
-          },
-          "properties": {
-            "is instance of": {
-              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "in taxon": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
-              "data": "",
-              "show": false,
-              "type": "link",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has definition": {
-              "uri": "http://www.w3.org/2004/02/skos/core#definition",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
             "end position": {
               "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
               "data": "",
-              "show": false,
+              "show": true,
               "type": "number",
-              "transitive": false,
-              "as": "tad_end",
-              "operator": ">"
-            },
-            "start position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
-              "data": "",
-              "show": false,
-              "type": "number",
-              "transitive": false,
-              "as": "tad_start",
-              "operator": "<"
-            },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
-              "data": "",
-              "show": false,
-              "type": "text",
               "transitive": false,
               "as": "",
               "operator": "="
             },
-            "is defined by": {
-              "uri": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-              "data": "",
-              "show": false,
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "TOX3",
+              "show": true,
               "type": "text",
               "transitive": false,
               "as": "",
               "operator": "="
             }
-          }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
         },
         {
           "id": 2,
           "data": "?Chromosome___0___URI",
           "label": "CHROMOSOME",
-          "color": "#3ad5fe",
+          "color": "#27e5ff",
           "type": "chromosome",
           "varID": 0,
-          "graph": "http://rdf.biogateway.eu/graph/gene",
+          "graph": "http://rdf.biogateway.eu/graph/tad",
           "class": "http://purl.obolibrary.org/obo/SO_0000340",
           "shape": "big ellipse",
           "font": {
@@ -212,7 +227,9 @@
               "as": "",
               "operator": "="
             }
-          }
+          },
+          "classTransitive": false,
+          "classOmmited": false
         },
         {
           "id": 3,
@@ -221,7 +238,7 @@
           ],
           "label": "http://purl.obolibrary.org/obo/UBERON_0000310",
           "color": "#D3D3D3",
-          "type": "uri",
+          "type": false,
           "varID": -1,
           "graph": "",
           "class": [
@@ -231,31 +248,24 @@
           "font": {
             "color": "black"
           },
-          "properties": {}
+          "properties": {},
+          "classTransitive": false,
+          "classOmmited": false
         },
         {
           "id": 4,
-          "data": "?Crm___0___URI",
-          "label": "CRM",
-          "color": "#86cccc",
-          "type": "crm",
+          "data": "?Tad___0___URI",
+          "label": "TAD",
+          "color": "#fbab6e",
+          "type": "tad",
           "varID": 0,
-          "graph": "http://rdf.biogateway.eu/graph/crm",
-          "class": "http://purl.obolibrary.org/obo/SO_0000727",
+          "graph": "http://rdf.biogateway.eu/graph/tad",
+          "class": "http://purl.obolibrary.org/obo/SO_0002304",
           "shape": "big ellipse",
           "font": {
             "color": "black"
           },
           "properties": {
-            "is instance of": {
-              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
             "in taxon": {
               "uri": "http://purl.obolibrary.org/obo/RO_0002162",
               "data": "",
@@ -265,35 +275,8 @@
               "as": "",
               "operator": "="
             },
-            "involved in positive regulation of": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002429",
-              "data": "",
-              "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "end position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
-              "data": "",
-              "show": true,
-              "type": "number",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "start position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
-              "data": "",
-              "show": true,
-              "type": "number",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "is instance of": {
+              "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
               "data": "",
               "show": false,
               "type": "text",
@@ -310,6 +293,33 @@
               "as": "",
               "operator": "="
             },
+            "end position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "as": "tad_end",
+              "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "as": "tad_start",
+              "operator": "="
+            },
             "is defined by": {
               "uri": "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
               "data": "",
@@ -319,7 +329,10 @@
               "as": "",
               "operator": "="
             }
-          }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
         },
         {
           "id": 5,
@@ -328,7 +341,7 @@
           ],
           "label": "http://purl.obolibrary.org/obo/UBERON_0000310",
           "color": "#D3D3D3",
-          "type": "uri",
+          "type": false,
           "varID": -1,
           "graph": "",
           "class": [
@@ -338,12 +351,78 @@
           "font": {
             "color": "black"
           },
-          "properties": {}
+          "properties": {},
+          "classTransitive": false,
+          "classOmmited": false
         }
       ],
       "edges": [
         {
-          "id": 0,
+          "id": 2,
+          "dashes": false,
+          "from": 1,
+          "to": 2,
+          "label": "part of",
+          "data": "http://purl.obolibrary.org/obo/BFO_0000050",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        },
+        {
+          "id": 3,
+          "dashes": false,
+          "from": 0,
+          "to": 3,
+          "label": "observed in",
+          "data": "http://purl.obolibrary.org/obo/TXPO_0003500",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": true,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": false
+            }
+          },
+          "smooth": {
+            "enabled": false
+          },
+          "width": 1,
+          "chosen": true,
+          "color": {
+            "color": "#000000",
+            "highlight": "#000000",
+            "hover": "#000000",
+            "inherit": false
+          }
+        },
+        {
+          "id": 4,
           "dashes": false,
           "from": 0,
           "to": 2,
@@ -375,71 +454,7 @@
           }
         },
         {
-          "id": 1,
-          "dashes": false,
-          "from": 1,
-          "to": 2,
-          "label": "part of",
-          "data": "http://purl.obolibrary.org/obo/BFO_0000050",
-          "isOptional": false,
-          "isTransitive": false,
-          "isFromInstance": false,
-          "arrows": {
-            "to": {
-              "enabled": true,
-              "scaleFactor": 1,
-              "type": "arrow"
-            },
-            "from": {
-              "enabled": false
-            }
-          },
-          "smooth": {
-            "enabled": false
-          },
-          "width": 1,
-          "chosen": true,
-          "color": {
-            "color": "#000000",
-            "highlight": "#000000",
-            "hover": "#000000",
-            "inherit": false
-          }
-        },
-        {
-          "id": 2,
-          "dashes": false,
-          "from": 1,
-          "to": 3,
-          "label": "observed in",
-          "data": "http://purl.obolibrary.org/obo/TXPO_0003500",
-          "isOptional": false,
-          "isTransitive": false,
-          "isFromInstance": true,
-          "arrows": {
-            "to": {
-              "enabled": true,
-              "scaleFactor": 1,
-              "type": "arrow"
-            },
-            "from": {
-              "enabled": false
-            }
-          },
-          "smooth": {
-            "enabled": false
-          },
-          "width": 1,
-          "chosen": true,
-          "color": {
-            "color": "#000000",
-            "highlight": "#000000",
-            "hover": "#000000",
-            "inherit": false
-          }
-        },
-        {
-          "id": 3,
+          "id": 5,
           "dashes": false,
           "from": 4,
           "to": 2,
@@ -471,7 +486,7 @@
           }
         },
         {
-          "id": 4,
+          "id": 6,
           "dashes": false,
           "from": 4,
           "to": 5,
@@ -505,7 +520,7 @@
       ],
       "bindings": [
         {
-          "id": 1706184040861,
+          "id": 1714650163320,
           "label": "enh_range",
           "operator": "-",
           "firstValue": {
@@ -515,7 +530,7 @@
             "isVar": true,
             "isFromNode": true,
             "nodeId": [
-              4
+              0
             ],
             "propertyUri": "http://purl.obolibrary.org/obo/GENO_0000895",
             "type": "number"
@@ -527,7 +542,7 @@
             "isVar": true,
             "isFromNode": true,
             "nodeId": [
-              4
+              0
             ],
             "propertyUri": "http://purl.obolibrary.org/obo/GENO_0000894",
             "type": "number"
@@ -536,14 +551,14 @@
           "isAbsolute": false
         },
         {
-          "id": 1706184085029,
+          "id": 1714650202274,
           "label": "enh_div",
           "operator": "/",
           "firstValue": {
             "label": "enh_range",
             "isFromNode": false,
             "isCustom": false,
-            "bindingId": 1706184040861,
+            "bindingId": 1714650163320,
             "type": "custom"
           },
           "secondValue": {
@@ -556,14 +571,14 @@
           "isAbsolute": false
         },
         {
-          "id": 1706184100046,
+          "id": 1714650232178,
           "label": "enh_middle",
           "operator": "+",
           "firstValue": {
             "label": "enh_div",
             "isFromNode": false,
             "isCustom": false,
-            "bindingId": 1706184085029,
+            "bindingId": 1714650202274,
             "type": "custom"
           },
           "secondValue": {
@@ -573,7 +588,7 @@
             "isVar": true,
             "isFromNode": true,
             "nodeId": [
-              4
+              0
             ],
             "propertyUri": "http://purl.obolibrary.org/obo/GENO_0000894",
             "type": "number"
@@ -582,17 +597,17 @@
           "isAbsolute": false
         },
         {
-          "id": 1706184137966,
+          "id": 1714650277575,
           "label": "distance",
           "operator": "-",
           "firstValue": {
-            "label": "End position TOX3",
+            "label": "End position GENE 0",
             "key": "end position",
-            "nodeLabel": "TOX3",
-            "isVar": false,
+            "nodeLabel": "GENE 0",
+            "isVar": true,
             "isFromNode": true,
             "nodeId": [
-              0
+              1
             ],
             "propertyUri": "http://purl.obolibrary.org/obo/GENO_0000895",
             "type": "number"
@@ -601,7 +616,7 @@
             "label": "enh_middle",
             "isFromNode": false,
             "isCustom": false,
-            "bindingId": 1706184100046,
+            "bindingId": 1714650232178,
             "type": "custom"
           },
           "showInResults": true,
@@ -610,13 +625,13 @@
       ],
       "filters": [
         {
-          "id": 1706185201229,
+          "id": 1714651312077,
           "firstValue": {
             "key": "http://purl.obolibrary.org/obo/GENO_0000894",
             "category": "number",
             "nodeType": "tad",
             "ids": [
-              1
+              4
             ],
             "nodeVarID": 0,
             "asLabel": "tad_start",
@@ -628,21 +643,21 @@
             "category": "number",
             "nodeType": "gene",
             "ids": [
-              0
+              1
             ],
-            "nodeVarID": -1,
+            "nodeVarID": 0,
             "asLabel": "",
-            "label": "end position TOX3 0"
+            "label": "end position GENE 0"
           }
         },
         {
-          "id": 1706185211205,
+          "id": 1714651322961,
           "firstValue": {
             "key": "http://purl.obolibrary.org/obo/GENO_0000895",
             "category": "number",
             "nodeType": "tad",
             "ids": [
-              1
+              4
             ],
             "nodeVarID": 0,
             "asLabel": "tad_end",
@@ -654,21 +669,21 @@
             "category": "number",
             "nodeType": "gene",
             "ids": [
-              0
+              1
             ],
-            "nodeVarID": -1,
+            "nodeVarID": 0,
             "asLabel": "",
-            "label": "end position TOX3 0"
+            "label": "end position GENE 0"
           }
         },
         {
-          "id": 1706185569513,
+          "id": 1714651333123,
           "firstValue": {
             "key": "http://purl.obolibrary.org/obo/GENO_0000894",
             "category": "number",
             "nodeType": "crm",
             "ids": [
-              4
+              0
             ],
             "nodeVarID": 0,
             "asLabel": "",
@@ -680,7 +695,7 @@
             "category": "number",
             "nodeType": "tad",
             "ids": [
-              1
+              4
             ],
             "nodeVarID": 0,
             "asLabel": "tad_start",
@@ -688,13 +703,13 @@
           }
         },
         {
-          "id": 1706185577935,
+          "id": 1714651341286,
           "firstValue": {
             "key": "http://purl.obolibrary.org/obo/GENO_0000895",
             "category": "number",
             "nodeType": "crm",
             "ids": [
-              4
+              0
             ],
             "nodeVarID": 0,
             "asLabel": "",
@@ -706,7 +721,7 @@
             "category": "number",
             "nodeType": "tad",
             "ids": [
-              1
+              4
             ],
             "nodeVarID": 0,
             "asLabel": "tad_end",
@@ -717,7 +732,7 @@
     }
   ],
   "startingVar": {
-    "4": {
+    "0": {
       "isMetric": false,
       "varID": 0,
       "type": "crm",
