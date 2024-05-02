@@ -438,36 +438,6 @@
           }
         },
         {
-          "id": 8,
-          "data": 1,
-          "label": "sub1",
-          "color": "#C22535",
-          "type": "graph",
-          "varID": -1,
-          "graph": null,
-          "class": null,
-          "shape": "circle",
-          "font": {
-            "color": "white"
-          },
-          "properties": {}
-        },
-        {
-          "id": 9,
-          "data": 2,
-          "label": "sub2",
-          "color": "#C22535",
-          "type": "graph",
-          "varID": -1,
-          "graph": null,
-          "class": null,
-          "shape": "circle",
-          "font": {
-            "color": "white"
-          },
-          "properties": {}
-        },
-        {
           "id": 11,
           "data": "?Database___0___URI",
           "label": "DATABASE",
@@ -1023,6 +993,40 @@
               "operator": "="
             }
           }
+        },
+        {
+          "id": 21,
+          "data": 1,
+          "label": "sub1",
+          "color": "#C22535",
+          "type": "graph",
+          "varID": -1,
+          "graph": null,
+          "class": null,
+          "shape": "circle",
+          "font": {
+            "color": "white"
+          },
+          "properties": {},
+          "classTransitive": false,
+          "classOmmited": false
+        },
+        {
+          "id": 22,
+          "data": 2,
+          "label": "sub2",
+          "color": "#C22535",
+          "type": "graph",
+          "varID": -1,
+          "graph": null,
+          "class": null,
+          "shape": "circle",
+          "font": {
+            "color": "white"
+          },
+          "properties": {},
+          "classTransitive": false,
+          "classOmmited": false
         }
       ],
       "edges": [
@@ -1121,43 +1125,6 @@
             "hover": "#000000",
             "inherit": false
           }
-        },
-        {
-          "id": 4,
-          "dashes": false,
-          "from": 8,
-          "to": 9,
-          "label": "UNION",
-          "data": "UNION",
-          "isOptional": false,
-          "isTransitive": false,
-          "isFromInstance": false,
-          "arrows": {
-            "to": {
-              "enabled": true,
-              "scaleFactor": 1,
-              "type": "arrow"
-            },
-            "from": {
-              "enabled": true,
-              "scaleFactor": 1,
-              "type": "arrow"
-            }
-          },
-          "smooth": {
-            "enabled": true,
-            "type": "curvedCW",
-            "roundness": 0.5
-          },
-          "width": 2,
-          "chosen": true,
-          "color": {
-            "color": "#848484",
-            "highlight": "#848484",
-            "hover": "#848484",
-            "inherit": false
-          },
-          "isUnion": true
         },
         {
           "id": 5,
@@ -1382,6 +1349,43 @@
             "hover": "#000000",
             "inherit": false
           }
+        },
+        {
+          "id": 13,
+          "dashes": false,
+          "from": 21,
+          "to": 22,
+          "label": "UNION",
+          "data": "UNION",
+          "isOptional": false,
+          "isTransitive": false,
+          "isFromInstance": false,
+          "arrows": {
+            "to": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            },
+            "from": {
+              "enabled": true,
+              "scaleFactor": 1,
+              "type": "arrow"
+            }
+          },
+          "smooth": {
+            "enabled": true,
+            "type": "curvedCW",
+            "roundness": 0.5
+          },
+          "width": 2,
+          "chosen": true,
+          "color": {
+            "color": "#848484",
+            "highlight": "#848484",
+            "hover": "#848484",
+            "inherit": false
+          },
+          "isUnion": true
         }
       ],
       "bindings": [
@@ -1473,9 +1477,7 @@
             "isVar": true,
             "isFromNode": true,
             "nodeId": [
-              1,
-              4,
-              6
+              1
             ],
             "propertyUri": "http://purl.obolibrary.org/obo/GENO_0000894",
             "type": "number"
@@ -1498,10 +1500,10 @@
       "label": "sub1",
       "nodes": [
         {
-          "id": 4,
+          "id": 17,
           "data": "?Gene___0___URI",
           "label": "GENE",
-          "color": "#21c1f9",
+          "color": "#1ec9ce",
           "type": "gene",
           "varID": 0,
           "graph": "http://rdf.biogateway.eu/graph/gene",
@@ -1520,15 +1522,6 @@
               "as": "",
               "operator": "="
             },
-            "in taxon": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
-              "data": "",
-              "show": false,
-              "type": "link",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
             "part of": {
               "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
               "data": "",
@@ -1538,11 +1531,20 @@
               "as": "",
               "operator": "="
             },
-            "has definition": {
-              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
               "data": "",
               "show": false,
-              "type": "text",
+              "type": "link",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "end position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
+              "data": "",
+              "show": false,
+              "type": "number",
               "transitive": false,
               "as": "",
               "operator": "="
@@ -1556,17 +1558,8 @@
               "as": "TSS_gene",
               "operator": "="
             },
-            "end position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000895",
-              "data": "",
-              "show": false,
-              "type": "number",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
               "data": "",
               "show": false,
               "type": "text",
@@ -1582,17 +1575,29 @@
               "transitive": false,
               "as": "",
               "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
             }
-          }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
         },
         {
-          "id": 5,
+          "id": 20,
           "data": [
             "http://biohackathon.org/resource/faldo#ForwardStrandPosition"
           ],
           "label": "http://biohackathon.org/resource/faldo#ForwardStrandPosition",
           "color": "#D3D3D3",
-          "type": "uri",
+          "type": false,
           "varID": -1,
           "graph": "",
           "class": [
@@ -1602,15 +1607,17 @@
           "font": {
             "color": "black"
           },
-          "properties": {}
+          "properties": {},
+          "classTransitive": false,
+          "classOmmited": false
         }
       ],
       "edges": [
         {
-          "id": 3,
+          "id": 13,
           "dashes": false,
-          "from": 4,
-          "to": 5,
+          "from": 17,
+          "to": 20,
           "label": "on strand",
           "data": "http://purl.obolibrary.org/obo/GENO_0000906",
           "isOptional": false,
@@ -1647,10 +1654,10 @@
       "label": "sub2",
       "nodes": [
         {
-          "id": 6,
+          "id": 18,
           "data": "?Gene___0___URI",
           "label": "GENE",
-          "color": "#21c1f9",
+          "color": "#1ec9ce",
           "type": "gene",
           "varID": 0,
           "graph": "http://rdf.biogateway.eu/graph/gene",
@@ -1669,15 +1676,6 @@
               "as": "",
               "operator": "="
             },
-            "in taxon": {
-              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
-              "data": "",
-              "show": false,
-              "type": "link",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
             "part of": {
               "uri": "http://purl.obolibrary.org/obo/BFO_0000050",
               "data": "",
@@ -1687,20 +1685,11 @@
               "as": "",
               "operator": "="
             },
-            "has definition": {
-              "uri": "http://www.w3.org/2004/02/skos/core#definition",
+            "in taxon": {
+              "uri": "http://purl.obolibrary.org/obo/RO_0002162",
               "data": "",
               "show": false,
-              "type": "text",
-              "transitive": false,
-              "as": "",
-              "operator": "="
-            },
-            "start position": {
-              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
-              "data": "",
-              "show": false,
-              "type": "number",
+              "type": "link",
               "transitive": false,
               "as": "",
               "operator": "="
@@ -1714,8 +1703,17 @@
               "as": "TSS_gene",
               "operator": "="
             },
-            "has name": {
-              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+            "start position": {
+              "uri": "http://purl.obolibrary.org/obo/GENO_0000894",
+              "data": "",
+              "show": false,
+              "type": "number",
+              "transitive": false,
+              "as": "",
+              "operator": "="
+            },
+            "has definition": {
+              "uri": "http://www.w3.org/2004/02/skos/core#definition",
               "data": "",
               "show": false,
               "type": "text",
@@ -1731,17 +1729,29 @@
               "transitive": false,
               "as": "",
               "operator": "="
+            },
+            "has name": {
+              "uri": "http://www.w3.org/2004/02/skos/core#prefLabel",
+              "data": "",
+              "show": false,
+              "type": "text",
+              "transitive": false,
+              "as": "",
+              "operator": "="
             }
-          }
+          },
+          "classTransitive": false,
+          "classOmmited": false,
+          "classOmitted": false
         },
         {
-          "id": 7,
+          "id": 19,
           "data": [
             "http://biohackathon.org/resource/faldo#ReverseStrandPosition"
           ],
           "label": "http://biohackathon.org/resource/faldo#ReverseStrandPosition",
           "color": "#D3D3D3",
-          "type": "uri",
+          "type": false,
           "varID": -1,
           "graph": "",
           "class": [
@@ -1751,15 +1761,17 @@
           "font": {
             "color": "black"
           },
-          "properties": {}
+          "properties": {},
+          "classTransitive": false,
+          "classOmmited": false
         }
       ],
       "edges": [
         {
-          "id": 4,
+          "id": 12,
           "dashes": false,
-          "from": 6,
-          "to": 7,
+          "from": 18,
+          "to": 19,
           "label": "on strand",
           "data": "http://purl.obolibrary.org/obo/GENO_0000906",
           "isOptional": false,
