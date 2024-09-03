@@ -30,7 +30,7 @@ colnames(activity_enh_ensembl) = epigenome_names
 rownames(activity_enh_ensembl) = enhancers$V9
 
 t = proc.time()
-for (i in i:length(epigenome_names)){
+for (i in 1:length(epigenome_names)){
   #Release 109
   file = paste0(url, epigenome_names[i], "/homo_sapiens.GRCh38.", epigenome_names[i], 
                 ".Regulatory_Build.regulatory_activity.20221007.gff.gz")
