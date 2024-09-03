@@ -1,5 +1,3 @@
-#Same as UpdateGeneSymbol.R, but performing queries on the .txt file instead of REST queries (faster)
-
 UpdateGenes = function(external_gene_name){
   library(biomaRt)
   
@@ -10,11 +8,11 @@ UpdateGenes = function(external_gene_name){
   external_gene_name = external_gene_name[grepl("^[[:alnum:][:blank:][:punct:]]+$", external_gene_name)]
   
   #Load Ensembl
-  ensembl = useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
+  ensembl = useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL", dataset = "hsapiens_gene_ensembl")
   
   #Query
   genes = getBM(attributes = c("external_gene_name", "hgnc_symbol"), filters = "external_gene_name",
-                values = external_gene_name, mart = ensembl)
+                values = external_gene_name, mart = ensembl, useCache = F)
   genes[genes == ""] = NA
   genes = merge(genes, data.frame(external_gene_name), by = "external_gene_name", all = T)
   genes = genes[!duplicated(genes),]
@@ -33,8 +31,9 @@ UpdateGenes = function(external_gene_name){
     rm(temp)
     
     for (j in 1:length(miss_hgnc)){
-      patterns = c(paste0("^", miss_hgnc[j], "$"), paste0("^", miss_hgnc[j], "\\|"), 
-                   paste0("\\|", miss_hgnc[j], "$"), paste0("\\|", miss_hgnc[j], "\\|"))
+      patterns = c(paste0("^", miss_hgnc[j], "$"), paste0('^\\"', miss_hgnc[j], "\\|"), 
+                   paste0("^", miss_hgnc[j], "\\|"), paste0("\\|", miss_hgnc[j], "$"),
+                   paste0("\\|", miss_hgnc[j], '\\"$'), paste0("\\|", miss_hgnc[j], "\\|"))
       patterns = paste(patterns, collapse = "|")
       symbol = grep(patterns, set_hgnc$symbol)
       prev_symbol = grep(patterns, set_hgnc$prev_symbol)
