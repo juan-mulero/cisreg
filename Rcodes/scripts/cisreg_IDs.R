@@ -5,8 +5,6 @@
 
 cisreg_IDs = function(old_IDs, n) {
   library(data.table)
-  crm_new2old_IDs = fread("./crm/crm_new2old_IDs.tsv", header = F)
-  colnames(crm_new2old_IDs) = c("new", "old")
   crm_old2new_IDs = fread("./crm/crm_old2new_IDs.tsv", header = F)
   colnames(crm_old2new_IDs) = c("old", "new")
   
@@ -19,14 +17,22 @@ cisreg_IDs = function(old_IDs, n) {
   
   n_groups = ceiling(length(old_IDs)/n)
   init = 1
+  initial_position = nrow(crm_old2new_IDs)
+  rm(crm_old2new_IDs)
+  new_crm_old2new_IDs = new_crm_new2old_IDs = c()
+  t = proc.time()
   for (group in 1:n_groups){
+    cat("Group", group, "of", n_groups, "with size of", n, "\n", proc.time() - t, "\n")
     if (group == n_groups){
       end = length(old_IDs)
     } else {
       end = init + n - 1
     }
-      
-    position = nrow(crm_new2old_IDs)
+    
+    if (is.null(nrow(new_crm_old2new_IDs))){
+      position = initial_position
+    } else {position = initial_position + nrow(new_crm_old2new_IDs)}
+
     new_IDs = c()
     for (i in init:end){
       position = position + 1
@@ -35,22 +41,35 @@ cisreg_IDs = function(old_IDs, n) {
       new_IDs = c(new_IDs, new_ID)
     }
       
-    set = data.frame(old_IDs[init:end], new_IDs)
+    set = data.table(old_IDs[init:end], new_IDs)
     set = format(set, scientific = F)
     colnames(set) = c("old", "new")
-    crm_old2new_IDs = as.data.frame(crm_old2new_IDs)
-    crm_old2new_IDs = rbind(crm_old2new_IDs, set)
+    new_crm_old2new_IDs = as.data.table(new_crm_old2new_IDs)
+    new_crm_old2new_IDs = rbind(new_crm_old2new_IDs, set)
       
-    set = data.frame(new_IDs, old_IDs[init:end])
+    set = data.table(new_IDs, old_IDs[init:end])
     colnames(set) = c("new", "old")
-    crm_new2old_IDs = as.data.frame(crm_new2old_IDs)
-    crm_new2old_IDs = rbind(crm_new2old_IDs, set)
+    new_crm_new2old_IDs = as.data.table(new_crm_new2old_IDs)
+    new_crm_new2old_IDs = rbind(new_crm_new2old_IDs, set)
       
     init = end + 1
   }
-
+  
+  crm_old2new_IDs = fread("./crm/crm_old2new_IDs.tsv", header = F)
+  colnames(crm_old2new_IDs) = colnames(new_crm_old2new_IDs)
+  new_crm_old2new_IDs$old = as.character(new_crm_old2new_IDs$old)
+  new_crm_old2new_IDs$new = as.character(new_crm_old2new_IDs$new)
+  crm_old2new_IDs = rbind(crm_old2new_IDs, new_crm_old2new_IDs)
   write.table(crm_old2new_IDs, "./crm/crm_old2new_IDs.tsv", col.names = F, row.names = F, quote = F, sep = "\t")
+  rm(crm_old2new_IDs, new_crm_old2new_IDs)
+  
+  crm_new2old_IDs = fread("./crm/crm_new2old_IDs.tsv", header = F)
+  colnames(crm_new2old_IDs) = colnames(new_crm_new2old_IDs)
+  new_crm_new2old_IDs$new = as.character(new_crm_new2old_IDs$new)
+  new_crm_new2old_IDs$old = as.character(new_crm_new2old_IDs$old)
+  crm_new2old_IDs = rbind(crm_new2old_IDs, new_crm_new2old_IDs)
   write.table(crm_new2old_IDs, "./crm/crm_new2old_IDs.tsv", col.names = F, row.names = F, quote = F, sep = "\t")
+  rm(crm_new2old_IDs, new_crm_new2old_IDs)
   
   return("Done")
 }
