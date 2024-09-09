@@ -2,6 +2,7 @@
 #Input: oldhg --> original assembly. Format: "hg19" or "hg38"
 #       newhg --> current assemby. Formta: "hg19" or "hg38"
 #       result_hgtohg_onestep --> result of the function hgtohg_onestep
+#       table_oldhg --> table with the original sequences.
 #Output: table_oldhg --> table with the original sequences.
 #        table_newhg --> table with the new sequences.
 #        enhancers --> table with the merge between both previous tables.
