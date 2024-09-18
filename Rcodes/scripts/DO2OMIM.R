@@ -7,7 +7,7 @@ DO2OMIM = function(DOID){
   term = which(DiseaseOntology$V1 == "[Term]")
   output = c()
   for (i in 1:length(DOID)){
-    if (!is.na(DOID[i]) | DOID[i] == "-"){
+    if (!is.na(DOID[i]) & DOID[i] != "-"){
       if (grepl("^DOID:", DOID[i])){
         index = which(DiseaseOntology$V1 == paste0("id: ", DOID[i]))
       } 
