@@ -15,11 +15,11 @@ DO2OMIM = function(DOID){
       
       if (length(index) > 0){
         data = DiseaseOntology$V1[(index-1):(term[which(term > index)[1]]-1)]
-        indexes = grep("^xref: OMIM:", data)
+        indexes = grep("^xref: O?MIM:", data)
         if (length(indexes) > 0){
           values = c()
           for (j in indexes){
-            value = unlist(strsplit(data[j], "OMIM:"))[2]
+            value = unlist(strsplit(data[j], "O?MIM:"))[2]
             values = c(values, value)
           }
           output[i] = paste(values, collapse = ",")
