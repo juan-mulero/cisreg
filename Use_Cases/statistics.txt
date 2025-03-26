@@ -7,7 +7,6 @@ WHERE {
 } 
 ORDER BY ?graph
 
-### New BGW graphs:
 
 ## CRM graph
 # Count of unique enhancers (classes):
@@ -67,12 +66,13 @@ WHERE {
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?pubmed)
 WHERE {
         GRAPH <crm> {
                 ?enhID a ?class .
                 ?class rdfs:subClassOf obo:SO_0000727 .
-                ?enhID <http://semanticscience.org/resource/SIO_000772> ?pubmed
+                ?enhID sio:SIO_000772 ?pubmed
         }
 }
 
@@ -80,12 +80,13 @@ WHERE {
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?database)
 WHERE {
         GRAPH <crm> {
                 ?enhID a ?class .
                 ?class rdfs:subClassOf obo:SO_0000727 .
-                ?enhID <http://semanticscience.org/resource/SIO_000253> ?database
+                ?enhID sio:SIO_000253 ?database
         }
 }
 
@@ -213,20 +214,6 @@ WHERE {
         }
 }
 
-#Count of cell types linked to TADs (Cell Ontology terms):
-BASE <http://rdf.biogateway.eu/graph/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX obo: <http://purl.obolibrary.org/obo/>
-SELECT COUNT(DISTINCT ?cl)
-WHERE {
-        GRAPH <tad> {
-                ?tadID a ?class .
-                ?class rdfs:subClassOf obo:SO_0002304 .
-                ?tadID obo:TXPO_0003500 ?cl .
-                FILTER(REGEX(?cl, "CL_"))
-        }
-}
-
 #Count of cell lines linked to TADs (Cell Line Ontology terms):
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -238,6 +225,20 @@ WHERE {
                 ?class rdfs:subClassOf obo:SO_0002304 .
                 ?tadID obo:TXPO_0003500 ?clo .
                 FILTER(REGEX(?clo, "CLO_"))
+        }
+}
+
+#Count of cell types linked to TADs (Cell Ontology terms):
+BASE <http://rdf.biogateway.eu/graph/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT COUNT(DISTINCT ?cl)
+WHERE {
+        GRAPH <tad> {
+                ?tadID a ?class .
+                ?class rdfs:subClassOf obo:SO_0002304 .
+                ?tadID obo:TXPO_0003500 ?cl .
+                FILTER(REGEX(?cl, "CL_"))
         }
 }
 
@@ -636,12 +637,13 @@ WHERE {
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?pubmed)
 WHERE {
         GRAPH <crm2phen> {
                 ?ID a ?class .
                 ?class rdfs:subClassOf rdf:Statement .
-                ?ID <http://semanticscience.org/resource/SIO_000772> ?pubmed
+                ?ID sio:SIO_000772 ?pubmed
         }
 }
 
@@ -649,12 +651,13 @@ WHERE {
 BASE <http://rdf.biogateway.eu/graph/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?database)
 WHERE {
         GRAPH <crm2phen> {
                 ?ID a ?class .
                 ?class rdfs:subClassOf rdf:Statement .
-                ?ID <http://semanticscience.org/resource/SIO_000253> ?database
+                ?ID sio:SIO_000253 ?database
         }
 }
 
@@ -751,7 +754,6 @@ WHERE {
         FILTER(REGEX(?uberon, "UBERON_"))
 }
 
-### Other BGW graphs:
 
 ## Gene graph
 #Number of different genes:
