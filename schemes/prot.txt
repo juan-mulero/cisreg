@@ -2,6 +2,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix sio: <http://semanticscience.org/resource/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix obo: <http://purl.obolibrary.org/obo/>.
@@ -12,19 +13,19 @@
 @prefix uniparc: <http://uniprot.org/uniparc/>.
 
 
-uniprot:PrimaryAccession rdf:type owl:Class ;
+uniprot:PrimaryAccession rdf:type owl:Class ; #PrimaryAccession: PrimaryAccession ID in UniProt
     rdfs:subClassOf sio:SIO_010043 ;
-    skos:definition "uniprot definition" ;
-    skos:prefLabel "EntryName" ;
-	skos:altLabel "PrimaryAccession" , "GeneSymbol" ;
+    skos:definition xsd:string ; #"{uniprot definition}"
+    skos:prefLabel xsd:string ; #"{EntryName}" ; #EntryName: Entry name in UniProt
+	skos:altLabel xsd:string ; #"{PrimaryAccession}" , "{GeneSymbol}" ; GeneSymbol: gene symbol of the gene
     obo:RO_0002162 obo:NCBITaxon_9606 ; #in taxon "human"
-	skos:closeMatch id_ensembl:EnsemblID , id_refseq:ProteinID ;
-	sio:SIO_000772 id_pubmed:PMID ;
-	schema:evidenceLevel "Annotation score" .
+	skos:closeMatch id_ensembl:EnsemblID , id_refseq:ProteinID ; #EnsemblID: Ensembl Protein ID; ProteinID: RefSeq ID
+	sio:SIO_000772 id_pubmed:PMID ; #Article (PMID: pubmed ID)
+	schema:evidenceLevel xsd:string . #"{Annotation score}" ; Annotation score in UniProt
 	
 uniparc:UniParcID rdf:type uniprot:PrimaryAccession ;
-	skos:prefLabel "PrimaryAccession" ;
-	skos:altLabel "instance of EntryName" .
+	skos:prefLabel xsd:string ; #"{PrimaryAccession}" 
+	skos:altLabel xsd:string . #"instance of {EntryName}" 
 
 sio:SIO_010043 rdf:type owl:Class ;
     skos:prefLabel "Protein" .

@@ -4,6 +4,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix obo: <http://purl.obolibrary.org/obo/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix biolink: <https://w3id.org/biolink/vocab/>.
@@ -15,11 +16,11 @@
 
 crm2pgene:bgw!crm_ID--hgncsymbol!9606/GeneSymbol rdf:type owl:Class ;
     rdfs:subClassOf rdf:Statement ;
-    rdf:subject hcrm:crm_ID ;
+    rdf:subject hcrm:crm_ID ; # crm_ID: CRM ID
     rdf:predicate obo:RO_0002429 ;
-    rdf:object hgene:GeneSymbol ;
-    skos:prefLabel "bgw!crm_ID--hgncsymbol!9606/GeneSymbol" ;
-    skos:definition "Association between cis-regulatory module CRMHS00000003515 and gene TBX5" .
+    rdf:object hgene:GeneSymbol ; #GeneSymbol: gene symbol of the gene
+    skos:prefLabel xsd:string ; #"bgw!{crm_ID}--hgncsymbol!9606/{GeneSymbol}"
+    skos:definition xsd:string . #"Association between cis-regulatory module {crm_ID} and gene {GeneSymbol}"
 
 hcrm:crm_ID obo:RO_0002429 hgene:GeneSymbol .
 
@@ -27,16 +28,16 @@ hgene:GeneSymbol skos:closeMatch id_ncbigene:GeneID ;
     biolink:category biolink:Gene .
 
 crm2pgene:bgw!crm_ID--hgncsymbol!9606/GeneSymbol#database_name rdf:type crm2pgene:bgw!crm_ID--hgncsymbol!9606/GeneSymbol ;
-    skos:prefLabel "bgw!crm_ID--hgncsymbol!9606/GeneSymbol#database_name" ;
-    skos:definition "Association between cis-regulatory module crm_ID and gene GeneSymbol according to database_name" ;
-    obo:TXPO_0003500 obo:BTO_ID ;
-    obo:TXPO_0003500 obo:CL_ID ;
-    obo:TXPO_0003500 obo:CLO_ID ;
-    obo:TXPO_0003500 obo:UBERON_ID ;
-    schema:evidenceOrigin <original_URL_crossreference> ;
-    rdfs:isDefinedBy obo:ECO_ID ;
-    sio:SIO_000772 id_pubmed:PMID ;
-    sio:SIO_000253 <original_URL_database> .
+    skos:prefLabel xsd:string ; #"bgw!{crm_ID}--hgncsymbol!9606/{GeneSymbol}#{database_name}"
+    skos:definition xsd:string ; #"Association between cis-regulatory module {crm_ID} and gene {GeneSymbol} according to {database_name}" 
+    obo:TXPO_0003500 obo:BTO_ID ; #Cell line, cell type or anatomical structure (BTO_ID: BTO Ontology Term ID)
+    obo:TXPO_0003500 obo:CL_ID ; #Cell type (CL_ID: CL Ontology Term ID)
+    obo:TXPO_0003500 obo:CLO_ID ; #Cell line (CLO_ID: CLO Ontology Term ID)
+    obo:TXPO_0003500 obo:UBERON_ID ; #Anatomical structure (UBERON_ID: UBERON Ontology Term ID)
+    schema:evidenceOrigin <original_URL_crossreference> ; #Crossreference URL
+    rdfs:isDefinedBy obo:ECO_ID ; #Experimental evidence (ECO_ID: ECO Ontology Term ID; EFO_ID; OBI_ID; BAO_ID; NCIT_ID; MI_ID)
+    sio:SIO_000772 id_pubmed:PMID ; #Article (PMID: pubmed ID)
+    sio:SIO_000253 <original_URL_database> . #Original Database URL
 
 obo:CL_ID biolink:category biolink:Cell .
 obo:CLO_ID biolink:category biolink:CellLine .
@@ -48,7 +49,7 @@ pubmed:PMID biolink:category biolink:Article .
 
 <original_URL_database> rdf:type owl:Class ;
     rdfs:subClassOf obo:NCIT_C15426 ;
-    skos:prefLabel "database_name" ;
+    skos:prefLabel xsd:string ; #"{database_name}"
     biolink:category biolink:InformationResource .
 	
 obo:NCIT_C15426 rdf:type owl:Class ;

@@ -1,6 +1,7 @@
 @prefix hgene: <http://rdf.biogateway.eu/gene/9606/>. #specific to human (Taxon ID 9606)
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix sio: <http://semanticscience.org/resource/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
@@ -17,32 +18,32 @@
 
 hgene:GeneSymbol rdf:type owl:Class ;
     rdfs:subClassOf sio:SIO_010035 ;
-    skos:definition "gene 9606/GeneSymbol encoding [EntryName]" ;
-    skos:prefLabel "GeneSymbol" ;
-	skos:altLabel "Alternative GeneSymbol" ;
+    skos:definition xsd:string ; #"gene 9606/{GeneSymbol} encoding [{EntryName}]" ; GeneSymbol: gene symbol of the gene ; EntryName: entry name of the encoded proteins
+    skos:prefLabel xsd:string ; #"{GeneSymbol}" 
+	skos:altLabel xsd:string ; #"{Alternative GeneSymbol}" 
     obo:RO_0002162 obo:NCBITaxon_9606 ; #in taxon "human"
     dc:hasVersion assembly:GCF_000001405.26 ; #hg38 assembly as reference
-    obo:BFO_0000050 nuccore:chr_ID ; #chromosome
-    obo:GENO_0000895 "start_position"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-    obo:GENO_0000894 "end_position"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+    obo:BFO_0000050 nuccore:chr_ID ; #chr_ID: chromosome ID in nuccore (NCBI Reference Sequence)
+    obo:GENO_0000895 xsd:integer ; #start position
+    obo:GENO_0000894 xsd:integer ; #end position
 	obo:GENO_0000906 faldo:StrandPosition ;
-	sio:SIO_010078 uniprot:PrimaryAccession ;
-	skos:closeMatch id_ensembl:EnsemblID , id_ncbigene:GeneID .
+	sio:SIO_010078 uniprot:PrimaryAccession ; #PrimaryAccession: PrimaryAccession ID in UniProt
+	skos:closeMatch id_ensembl:EnsemblID , id_ncbigene:GeneID . #EnsemblID: Ensembl Gene ID; GeneID: NCBI Gene ID
 	
 id_ncbigene:GeneID biolink:category biolink:Gene .
 	
 hgene:GeneSymbol#EnsemblID rdf:type hgene:GeneSymbol ;
-	skos:prefLabel "Ensembl#EnsemblID" .
+	skos:prefLabel xsd:string . #"Ensembl#{EnsemblID}" 
 	
 hgene:GeneSymbol#GeneID rdf:type hgene:GeneSymbol ;
-	skos:prefLabel "GeneID#GeneID" .
+	skos:prefLabel xsd:string . #"GeneID#{GeneID}"
 
 sio:SIO_010035 rdf:type owl:Class ;
     skos:prefLabel "Gene" .
 
 nuccore:chr_ID rdf:type owl:Class ;
     rdfs:subClassOf obo:SO_0000340 ;
-    skos:prefLabel "chr_name" ;
+    skos:prefLabel xsd:string;  #"{chr_name}"
     biolink:category biolink:GenomicSequenceLocalization .
 
 assembly:GCF_000001405.26 rdf:type owl:Class ;

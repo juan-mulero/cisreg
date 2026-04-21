@@ -1,6 +1,7 @@
 @prefix htad: <http://rdf.biogateway.eu/tad/9606/>. #specific to human (Taxon ID 9606)
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix owl: <http://www.w3.org/2002/07/owl#>.
 @prefix obo: <http://purl.obolibrary.org/obo/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
@@ -16,25 +17,25 @@
 
 htad:tad_id rdf:type owl:Class ;
     rdfs:subClassOf obo:SO_0002304 ;
-    skos:definition "Topologically associated domain located in Homo sapiens chr_name between start_position and end_position" ;
-    skos:prefLabel "tad/tad_id" ;
-    obo:RO_0002162 obo:NCBITaxon_9606 ;
-    dc:hasVersion assembly:GCF_000001405.26 ;
-    obo:BFO_0000050 nuccore:chr_ID ;
-    obo:GENO_0000895 "start_position"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-    obo:GENO_0000894 "end_position"^^<http://www.w3.org/2001/XMLSchema#integer> .
+    skos:definition xsd:string ; #"Topologically associated domain located in Homo sapiens {chr_name} between {start_position} and {end_position}" 
+    skos:prefLabel xsd:string ; #"tad/{tad_id}" 
+    obo:RO_0002162 obo:NCBITaxon_9606 ; #in taxon "human"
+    dc:hasVersion assembly:GCF_000001405.26 ; #hg38 assembly as reference
+    obo:BFO_0000050 nuccore:chr_ID ; #chr_ID: chromosome ID in nuccore (NCBI Reference Sequence)
+    obo:GENO_0000895 xsd:integer ; #start position
+    obo:GENO_0000894 xsd:integer . #end position
 
-htad:tad_id#database_name rdf:type htad:TADHS00000000001 ;
-    skos:definition "Topologically associated domain located in Homo sapiens chr1 between start_position and end_position according to database_name" ;
-    skos:prefLabel "tad#tad_id#database_name" ;
-    obo:TXPO_0003500 obo:BTO_ID ;
-    obo:TXPO_0003500 obo:CL_ID ;
-    obo:TXPO_0003500 obo:CLO_ID ;
-    obo:TXPO_0003500 obo:UBERON_ID ;
-    rdfs:isDefinedBy obo:ECO_ID ;
-    schema:evidenceOrigin <original_URL_crossreference> ;
-    sio:SIO_000772 id_pubmed:PMID ;
-    sio:SIO_000253 <original_URL_database> .
+htad:tad_id#database_name rdf:type htad:tad_id ;
+    skos:definition xsd:string ; #"Topologically associated domain located in Homo sapiens {chr_name} between {start_position} and {end_position} according to {database_name}" 
+    skos:prefLabel xsd:string ; #"tad#{tad_id}#{database_name}"
+    obo:TXPO_0003500 obo:BTO_ID ; #Cell line, cell type or anatomical structure (BTO_ID: BTO Ontology Term ID)
+    obo:TXPO_0003500 obo:CL_ID ; #Cell type (CL_ID: CL Ontology Term ID)
+    obo:TXPO_0003500 obo:CLO_ID ; #Cell line (CLO_ID: CLO Ontology Term ID)
+    obo:TXPO_0003500 obo:UBERON_ID ; #Anatomical structure (UBERON_ID: UBERON Ontology Term ID)
+    rdfs:isDefinedBy obo:ECO_ID ; #Experimental evidence (ECO_ID: ECO Ontology Term ID; EFO_ID; OBI_ID; BAO_ID; NCIT_ID; MI_ID)
+    schema:evidenceOrigin <original_URL_crossreference> ; #Crossreference URL
+    sio:SIO_000772 id_pubmed:PMID ; #Article (PMID: pubmed ID)
+    sio:SIO_000253 <original_URL_database> . #Original Database URL
 
 obo:SO_0002304 rdf:type owl:Class ;
     skos:prefLabel "TAD" ;
@@ -43,9 +44,9 @@ obo:SO_0002304 rdf:type owl:Class ;
 
 nuccore:chr_ID rdf:type owl:Class ;
     rdfs:subClassOf obo:SO_0000340 ;
-    skos:prefLabel "chr_name" ;
+    skos:prefLabel xsd:string ; #"{chr_name}"
     biolink:category biolink:GenomicSequenceLocalization ;
-    skos:closeMatch obo:NCIT_ID .
+    skos:closeMatch obo:NCIT_ID . #NCIT_ID: NCIT Ontology Term ID
 
 obo:NCBITaxon_9606 biolink:category biolink:OrganismTaxon .
 
@@ -65,5 +66,5 @@ pubmed:PMID biolink:category biolink:Article .
 
 <original_URL_database> rdf:type owl:Class ;
     rdfs:subClassOf obo:NCIT_C15426 ;
-    skos:prefLabel "database_name" ;
+    skos:prefLabel xsd:string ; #"{database_name}"
     biolink:category biolink:InformationResource .
