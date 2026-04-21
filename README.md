@@ -60,4 +60,4 @@ We demonstrate the use of the knowledge network in a set of advanced queries (th
 
 ![UseCases](./images/UseCases.PNG)
 
-The reported results were obtained using the December 2023 BioGateway instance [https://2312.biogateway.eu/sparql](https://2312.biogateway.eu/sparql). Since the databases used as sources vary over time, BioGateway also updates the content of its network, but retains the different network instances generated so that users can always reproduce their queries.
+The reported results were obtained using the December 2023 BioGateway instance. Since the databases used as sources vary over time, BioGateway also updates the content of its network.
