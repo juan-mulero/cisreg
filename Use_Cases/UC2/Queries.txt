@@ -9,7 +9,7 @@ WHERE {
 		UNION
 		{?phen skos:altLabel ?label}
 	}
-        FILTER regex(?label, "breast cancer", "i")
+    FILTER regex(?label, "breast cancer", "i")
 }
 
 
@@ -28,7 +28,7 @@ WHERE {
 		UNION
 		{?phen skos:altLabel ?label}
 	}
-        FILTER regex(?label, "breast cancer", "i")
+    FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
 		?gene2phen rdf:object ?phen ;
@@ -38,11 +38,11 @@ WHERE {
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
 		?gene skos:prefLabel ?gene_label ;
 			sio:SIO_010078 ?prot
-        }
+    }
 
 	GRAPH <http://rdf.biogateway.eu/graph/prot> {
-               	?prot skos:prefLabel ?prot_label .
-        }
+        ?prot skos:prefLabel ?prot_label .
+    }
 
 	OPTIONAL {
 		GRAPH <http://rdf.biogateway.eu/graph/prot2bp> {
@@ -72,7 +72,7 @@ WHERE {
 		UNION
 		{?phen skos:altLabel ?label}
 	}
-        FILTER regex(?label, "breast cancer", "i")
+    FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
 		?gene2phen rdf:object ?phen ;
@@ -113,7 +113,7 @@ WHERE {
 		UNION
 		{?phen skos:altLabel ?label}
 	}
-        FILTER regex(?label, "breast cancer", "i")
+    FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
 		?gene2phen rdf:object ?phen ;
@@ -156,7 +156,7 @@ WHERE {
 		UNION
 		{?phen skos:altLabel ?label}
 	}
-        FILTER regex(?label, "breast cancer", "i")
+    FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
 		?gene2phen rdf:object ?phen ;
@@ -181,11 +181,11 @@ WHERE {
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
 		?tgene skos:prefLabel ?tgene_label ;
 			sio:SIO_010078 ?prot .
-        }
+    }
 
 	GRAPH <http://rdf.biogateway.eu/graph/prot> {
-               	?prot skos:prefLabel ?prot_label .
-        }
+        ?prot skos:prefLabel ?prot_label .
+    }
 
 	GRAPH <http://rdf.biogateway.eu/graph/prot2bp> {
 		?prot2bp rdf:subject ?prot ;
@@ -211,7 +211,7 @@ WHERE {
 		UNION
 		{?phen skos:altLabel ?label}
 	}
-        FILTER regex(?label, "breast cancer", "i")
+    FILTER regex(?label, "breast cancer", "i")
 
 	GRAPH <http://rdf.biogateway.eu/graph/gene2phen> {
 		?gene2phen rdf:object ?phen ;
@@ -236,10 +236,10 @@ WHERE {
 	GRAPH <http://rdf.biogateway.eu/graph/gene> {
 		?tgene skos:prefLabel ?tgene_label ;
 			sio:SIO_010078 ?prot .
-        }
+    }
 	GRAPH <http://rdf.biogateway.eu/graph/prot> {
-               	?prot skos:prefLabel ?prot_label .
-        }
+        ?prot skos:prefLabel ?prot_label .
+    }
 }
 
 
@@ -253,10 +253,10 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 SELECT DISTINCT ?enh_label ?tgene ?tf
 WHERE {
 	VALUES ?phen {
-			<http://purl.bioontology.org/ontology/OMIM/114480>
-			<http://purl.obolibrary.org/obo/DOID_1612>
-			<https://id.nlm.nih.gov/mesh/D001943>
-		}
+		<http://purl.bioontology.org/ontology/OMIM/114480>
+		<http://purl.obolibrary.org/obo/DOID_1612>
+		<https://id.nlm.nih.gov/mesh/D001943>
+	}
 
 	GRAPH <http://rdf.biogateway.eu/graph/crm2phen> {
 		?enhID obo:RO_0002331 ?phen .
@@ -288,10 +288,10 @@ PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?enhID) COUNT(DISTINCT ?tgene) COUNT(DISTINCT ?tf)
 WHERE {
 	VALUES ?phen {
-			<http://purl.bioontology.org/ontology/OMIM/114480>
-			<http://purl.obolibrary.org/obo/DOID_1612>
-			<https://id.nlm.nih.gov/mesh/D001943>
-		}
+		<http://purl.bioontology.org/ontology/OMIM/114480>
+		<http://purl.obolibrary.org/obo/DOID_1612>
+		<https://id.nlm.nih.gov/mesh/D001943>
+	}
 
 	GRAPH <http://rdf.biogateway.eu/graph/crm2phen> {
 		?enhID obo:RO_0002331 ?phen .
@@ -324,10 +324,10 @@ PREFIX sio: <http://semanticscience.org/resource/>
 SELECT COUNT(DISTINCT ?tgene_label) COUNT(DISTINCT ?tf_label)
 WHERE {
 	VALUES ?phen {
-			<http://purl.bioontology.org/ontology/OMIM/114480>
-			<http://purl.obolibrary.org/obo/DOID_1612>
-			<https://id.nlm.nih.gov/mesh/D001943>
-		}
+		<http://purl.bioontology.org/ontology/OMIM/114480>
+		<http://purl.obolibrary.org/obo/DOID_1612>
+		<https://id.nlm.nih.gov/mesh/D001943>
+	}
 
 	GRAPH <http://rdf.biogateway.eu/graph/crm2phen> {
 		?enhID obo:RO_0002331 ?phen .
@@ -347,7 +347,7 @@ WHERE {
 			rdf:subject ?tf .
 	}
 
-        GRAPH <http://rdf.biogateway.eu/graph/prot> {
+    GRAPH <http://rdf.biogateway.eu/graph/prot> {
 		?tf skos:prefLabel ?tf_label .
 	}
 }

@@ -32,7 +32,8 @@ uniprot:PrimaryAccession obo:RO_0012012 uniprot:PrimaryAccession .
 	schema:evidenceLevel xsd:string ; #"{value}" ; value from UniProt
 	rdfs:isDefinedBy obo:MI_ID ; #MI_ID: Molecular Interactions Controlled Vocabulary Identifier ; Currently only MI_0364
 	obo:RO_0002331 obo:MI_ID ;
-	skos:relatedMatch obo:MI_ID , obo:GO_ID . #GO_ID: Gene Ontology Identifier
+	skos:relatedMatch obo:MI_ID , obo:GO_ID ; #GO_ID: Gene Ontology Identifier
+	obo:BFO_0000066 obo:BTO_ID . #Biosample (BTO_ID: BTO Ontology Term ID) 
 
 rdf:Statement rdf:type owl:Class ;
 	skos:prefLabel "Triple" .
@@ -54,7 +55,8 @@ uniprot:PrimaryAccession obo:RO_0002429 uniprot:PrimaryAccession .
 	schema:evidenceLevel xsd:string ; #"{value}"
 	rdfs:isDefinedBy obo:MI_ID ; #Currently only MI_0364
 	obo:RO_0002331 obo:MI_ID ;
-	skos:relatedMatch obo:MI_ID , obo:GO_ID .
+	skos:relatedMatch obo:MI_ID , obo:GO_ID ;
+	obo:BFO_0000066 obo:BTO_ID . #Biosample (BTO_ID: BTO Ontology Term ID) 
 
 <http://rdf.biogateway.eu/reg2ntrg/uniprot!PrimaryAccession--uniprot!PrimaryAccession> rdf:type owl:Class ;
     rdfs:subClassOf rdf:Statement ;
@@ -73,4 +75,5 @@ uniprot:PrimaryAccession obo:RO_0002430 uniprot:PrimaryAccession .
 	schema:evidenceLevel xsd:string ; #"{value}"
 	rdfs:isDefinedBy obo:MI_ID ; #Currently only MI_0364
 	obo:RO_0002331 obo:MI_ID ;
-	skos:relatedMatch obo:MI_ID , obo:GO_ID .
+	skos:relatedMatch obo:MI_ID , obo:GO_ID ;
+	obo:BFO_0000066 obo:BTO_ID . #Biosample (BTO_ID: BTO Ontology Term ID) 
