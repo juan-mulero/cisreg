@@ -8,7 +8,7 @@
 - [schemas](./schemas/). Semantic schemas for modeling and standardizing the representation of knowledge in BioGateway.
 - [cisreg](./cisreg/). Go code for serializing preprocessed data into RDF according to the patterns established in the semantic schemas. This code uses as input the results obtained after executing the Rcodes, as well as the mapping files located in the [mappings](./mappings) folder. The resulting graphs are stored in the repository [https://doi.org/10.5281/zenodo.11161303](https://doi.org/10.5281/zenodo.11161303)
 - [Use_Cases](./Use_Cases/). SPARQL queries used to test the generated graphs.
-- [docs]. Documents and Supplementary files.
+- [docs](./docs/). Documents and Supplementary files.
 
 
 ### Readme Contents
