@@ -17,7 +17,7 @@
 - [Structure and content of BGW](#structure-and-content-of-bgw): Structure and Content of BioGateway.
 - [Workflow](#workflow): Workflow for reproducing the pipeline.
 - [Use cases](#use-cases): Queries to explore the graphs and develop competence questions that address specific use cases.
-- [Citation]()
+- [Citation](#citation): Publication to be cited.
 
 
 ## Introduction
