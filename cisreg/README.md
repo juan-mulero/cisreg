@@ -10,7 +10,7 @@ cd bgw3/src/cisreg
 go run cisreg.go
 ```
 Execution requires to specify input and output paths for files in [cisreg.go](./cisreg.go):
--  The input files are the files obtained after running the [Rcodes](../Rcodes). Also the paths of the files used for the [enrichment](../mappings/symbol2enrich.tsv) and mapping of data: [biosamples](../mappings/biosamples.tsv) and [methods](../mappings/methods.tsv).
+-  The input files are the files obtained after running the [Rcodes](../Rcodes). Also the paths of the files used for the [enrichment](./mappings/symbol2enrich.tsv) and mapping of data: [biosamples](./mappings/biosamples.tsv) and [methods](./mappings/methods.tsv).
 -  The output files correspond to the paths where you want to save the RDF files.
  
 Therefore, check these paths before execution.

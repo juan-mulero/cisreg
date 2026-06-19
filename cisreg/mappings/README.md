@@ -1,0 +1,1 @@
+Manually generated mapping files that associate biosample and method labels identified in the databases with identifiers of ontological resources. The folder also includes a file [symbol2enrich](./symbol2enrich.tsv) that provides the UniProt PrimaryAccessions for the different genes represented by GeneSymbols.
