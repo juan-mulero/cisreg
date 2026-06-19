@@ -6,7 +6,7 @@
 
 - [Rcodes](./Rcodes/). R code for downloading and preprocessing the original [databases](./images/databases.PNG).
 - [schemas](./schemas/). Semantic schemas for modeling and standardizing the representation of knowledge in BioGateway.
-- [cisreg](./cisreg/). Go code for serializing preprocessed data into RDF according to the patterns established in the semantic schemas. This code uses as input the results obtained after executing the Rcodes, as well as the mapping files located in the [mappings](./mappings) folder.
+- [cisreg](./cisreg/). Go code for serializing preprocessed data into RDF according to the patterns established in the semantic schemas. This code uses as input the results obtained after executing the Rcodes, as well as the mapping files located in the [mappings](./mappings) folder. The resulting graphs are stored in the repository [https://doi.org/10.5281/zenodo.11161303](https://doi.org/10.5281/zenodo.11161303)
 - [Use_Cases](./Use_Cases/). SPARQL queries used to test the generated graphs.
 - [docs]. Documents and Supplementary files.
 
@@ -20,7 +20,7 @@
 
 
 ## Introduction
-BioGateway is a knowledge network based on RDF graphs to query biological data corresponding to *Homo sapiens* and other organisms. BioGateway uses semantic web technologies to integrate information from different databases through [schemes](./schemes/) that, by reusing available resources, aims to standardize biological data and improve web interoperability. In addition, the knowledge network includes biological coordinates to allow the development of query strategies that exploit the location of sequences, an aspect that other semantic biological knowledge networks do not usually exploit.
+BioGateway is a knowledge network based on RDF graphs to query biological data corresponding to *Homo sapiens* and other organisms. BioGateway uses semantic web technologies to integrate information from different databases through [schemas](./schemas/) that, by reusing available resources, aims to standardize biological data and improve web interoperability. In addition, the knowledge network includes biological coordinates to allow the development of query strategies that exploit the location of sequences, an aspect that other semantic biological knowledge networks do not usually exploit.
 
 The knowledge network is available through the endpoint [https://semantics.inf.um.es/biogateway](https://semantics.inf.um.es/biogateway) and SPARQL. A short SPARQL [tutorial](./docs/SPARQL_Tutorial.pdf) is available to introduce potencial users to this query language as well as to the use of the knowledge network. 
 
@@ -77,9 +77,9 @@ To run the pipeline, click on each section to access the corresponding Readme an
 
 We demonstrate the use of the knowledge network in a set of advanced queries (three use cases) that were not possible in an efficient way until now. Below we provide the files corresponding to the queries and the results obtained:
 
-- Use Case 1: [Queries](./docs/Use_Cases/UC1/Queries.txt) - [Results](./docs/Use_Cases/UC1/Results.xlsx).
-- Use Case 2: [Queries](./docs/Use_Cases/UC2/Queries.txt) - [Results](./docs/Use_Cases/UC2/Results.xlsx).
-- Use Case 3: [Queries](./docs/Use_Cases/UC3/Queries.txt) - [Results](./docs/Use_Cases/UC3/Results.tsv).
+- Use Case 1: [Queries](./Use_Cases/UC1/Queries.txt) - [Results](./Use_Cases/UC1/Results.xlsx).
+- Use Case 2: [Queries](./Use_Cases/UC2/Queries.txt) - [Results](./Use_Cases/UC2/Results.xlsx).
+- Use Case 3: [Queries](./Use_Cases/UC3/Queries.txt) - [Results](./Use_Cases/UC3/Results.tsv).
 
 ![UseCases](./docs/images/UseCases.PNG)
 
