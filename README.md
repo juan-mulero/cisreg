@@ -17,6 +17,7 @@
 - [Structure and content of BGW](#structure-and-content-of-bgw): Structure and Content of BioGateway.
 - [Workflow](#workflow): Workflow for reproducing the pipeline.
 - [Use cases](#use-cases): Queries to explore the graphs and develop competence questions that address specific use cases.
+- [Citation]()
 
 
 ## Introduction
@@ -84,3 +85,22 @@ We demonstrate the use of the knowledge network in a set of advanced queries (th
 ![UseCases](./docs/images/UseCases.PNG)
 
 Since the databases used as sources vary over time, BioGateway also updates the content of its network.
+
+## Citation
+
+The content of this repository is associated with the publication [https://doi.org/10.1093/nar/gkae566](https://doi.org/10.1093/nar/gkae566):
+
+Mulero-Hernández, J., Mironov, V., Miñarro-Giménez, J. A., Kuiper, M., & Fernández-Breis, J. T. (2024). Integration of chromosome locations and functional aspects of enhancers and topologically associating domains in knowledge graphs enables versatile queries about gene regulation. Nucleic Acids Research, 52(15), e69-e69. https://doi.org/10.1093/nar/gkae566
+
+```
+@article{mulero2024integration,
+  title={Integration of chromosome locations and functional aspects of enhancers and topologically associating domains in knowledge graphs enables versatile queries about gene regulation},
+  author={Mulero-Hern{\'a}ndez, Juan and Mironov, Vladimir and Mi{\~n}arro-Gim{\'e}nez, Jos{\'e} Antonio and Kuiper, Martin and Fern{\'a}ndez-Breis, Jesualdo Tom{\'a}s},
+  journal={Nucleic Acids Research},
+  volume={52},
+  number={15},
+  pages={e69--e69},
+  year={2024},
+  publisher={Oxford University Press}
+}
+```
